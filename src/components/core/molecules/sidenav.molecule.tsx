@@ -20,7 +20,7 @@ const SideNav = () => {
       <div
         className={clsx(
           "fixed top-0 left-0 w-full h-[100vh] bg-secondary z-50 transition ease-in-out duration-300",
-          { "translate-x-0": openNav, "translate-x-[100vw]": !openNav }
+          { "translate-x-0": openNav, "translate-x-[10000px]": !openNav }
         )}
       >
         <div className="container py-8 flex justify-between items-center gap-[48px]">

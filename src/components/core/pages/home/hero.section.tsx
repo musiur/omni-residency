@@ -4,9 +4,9 @@ import SearchBox from "../../molecules/searchbox.molecule";
 
 const HeroSection = () => {
   return (
-    <div className="relative min-h-[170vh] md:min-h-[150vh] min-[1040px]:min-h-[100vh]">
+    <div className="relative min-h-[110dvh] md:min-h-[100dvh] min-[1040px]:min-h-[90dvh]">
       <video
-        className="abosulute top-0 left-0 w-full min-h-[170vh] md:min-h-[150vh] min-[1040px]:min-h-[100vh]"
+        className="abosulute top-0 left-0 w-full min-h-[110dvh] md:min-h-[100dvh] min-[1040px]:min-h-[90dvh]"
         autoPlay
         muted
         loop
@@ -38,15 +38,6 @@ const HeroSection = () => {
           <SearchBox tab={true} />
         </div>
       </section>
-      {/* <Image
-        src="/images/home/hero-background.png"
-        alt="hero-background-image"
-        fill
-        quality={100}
-        style={{ objectFit: "cover", objectPosition: "center", zIndex: "-1" }}
-      /> */}
-
-      {/* allowFullScreen */}
     </div>
   );
 };

@@ -41,17 +41,20 @@ const RoomCard = ({
   } = details;
   const even = id % 2 === 0;
   return (
-    <div className="relative grid grid-cols-1 md:grid-cols-2 py-0 md:py-[90px] overflow-hidden">
+    <div className="relative grid grid-cols-1 md:grid-cols-2 gap-[12px] py-0 md:py-[90px] overflow-hidden rounded-[10px] md:rounded-[40px]">
       <Image
         src={image}
         alt="hero-background-image"
         fill
         quality={100}
-        // style={{ objectFit: "contain", objectPosition: "left", zIndex: "-1" }}
-        className={clsx("hidden md:flex max-w-[800px] bg-contain bg-center z-[-1]", {
-          "ml-0": !even,
-          "ml-auto": even,
-        })}
+        style={{ objectFit: "cover", objectPosition: "left" }}
+        className={clsx(
+          "hidden md:flex max-w-[800px] min-h-[600px] z-[-1] rounded-[10px] md:rounded-[40px]",
+          {
+            "ml-0": !even,
+            "ml-auto": even,
+          }
+        )}
       />
       <div
         className={clsx(

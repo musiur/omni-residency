@@ -49,12 +49,15 @@ export const RoomCarousel = () => {
             key={id}
             className="pb-16 group z-0 relative max-w-[300px]"
           >
-            <div className={`relative overflow-hidden h-[245px] w-full rounded-t-[10px]`}>
+            <div
+              className={`relative overflow-hidden h-[245px] w-full rounded-t-[10px]`}
+            >
               <Image
                 src={image}
                 alt="slide-image"
                 fill
-                className="bg-cover bg-center"
+                // className="bg-cover bg-center"
+                style={{ objectFit: "cover", objectPosition: "center" }}
               />
               <p className="absolute top-0 left-0 p-[10px] m-[5px] rounded-full flex flex-col items-center justify-center bg-primary text-white leading-[13px]">
                 <span className="font-bold text-white">{offPercent}%</span>

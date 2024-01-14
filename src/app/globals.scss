@@ -129,7 +129,7 @@ h2 span {
 
 .swiper-button-prev,
 .swiper-button-next {
-  @apply border border-primary/50 bg-white/50 backdrop-blur min-w-[40px] max-h-[40px] rounded-full flex items-center justify-center;
+  @apply border border-primary/50 bg-white/80 backdrop-blur min-w-[40px] max-h-[40px] rounded-full flex items-center justify-center;
   opacity: 0 !important;
 }
 
@@ -161,4 +161,22 @@ h2 span {
 }
 .swiper-pagination-bullet-active {
   background: hsl(var(--secondary)) !important;
+}
+
+.form-input {
+  @apply flex flex-col gap-[8px];
+
+  input,
+  textarea,
+  select {
+    @apply px-[16px] py-[8px] rounded-[10px] border border-gray-200;
+  }
+
+  textarea {
+    @apply min-h-[200px];
+  }
+
+  label {
+    @apply flex items-center gap-[8px] font-medium;
+  }
 }
