@@ -1,3 +1,4 @@
+import Testimonial from "@/components/core/pages/home/testimonial.section";
 import HeroSection from "@/components/core/pages/search/hero.section";
 import RoomCard from "@/components/core/pages/search/room.card";
 import {
@@ -18,6 +19,7 @@ const Page = () => {
           return <RoomCard key={item.id} details={item} />;
         })}
       </section>
+      <Testimonial />
     </div>
   );
 };
