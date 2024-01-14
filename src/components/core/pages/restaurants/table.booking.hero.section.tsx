@@ -7,9 +7,11 @@ const TableBookingHeroSection = () => {
       <section className="bg-black/60 flex flex-col items-center justify-center gap-[16px]">
         <div className="max-w-[649px] [&>*]:text-white [&>*]:text-center max-auto flex flex-col items-center justify-center gap-[24px] px-[10px]">
           <h1>Make a reservation</h1>
-          <h3 className="text-[16px] md:text-[24px] font-semibold">At the Fiddlehead Restaurant, Banani</h3>
+          <h3 className="text-[16px] md:text-[24px] font-semibold">
+            At the Fiddlehead Restaurant, Banani
+          </h3>
           <p className="inline-flex flex-wrap items-center justify-center">
-            Banani&nbsp;
+            Home&nbsp;
             <ChevronRight className="w-4 h-4" />
             &nbsp;Restaurants Reservation
           </p>

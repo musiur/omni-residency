@@ -10,7 +10,6 @@ const Page = () => {
   return (
     <>
       <HeroSection />
-      <DealsOfTheDay />
       {RestaurantsOverviewData.map((item) => {
         return <RestaurantOverview key={item.id} details={item} />;
       })}

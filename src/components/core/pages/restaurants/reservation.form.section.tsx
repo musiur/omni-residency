@@ -6,8 +6,10 @@ import { ReservationFormSchema, TReservationFormSchema } from "@/lib/type";
 import { Button } from "@/components/ui/button";
 import clsx from "clsx";
 import Errors from "../../atoms/errors.atom";
+import { useToast } from "@/components/ui/use-toast";
 
 const ReservationForm = () => {
+  const { toast } = useToast();
   const {
     register,
     handleSubmit,
@@ -20,6 +22,11 @@ const ReservationForm = () => {
   const onSubmit = async (data: TReservationFormSchema) => {
     console.log(data, "<--");
     await new Promise((resolve) => setTimeout(resolve, 1000));
+    toast({
+      title: "Reservation",
+      description: "Request has been placed successfully!",
+    });
+    await new Promise((resolve) => setTimeout(resolve, 3000));
     reset();
   };
   return (

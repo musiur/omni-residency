@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+
 import SearchBox from "../../molecules/searchbox.molecule";
 import Image from "next/image";
 import { ChevronRight } from "lucide-react";
