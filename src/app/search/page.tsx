@@ -1,6 +1,9 @@
+"use client";
+
 import Testimonial from "@/components/core/pages/home/testimonial.section";
 import HeroSection from "@/components/core/pages/search/hero.section";
 import RoomCard from "@/components/core/pages/search/room.card";
+import SearchRoomCardSkeleton from "@/components/skeletons/search.room.card.skeleton";
 import {
   AreaChart,
   Baby,
@@ -9,15 +12,30 @@ import {
   CarFront,
   User2,
 } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const Page = () => {
+  const [Rooms, setRooms] = useState<any>([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setRooms(roomsData);
+      setLoading(false);
+    }, 2000);
+  }, []);
   return (
     <div>
       <HeroSection />
       <section className="container grid grid-cols-1 gap-[64px]">
-        {Rooms.map((item) => {
-          return <RoomCard key={item.id} details={item} />;
-        })}
+        {Rooms.length ? (
+          Rooms.map((item: any) => {
+            return <RoomCard key={item.id} details={item} />;
+          })
+        ) : loading ? (
+          <SearchRoomCardSkeleton />
+        ) : (
+          <div>Opps! No room found!</div>
+        )}
       </section>
       <Testimonial />
     </div>
@@ -26,7 +44,16 @@ const Page = () => {
 
 export default Page;
 
-const Rooms = [
+async function sleeper(ms: number) {
+  return async function (x: any) {
+    const value = await new Promise((resolve) =>
+      setTimeout(() => resolve(x), ms)
+    );
+    return value;
+  };
+}
+
+const roomsData = [
   {
     id: 1,
     title: "Standard Room",
