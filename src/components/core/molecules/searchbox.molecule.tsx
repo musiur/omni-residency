@@ -5,8 +5,9 @@ import { clsx } from "clsx";
 import { Button } from "@/components/ui/button";
 import DatePicker from "./datepicker.molecule";
 import Selector from "./select.molecule";
+import Link from "next/link";
 
-const SearchBox = ({ tab }: { tab: boolean }) => {
+const SearchBox = ({ tab }: { tab?: boolean }) => {
   const [formData, setFormData] = useState({ branch: "Banani" });
   return (
     <form className="w-full">
@@ -59,7 +60,9 @@ const SearchBox = ({ tab }: { tab: boolean }) => {
             <Selector />
           </div>
         </div>
-        <Button className="min-w-[148px]">Search Now</Button>
+        <Link href="/search">
+          <Button className="min-w-[148px]">Search Now</Button>
+        </Link>
       </div>
     </form>
   );
