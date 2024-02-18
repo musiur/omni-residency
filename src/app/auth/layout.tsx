@@ -5,7 +5,7 @@ import { ReactElement } from "react";
 
 const AuthLayout = ({ children }: { children: ReactElement }) => {
   return (
-    <section className="bg-white min-h-[100vh] bg-[url('/images/auth/grid.svg')] bg-cover bg-center">
+    <section className="min-h-[100vh]">
       <Image
         src="/auth/grid.svg"
         alt=""
