@@ -51,10 +51,12 @@ const Navbar = () => {
                 />
               </Link>
 
-              <Button className="rounded-full px-[16px] py-[12px] gap-[8px]">
-                <User className="stroke-white w-[16px] h-[16px]" />
-                Login
-              </Button>
+              <Link href="/auth/login">
+                <Button className="rounded-full px-[16px] py-[12px] gap-[8px]">
+                  <User className="stroke-white w-[16px] h-[16px]" />
+                  Login
+                </Button>
+              </Link>
 
               <div className="block min-[1120px]:hidden">
                 <SideNav />
