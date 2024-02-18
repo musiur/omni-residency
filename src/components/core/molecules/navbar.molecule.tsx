@@ -1,5 +1,7 @@
+"use client";
+
 import TikTok from "@/components/assets/tiktok.icon";
-import { Instagram, Menu, PhoneCall, User } from "lucide-react";
+import { Instagram, PhoneCall, User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import Textcon from "../atoms/texcon.atom";
@@ -7,9 +9,12 @@ import { Button } from "@/components/ui/button";
 import Envelope from "@/components/assets/envelope.icon";
 import NavAnim from "@/components/anim/nav.anim";
 import SideNav from "./sidenav.molecule";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
-  return (
+  const pathname = usePathname();
+
+  return !pathname.includes("auth") ? (
     <NavAnim>
       <nav>
         <div className="w-full py-[7px]">
@@ -92,7 +97,7 @@ const Navbar = () => {
         </div>
       </nav>
     </NavAnim>
-  );
+  ) : null;
 };
 
 export default Navbar;

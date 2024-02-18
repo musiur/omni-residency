@@ -1,11 +1,14 @@
+"use client";
 import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 import Textcon from "../atoms/texcon.atom";
 import { Mail, PhoneCall } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 const Footer = () => {
-  return (
+  const pathname = usePathname();
+  return !pathname.includes("auth") ? (
     <footer id="footer">
       <div className="container flex flex-wrap items-center justify-center sm:justify-between gap-[24px] md:gap-[48px] pt-[48px]">
         {Brands.map((brand) => {
@@ -83,7 +86,7 @@ const Footer = () => {
         Copyright @ {new Date().getFullYear()} All Right Reserved
       </div>
     </footer>
-  );
+  ) : null;
 };
 
 export default Footer;
