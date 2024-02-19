@@ -1,14 +1,8 @@
 import { Button } from "@/components/ui/button";
 import clsx from "clsx";
 import {
-  AreaChart,
-  Baby,
-  Bath,
-  BedDouble,
-  CarFront,
   ImageIcon,
   Play,
-  User2,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
