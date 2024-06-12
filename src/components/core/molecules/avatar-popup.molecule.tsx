@@ -6,17 +6,9 @@ import {
 } from "@/components/ui/popover";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { CSR__DELETE__Cookie } from "@/app/utils/actions";
-import { useRouter } from "next/navigation";
+import Logout from "../atoms/logout.atom";
 
 const AvatarPopup = () => {
-  const router = useRouter();
-  const logout = async () => {
-    await CSR__DELETE__Cookie("access");
-    await CSR__DELETE__Cookie("refresh");
-    router.push("/auth/login");
-  };
   return (
     <Popover>
       <PopoverTrigger>
@@ -25,22 +17,23 @@ const AvatarPopup = () => {
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
       </PopoverTrigger>
-      <PopoverContent>
+      <PopoverContent
+        align="end"
+        className="bg-black/5 backdrop-blur-xl border-white/20"
+      >
         <ul className="space-y-2">
-          <Link href="/dashobard/overview">
-            <li className="px-4 py-2 hover:bg-gray-100 rounded-md">Overview</li>
+          <Link href="/dashboard/overview">
+            <li className="px-4 py-2 hover:bg-primary  text-white rounded-md">
+              Overview
+            </li>
           </Link>
-          <Link href="/dashobard/settings">
-            <li className="px-4 py-2 hover:bg-gray-100 rounded-md">settings</li>
+          <Link href="/dashboard/settings">
+            <li className="px-4 py-2 hover:bg-primary text-white rounded-md">
+              settings
+            </li>
           </Link>
           <li className="pt-2">
-            <Button
-              className="w-full text-pink-500 hover:text-pink-700"
-              variant="outline"
-              onClick={() => logout()}
-            >
-              Logout
-            </Button>
+            <Logout />
           </li>
         </ul>
       </PopoverContent>

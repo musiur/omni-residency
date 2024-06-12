@@ -97,9 +97,13 @@ const InputX = ({
           placeholder={placeholder}
           {...field}
           type={!showPass ? type : "text"}
+          className={clsx({
+            "text-4xl caret-white": !showPass,
+            "text-base": showPass,
+          })}
         />
         <div
-          className="inline-flex w-8 h-8 items-center justify-center absolute top-[2px] right-2"
+          className="inline-flex w-8 h-8 items-center justify-center absolute top-[8px] right-2"
           role="button"
           onClick={() => setShowPass(!showPass)}
         >
