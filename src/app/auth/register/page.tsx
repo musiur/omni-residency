@@ -14,6 +14,10 @@ import { useRouter } from "next/navigation";
 import AuthGraphic from "@/components/core/molecules/auth-graphic.molecule";
 import InputField from "@/components/core/molecules/input-field.molecule";
 import PasswordField from "@/components/core/molecules/password-filed.molecule";
+import { A__POST__Register } from "../_utils/actions";
+import ResponseX from "@/components/core/molecules/response-x.molecule";
+import InputX from "@/components/core/molecules/input-x.molecule";
+import SubmitX from "@/components/core/molecules/submit-x.molecule";
 // import { ActionResponseHandler } from "@/lib/error";
 
 const Register = () => {
@@ -23,21 +27,17 @@ const Register = () => {
     defaultValues: {
       email: "",
       password: "",
-      confirmPassword: "",
-      firstName: "",
-      lastName: "",
-      phone: "",
+      re_password: "",
     },
   });
 
   // form submission handler
-  const onSubmit = async (values: TRegisterFormSchema) => {
-    // action on successfull response
-    // const result = await RegisterAction(values);
-    // ActionResponseHandler(result, "User register");
-    // if (result.success) {
-    Router.push("/auth/login");
-    // }
+  const onSubmit = async (data: TRegisterFormSchema) => {
+    const result = await A__POST__Register(data);
+    ResponseX({ title: "User register", result });
+    if (result.success) {
+      Router.push("/auth/login");
+    }
   };
 
   return (
@@ -55,41 +55,31 @@ const Register = () => {
               className="flex flex-col gap-[32px]"
               onSubmit={form.handleSubmit(onSubmit)}
             >
-              <InputField
+              <InputX form={form} name="email" label="Email" />
+              <InputX
                 form={form}
-                name="firstName"
-                label="First name"
-                placeholder="e.g. John"
+                name="password"
+                label="Password"
+                type="password"
               />
-              <InputField
+              <InputX
                 form={form}
-                name="lastName"
-                label="Last name"
-                placeholder="e.g. Doe"
+                name="re_password"
+                label="Confirm Password"
+                type="password"
               />
-              <InputField
-                form={form}
-                name="phone"
-                label="Phone"
-                placeholder="e.g +23423234524"
-              />
-              <InputField
-                form={form}
-                name="email"
-                label="Email"
-                placeholder="e.g. hello@example.com"
-              />
-              <PasswordField form={form} name="password" label="Password" />
+              {/* <PasswordField form={form} name="password" label="Password" />
               <PasswordField
                 form={form}
-                name="confirmPassword"
+                name="re_password"
                 label="Confirm Password"
-              />
+              /> */}
 
               <div className="grid grid-cols-1 gap-[16px]">
-                <Button type="submit" disabled={form.formState.isSubmitting}>
-                  {form.formState.isSubmitting ? "Registering..." : "Register"}
-                </Button>
+                <SubmitX
+                  pending={form.formState.isSubmitting}
+                  text="Register"
+                />
               </div>
             </form>
           </Form>

@@ -13,6 +13,8 @@ import {
 import AuthGraphic from "@/components/core/molecules/auth-graphic.molecule";
 import InputField from "@/components/core/molecules/input-field.molecule";
 import PasswordField from "@/components/core/molecules/password-filed.molecule";
+import { A__POST__Login } from "../_utils/actions";
+import ResponseX from "@/components/core/molecules/response-x.molecule";
 
 const Login = () => {
   //   const { setAuth } = useAuthContext();
@@ -25,13 +27,9 @@ const Login = () => {
   });
 
   // form submission handler
-  const onSubmit = async (values: TLoginFormSchema) => {
-    // action on successfull response
-    // const result = await LoginAction(values);
-    // ActionResponseHandler(result, "User login", true);
-    // if (result.success) {
-    //   setAuth({ ...result.data });
-    // }
+  const onSubmit = async (data: TLoginFormSchema) => {
+    const result = await A__POST__Login(data);
+    ResponseX({ title: "User login", result });
   };
 
   return (

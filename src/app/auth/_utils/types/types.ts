@@ -9,14 +9,11 @@ export const RegisterFormSchema = z
   .object({
     email: z.string().email('Invalid email address').min(1, 'Email is required'),
     password: z.string().min(8, 'Password must be at least 8 characters'),
-    confirmPassword: z.string().min(8, 'Password must be at least 8 characters'),
-    firstName: z.string().min(2).max(20),
-    lastName: z.string().min(2).max(20),
-    phone: z.string().min(2).max(20),
+    re_password: z.string().min(8, 'Password must be at least 8 characters'),
   })
-  .refine((values) => values.password === values.confirmPassword, {
+  .refine((values) => values.password === values.re_password, {
     message: "Password and confirm password must match",
-    path: ["confirmPassword"],
+    path: ["re_password"],
   });
 
 export const ForgotFormSchema = z
@@ -32,11 +29,11 @@ export const ForgotFormSchema = z
 export const ResetFormSchema = z
   .object({
     password: z.string().min(8, "Password must be at least 8 characters"),
-    confirmPassword: z.string(),
+    re_password: z.string(),
   })
-  .refine((data) => data.password === data.confirmPassword, {
+  .refine((data) => data.password === data.re_password, {
     message: "Passwords do not match",
-    path: ["confirmPassword"],
+    path: ["re_password"],
   });
 
 export type TLoginFormSchema = z.infer<typeof LoginFormSchema>;

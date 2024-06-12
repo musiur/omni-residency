@@ -1,3 +1,4 @@
+
 import { z } from "zod";
 export const ReservationFormSchema = z.object({
   name: z.string().min(3, "Name must have at least 3 characters"),
@@ -19,3 +20,8 @@ export type TRestaurantOverviewData = {
   hours: { id: number; type: "Breakfast" | "Lunch" | "Dinner"; time: string }[];
   cuisine: string;
 };
+
+export type T__SelectOption = {
+  label: string,
+  value: string
+}
