@@ -15,6 +15,7 @@ import InputField from "@/components/core/molecules/input-field.molecule";
 import PasswordField from "@/components/core/molecules/password-filed.molecule";
 import { A__POST__Login } from "../_utils/actions";
 import ResponseX from "@/components/core/molecules/response-x.molecule";
+import InputX from "@/components/core/molecules/input-x.molecule";
 
 const Login = () => {
   //   const { setAuth } = useAuthContext();
@@ -47,13 +48,13 @@ const Login = () => {
               className="flex flex-col gap-[32px]"
               onSubmit={form.handleSubmit(onSubmit)}
             >
-              <InputField
+              <InputX form={form} name="email" label="Email" />
+              <InputX
                 form={form}
-                name="email"
-                label="Email"
-                placeholder="e.g. hello@example.com"
+                name="password"
+                label="Password"
+                type="password"
               />
-              <PasswordField form={form} name="password" label="Password" />
               <div className="grid grid-cols-1 gap-[16px]">
                 <div className="flex items-center justify-end gap-[10px]">
                   {/* <Toggler text="Remember me" textSize="" handler={() => {}} /> */}
