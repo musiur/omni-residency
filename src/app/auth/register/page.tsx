@@ -1,27 +1,19 @@
 "use client";
 
-import Link from "next/link";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import {
   RegisterFormSchema,
   TRegisterFormSchema,
 } from "@/app/auth/_utils/types/types";
-import { useRouter } from "next/navigation";
 import AuthGraphic from "@/components/core/molecules/auth-graphic.molecule";
-import InputField from "@/components/core/molecules/input-field.molecule";
-import PasswordField from "@/components/core/molecules/password-filed.molecule";
 import { A__POST__Register } from "../_utils/actions";
 import ResponseX from "@/components/core/molecules/response-x.molecule";
 import InputX from "@/components/core/molecules/input-x.molecule";
 import SubmitX from "@/components/core/molecules/submit-x.molecule";
-// import { ActionResponseHandler } from "@/lib/error";
 
 const Register = () => {
-  const Router = useRouter();
   const form = useForm<TRegisterFormSchema>({
     resolver: zodResolver(RegisterFormSchema),
     defaultValues: {
@@ -34,10 +26,8 @@ const Register = () => {
   // form submission handler
   const onSubmit = async (data: TRegisterFormSchema) => {
     const result = await A__POST__Register(data);
+    console.log(result, "<--");
     ResponseX({ title: "User register", result });
-    if (result.success) {
-      Router.push("/auth/login");
-    }
   };
 
   return (
@@ -68,12 +58,6 @@ const Register = () => {
                 label="Confirm Password"
                 type="password"
               />
-              {/* <PasswordField form={form} name="password" label="Password" />
-              <PasswordField
-                form={form}
-                name="re_password"
-                label="Confirm Password"
-              /> */}
 
               <div className="grid grid-cols-1 gap-[16px]">
                 <SubmitX

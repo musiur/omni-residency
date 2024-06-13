@@ -6,7 +6,8 @@ import { ReactElement } from "react";
 const NavFooterVisibility = ({ children }: { children: ReactElement }) => {
   const pathname = usePathname();
   return pathname.includes("auth") || pathname.includes("dashboard")
-    ? null
+    ? // pathname.includes("activate")
+      null
     : children;
 };
 

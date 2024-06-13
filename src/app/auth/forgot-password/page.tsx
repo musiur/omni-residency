@@ -1,42 +1,39 @@
 "use client";
 
-import Link from "next/link";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Form } from "@/components/ui/form";
 import {
-  LoginFormSchema,
-  TLoginFormSchema,
+  ForgotFormSchema,
+  TForgotFormSchema,
 } from "@/app/auth/_utils/types/types";
 import AuthGraphic from "@/components/core/molecules/auth-graphic.molecule";
-import { A__POST__Login } from "../_utils/actions";
+import { A__POST__ForgotPassword } from "../_utils/actions";
 import ResponseX from "@/components/core/molecules/response-x.molecule";
 import InputX from "@/components/core/molecules/input-x.molecule";
 import SubmitX from "@/components/core/molecules/submit-x.molecule";
 
-const Login = () => {
+const ForgotPassword = () => {
   //   const { setAuth } = useAuthContext();
-  const form = useForm<TLoginFormSchema>({
-    resolver: zodResolver(LoginFormSchema),
+  const form = useForm<TForgotFormSchema>({
+    resolver: zodResolver(ForgotFormSchema),
     defaultValues: {
       email: "",
-      password: "",
     },
   });
 
   // form submission handler
-  const onSubmit = async (data: TLoginFormSchema) => {
-    const result = await A__POST__Login(data);
-    ResponseX({ title: "User login", result });
+  const onSubmit = async (data: TForgotFormSchema) => {
+    const result = await A__POST__ForgotPassword(data);
+    ResponseX({ title: "Forgot Password", result });
   };
 
   return (
     <div className="py-[90px] h-[100dvh] flex items-center justify-center">
       <div className="relative container grid grid-cols-1 md:grid-cols-2 gap-10">
         <AuthGraphic
-          H1="Login"
-          text="Already have account?"
+          H1="Forgot"
+          text="Don't have account?"
           link="/auth/register"
           linkText="Please register!"
         />
@@ -47,20 +44,8 @@ const Login = () => {
               onSubmit={form.handleSubmit(onSubmit)}
             >
               <InputX form={form} name="email" label="Email" />
-              <InputX
-                form={form}
-                name="password"
-                label="Password"
-                type="password"
-              />
               <div className="grid grid-cols-1 gap-[16px]">
-                <div className="flex items-center justify-end gap-[10px]">
-                  {/* <Toggler text="Remember me" textSize="" handler={() => {}} /> */}
-                  <Link href="/auth/forgot-password" className="mt-[-15px]">
-                    Forgot password?
-                  </Link>
-                </div>
-                <SubmitX pending={form.formState.isSubmitting} text="Login" />
+                <SubmitX pending={form.formState.isSubmitting} text="Recover" />
               </div>
             </form>
           </Form>
@@ -69,4 +54,4 @@ const Login = () => {
     </div>
   );
 };
-export default Login;
+export default ForgotPassword;

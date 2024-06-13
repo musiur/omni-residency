@@ -7,11 +7,13 @@ const ResponseX = ({
   title: string;
   result: any;
 }) => {
-  const { success, message } = result;
+  const { success, message, detail } = result;
   toast({
     variant: success ? "default" : "destructive",
     title,
-    description: <div>{message}</div>,
+    description: (
+      <div>{message ? message : detail ? detail : "Something went wrong"}</div>
+    ),
   });
   return null;
 };
