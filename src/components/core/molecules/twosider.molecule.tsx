@@ -26,7 +26,7 @@ const TwoSiderMolecule = ({ details }: { details: TwoSiderMoleculeProps }) => {
         "items-center": !imgMaxW,
       })}
     >
-      <div>
+      <div className="overflow-hidden  rounded-2xl">
         <Image
           src={image}
           alt="image"

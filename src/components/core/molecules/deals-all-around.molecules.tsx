@@ -82,16 +82,16 @@ export const DealsAllAround = () => {
 const images = [
   {
     id: 1,
-    image: "/images/home/carousel/double-delux.png",
-    title: "Delux Double",
+    image: "/images/home/carousel/delux.jpg",
+    title: "Delux",
     location: "Dhaka, Banani",
-    link: "/booking-checkout/double-delux",
+    link: "/booking-checkout/delux",
     offPercent: 20,
     btnText: "Show Room",
   },
   {
     id: 2,
-    image: "/images/home/carousel/gym/gym1.jpg",
+    image: "/images/home/carousel/gym/gym.jpg",
     title: "10 Day Offered Gym Facilities",
     location: "Dhaka, Baridhara",
     link: "/booking-checkout/queen-delux",
@@ -100,7 +100,7 @@ const images = [
   },
   {
     id: 3,
-    image: "/images/home/carousel/restaurants/restaurants1.jpg",
+    image: "/images/home/carousel/restaurants/restaurants6.jpg",
     title: "Bouffe at High with Discount",
     location: "Cox's Bazar, Iconic",
     link: "/booking-checkout/double-&-single",
@@ -109,7 +109,7 @@ const images = [
   },
   {
     id: 4,
-    image: "/images/home/carousel/honeymoon.png",
+    image: "/images/home/carousel/queen.jpg",
     title: "Honeymoon",
     location: "Dhaka, Banani",
     link: "/booking-checkout/honeymoon",
@@ -118,17 +118,8 @@ const images = [
   },
   {
     id: 5,
-    image: "/images/home/carousel/restaurants/restaurants.avif",
+    image: "/images/home/carousel/restaurants/restaurants3.jpg",
     title: "Cover Best Foods in BD",
-    location: "Dhaka, Banani",
-    link: "/booking-checkout/honeymoon",
-    offPercent: 10,
-    btnText: "Show Properties",
-  },
-  {
-    id: 6,
-    image: "/images/home/carousel/gym/gym2.jpg",
-    title: "Ultimate Gym Point",
     location: "Dhaka, Banani",
     link: "/booking-checkout/honeymoon",
     offPercent: 10,

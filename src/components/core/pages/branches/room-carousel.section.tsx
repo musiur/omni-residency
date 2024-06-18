@@ -101,7 +101,7 @@ export const RoomCarousel = () => {
 const images = [
   {
     id: 1,
-    image: "/images/home/carousel/double-delux.png",
+    image: "/images/home/carousel/double-delux.jpg",
     title: "Delux Double",
     location: "Dhaka, Banani",
     link: "/booking-checkout/delux-double",
@@ -110,7 +110,7 @@ const images = [
   },
   {
     id: 2,
-    image: "/images/home/carousel/queen-delux.png",
+    image: "/images/home/carousel/queen.jpg",
     title: "Queen Delux",
     location: "Dhaka, Baridhara",
     link: "/booking-checkout/queen-delux",
@@ -119,7 +119,7 @@ const images = [
   },
   {
     id: 3,
-    image: "/images/home/carousel/single-double.png",
+    image: "/images/home/carousel/double-delux.jpg",
     title: "Double & Single",
     location: "Cox's Bazar, Iconic",
     link: "/booking-checkout/double-&-single",
@@ -128,28 +128,28 @@ const images = [
   },
   {
     id: 4,
-    image: "/images/home/carousel/honeymoon.png",
+    image: "/images/home/carousel/queen1.jpg",
     title: "Honeymoon",
     location: "Dhaka, Banani",
     link: "/booking-checkout/honeymoon",
     offPercent: 10,
     btnText: "Show Properties",
   },
-  {
-    id: 5,
-    image: "/images/home/carousel/honeymoon.png",
-    title: "Honeymoon",
-    link: "/booking-checkout/honeymoon",
-    offPercent: 10,
-    btnText: "Show Properties",
-  },
-  {
-    id: 6,
-    image: "/images/home/carousel/honeymoon.png",
-    title: "Honeymoon",
-    location: "Dhaka, Banani",
-    link: "/booking-checkout/honeymoon",
-    offPercent: 10,
-    btnText: "Show Properties",
-  },
+  // {
+  //   id: 5,
+  //   image: "/images/home/carousel/honeymoon.png",
+  //   title: "Honeymoon",
+  //   link: "/booking-checkout/honeymoon",
+  //   offPercent: 10,
+  //   btnText: "Show Properties",
+  // },
+  // {
+  //   id: 6,
+  //   image: "/images/home/carousel/honeymoon.png",
+  //   title: "Honeymoon",
+  //   location: "Dhaka, Banani",
+  //   link: "/booking-checkout/honeymoon",
+  //   offPercent: 10,
+  //   btnText: "Show Properties",
+  // },
 ];

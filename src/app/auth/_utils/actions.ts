@@ -111,7 +111,7 @@ export const A__POST__ChangePassword = async (data: TChangeFormSchema) => {
     try {
         const body = JSON.stringify(data);
         const token = cookies().get("access")?.value;
-        const response = await fetch(`${BASEURL}auth/users/set_password/`, {
+        const response = await fetch(`${BASEURL}/auth/users/set_password/`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

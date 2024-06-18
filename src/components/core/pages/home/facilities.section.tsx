@@ -6,7 +6,7 @@ const Facilities = () => {
       <div id="restaurant">
         <TwoSiderMolecule
           details={{
-            image: "/images/home/food.png",
+            image: "/images/home/carousel/restaurants/restaurants4.jpg",
             highlighter: "Restaurants",
             h2: <>Enjoy the most lively cuisines at our branches!</>,
             p: "We are best agency for homestay buat penginapan kamu bersama orang tercinta dan orang tersayang yang kamu sukai dan sayangi untuk selamanya di dunia ini",
@@ -20,7 +20,7 @@ const Facilities = () => {
       <div id="gym">
         <TwoSiderMolecule
           details={{
-            image: "/images/home/fitness.png",
+            image: "/images/home/carousel/gym/gym.jpg",
             highlighter: "Fitness Center",
             h2: <>Keep your health and fitness always in check</>,
             p: "Kami akan selalu ada untuk menampilkan hunian terbaik untuk anda serta memberikan hunian atau tempat berteduh untuk orang yang sangat di sayangi dan juga di cintai",
