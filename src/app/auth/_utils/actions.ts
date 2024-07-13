@@ -1,14 +1,27 @@
 "use server"
 
+/**
+ * 
+ * {
+ *  success: boolean,
+ * message: string,
+ * data: [] | {},
+ * token
+ * 
+ * }
+ * 
+ */
+
 import { cookies } from "next/headers";
 import { TChangeFormSchema, TLoginFormSchema, TRegisterFormSchema, TResetFormSchema } from "./types/types";
+
 const BASEURL = process.env.BASEURL;
 
 export const A__POST__Register = async (data: TRegisterFormSchema) => {
     try {
-        console.log(data)
+        // console.log(data)
         const body = JSON.stringify(data);
-        console.log(body)
+        // console.log(body)
         const response = await fetch(`${BASEURL}/auth/users/`, {
             method: "POST",
             headers: {
@@ -18,13 +31,13 @@ export const A__POST__Register = async (data: TRegisterFormSchema) => {
             body,
         })
         const result = await response.json()
-        console.log(result)
+        // console.log(result)
         return result;
     } catch (error) {
         console.log(error)
         return {
             success: false,
-            message: "Something went wrong"
+            message: "Something went wrong",
         }
     }
 }
@@ -154,6 +167,26 @@ export const A__POST__Login = async (data: TLoginFormSchema) => {
         };
     } catch (error) {
         console.log(error)
+        return {
+            success: false,
+            message: "Something went wrong"
+        }
+    }
+}
+
+
+export const A__GET__HotelList = async () => {
+    try {
+        const response = await fetch(`${BASEURL}/segments/offers/`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            cache: "no-store"
+        })
+        const result = await response.json();
+        return result;
+    } catch (error) {
         return {
             success: false,
             message: "Something went wrong"

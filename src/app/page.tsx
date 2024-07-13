@@ -4,8 +4,11 @@ import Facilities from "@/components/core/pages/home/facilities.section";
 import HeroSection from "@/components/core/pages/home/hero.section";
 import OtherServices from "@/components/core/pages/home/other-services.section";
 import Testimonial from "@/components/core/pages/home/testimonial.section";
+import { A__GET__HotelList } from "./auth/_utils/actions";
 
-const Home = () => {
+const Home = async () => {
+  const result = await A__GET__HotelList();
+  console.log(result);
   return (
     <div>
       <HeroSection />
