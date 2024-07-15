@@ -5,15 +5,13 @@ import RestaurantOverview from "@/components/core/pages/restaurants/restaurant.o
 // import { RestaurantsOverviewData } from "@/lib/data";
 import { A__GET__RestaurentList } from "./_utils/actions";
 
-
-
 const Page = async () => {
   const response = await A__GET__RestaurentList();
-  const RestaurantsOverviewData = response?.data.results
+  const RestaurantsOverviewData = response?.data?.results
   return (
     <>
       <HeroSection />
-      {RestaurantsOverviewData?.map((item:any) => {
+      {RestaurantsOverviewData?.map((item: any) => {
         return <RestaurantOverview key={item.id} details={item} />;
       })}
       <Testimonial />

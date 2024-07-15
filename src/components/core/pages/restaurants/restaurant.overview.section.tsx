@@ -86,11 +86,14 @@ const RestaurantOverview = ({
           <h3 className="text-[16px] md:text-[20px] font-semibold pb-2">
             Cuisine
           </h3>
-          {
-            cuisines.map((item: any) => (
-              <p key={item.id}>{item.cuisine}</p>
-            ))
-          }
+          <div className="flex items-center gap-2">
+            {
+              cuisines.map((item: any) => (
+                <p className="border px-3 py-1 rounded-md shadow-sm" key={item.id}>{item.cuisine}</p>
+              ))
+            }
+          </div>
+
         </div>
         <Link href={`/restaurants/table-booking?branch=banani`}>
           <Button>Book a Table</Button>
