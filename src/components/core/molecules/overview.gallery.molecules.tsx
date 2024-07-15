@@ -1,10 +1,8 @@
 "use client";
-import { Swiper, SwiperSlide } from "swiper/react";
 
+import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { A11y, Autoplay, Navigation, Pagination } from "swiper/modules";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 
 // Import Swiper styles
 import "swiper/css";
@@ -12,9 +10,18 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import Image from "next/image";
-import { BedDouble } from "lucide-react";
 
-export const RestaurantOverviewGallery = () => {
+// Define types
+type ImageItem = {
+  id: number;
+  image: string;
+};
+
+type GalleryProps = {
+  images: ImageItem[];
+};
+
+export const RestaurantOverviewGallery: React.FC<GalleryProps> = ({ images }) => {
   return (
     <Swiper
       modules={[Navigation, Pagination, A11y, Autoplay]}
@@ -30,7 +37,7 @@ export const RestaurantOverviewGallery = () => {
       }}
       slidesPerView={1}
     >
-      {images.map((item) => {
+      {images.map((item: ImageItem) => {
         const { id, image } = item;
         return (
           <SwiperSlide key={id} className="pb-16 group z-0 relative w-full min-h-[350px] md:min-h-[500px]">
@@ -38,8 +45,7 @@ export const RestaurantOverviewGallery = () => {
               src={image}
               alt="slide-image"
               fill
-            //   className="bg-cover bg-center"
-            style={{objectFit: "cover", objectPosition: "center"}}
+              style={{objectFit: "cover", objectPosition: "center"}}
             />
           </SwiperSlide>
         );
@@ -47,30 +53,3 @@ export const RestaurantOverviewGallery = () => {
     </Swiper>
   );
 };
-
-const images = [
-  {
-    id: 1,
-    image: "/images/home/carousel/double-delux.png",
-  },
-  {
-    id: 2,
-    image: "/images/home/carousel/queen-delux.png",
-  },
-  {
-    id: 3,
-    image: "/images/home/carousel/single-double.png",
-  },
-  {
-    id: 4,
-    image: "/images/home/carousel/honeymoon.png",
-  },
-  {
-    id: 5,
-    image: "/images/home/carousel/honeymoon.png",
-  },
-  {
-    id: 6,
-    image: "/images/home/carousel/honeymoon.png",
-  },
-];

@@ -27,6 +27,7 @@ const Login = () => {
   const onSubmit = async (data: TLoginFormSchema) => {
     const result = await A__POST__Login(data);
     ResponseX({ title: "User login", result });
+    // console.log({result})
   };
 
   return (
