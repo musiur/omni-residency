@@ -24,6 +24,7 @@ const HeroSection = () => {
       <section className="bg-black/60 flex flex-col items-center justify-center gap-[16px] absolute top-0 left-0 w-full h-full">
         <div className="max-w-[649px] [&>*]:text-white [&>*]:text-center max-auto flex flex-col items-center justify-center gap-[24px] px-[10px] pt-[10vh]">
           <h1>Find Homestay that suits you and your family</h1>
+          <p>{">>>> || <<<"}</p>
           <p>
             Hotel are becoming increasingly popular and appealing to travellers
             who can&apos;t bear to be parted and the result new way to rent the
