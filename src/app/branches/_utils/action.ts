@@ -2,9 +2,9 @@
 
 const BASEURL = process.env.BASEURL;
 
-export const A__GET__RestaurentList = async () => {
+export const A__GET__BranchList = async () => {
   try {
-    const response = await fetch(`${BASEURL}/refuel/restaurants/`, {
+    const response = await fetch(`${BASEURL}/segments/branches/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

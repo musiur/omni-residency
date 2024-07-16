@@ -21,7 +21,9 @@ type GalleryProps = {
   images: ImageItem[];
 };
 
-export const RestaurantOverviewGallery: React.FC<GalleryProps> = ({ images }) => {
+export const RestaurantOverviewGallery: React.FC<GalleryProps> = ({
+  images,
+}) => {
   return (
     <Swiper
       modules={[Navigation, Pagination, A11y, Autoplay]}
@@ -40,12 +42,15 @@ export const RestaurantOverviewGallery: React.FC<GalleryProps> = ({ images }) =>
       {images.map((item: ImageItem) => {
         const { id, image } = item;
         return (
-          <SwiperSlide key={id} className="pb-16 group z-0 relative w-full min-h-[350px] md:min-h-[500px]">
+          <SwiperSlide
+            key={id}
+            className="pb-16 group z-0 relative w-full min-h-[350px] md:min-h-[500px]"
+          >
             <Image
               src={image}
               alt="slide-image"
               fill
-              style={{objectFit: "cover", objectPosition: "center"}}
+              style={{ objectFit: "cover", objectPosition: "center" }}
             />
           </SwiperSlide>
         );

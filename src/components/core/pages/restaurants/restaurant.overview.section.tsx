@@ -5,7 +5,6 @@ import Link from "next/link";
 import clsx from "clsx";
 import { TRestaurantOverviewData } from "@/lib/type";
 
-
 type RestaurantsData = {
   id: number;
   name: string;
@@ -28,11 +27,7 @@ type RestaurantsData = {
   created_at: string;
 };
 
-const RestaurantOverview = ({
-  details,
-}: {
-  details: RestaurantsData
-}) => {
+const RestaurantOverview = ({ details }: { details: RestaurantsData }) => {
   const { id, branch, name, overview, cuisines } = details;
   const even = id % 2 === 0;
   return (
@@ -56,44 +51,40 @@ const RestaurantOverview = ({
             <div className="flex items-center gap-[4px]">
               <AlarmClock className="w-5 h-5 stroke-[1.3px] stroke-secondary" />
               <span className="font-semibold">Breakfast:</span>
-              <span>{details.breakfast_opening} - {details.breakfast_closing}</span>
+              <span>
+                {details.breakfast_opening} - {details.breakfast_closing}
+              </span>
             </div>
             <div className="flex items-center gap-[4px]">
               <AlarmClock className="w-5 h-5 stroke-[1.3px] stroke-secondary" />
               <span className="font-semibold">Lunch:</span>
-              <span>{details.lunch_opening} - {details.lunch_closing}</span>
+              <span>
+                {details.lunch_opening} - {details.lunch_closing}
+              </span>
             </div>
             <div className="flex items-center gap-[4px]">
               <AlarmClock className="w-5 h-5 stroke-[1.3px] stroke-secondary" />
               <span className="font-semibold">Dinner:</span>
-              <span>{details.dinner_opening} - {details.dinner_closing}</span>
+              <span>
+                {details.dinner_opening} - {details.dinner_closing}
+              </span>
             </div>
           </div>
-          {/* <div className="flex flex-col gap-[16px]">
-            {hours.map((item) => {
-              const { id, type, time } = item;
-              return (
-                <div key={id} className="flex items-center gap-[4px]">
-                  <AlarmClock className="w-5 h-5 stroke-[1.3px] stroke-secondary" />
-                  <span className="font-semibold">{type}:</span>
-                  <span>{time}</span>
-                </div>
-              );
-            })}
-          </div> */}
         </div>
         <div>
           <h3 className="text-[16px] md:text-[20px] font-semibold pb-2">
             Cuisine
           </h3>
           <div className="flex items-center gap-2">
-            {
-              cuisines.map((item: any) => (
-                <p className="border px-3 py-1 rounded-md shadow-sm" key={item.id}>{item.cuisine}</p>
-              ))
-            }
+            {cuisines.map((item: any) => (
+              <p
+                className="border px-3 py-1 rounded-md shadow-sm"
+                key={item.id}
+              >
+                {item.cuisine}
+              </p>
+            ))}
           </div>
-
         </div>
         <Link href={`/restaurants/table-booking?branch=banani`}>
           <Button>Book a Table</Button>

@@ -1,40 +1,74 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { clsx } from "clsx";
 import { Button } from "@/components/ui/button";
 import DatePicker from "./datepicker.molecule";
 import Selector from "./select.molecule";
 import Link from "next/link";
+import { A__GET__BranchList } from "@/app/branches/_utils/action";
+
+interface FormData {
+  branch: string | undefined;
+  checkIn?: Date;
+  checkOut?: Date;
+  persons?: number;
+}
 
 const SearchBox = ({ tab }: { tab?: boolean }) => {
-  const [formData, setFormData] = useState({ branch: "Banani" });
+  const [branchList, setBranchList] = useState([]);
+  const [formData, setFormData] = useState < FormData > ({
+    branch: undefined,
+    checkIn: undefined,
+    checkOut: undefined,
+    persons: undefined,
+  });
+
+  useEffect(() => {
+    const fetchBranchList = async () => {
+      const res = await A__GET__BranchList();
+      const branches = res.success ? res?.data?.results : [];
+      setBranchList(branches);
+      // Set initial branch after fetching
+      if (branches?.length > 0) {
+        setFormData((prevData) => ({
+          ...prevData,
+          branch: branches[0]?.nick_name,
+        }));
+      }
+    };
+    fetchBranchList();
+  }, []);
+
+  // console.log({ branchList });
   return (
     <form className="w-full">
       {tab ? (
         <div className="w-full flex items-center justify-start">
-          {branchs.map((branch: { id: number; text: string }) => {
-            const { id, text } = branch;
-            return (
-              <div
-                key={id}
-                role="button"
-                className={clsx(
-                  "px-[24px] py-[16px] font-semibold transition ease-in-out duration-500",
-                  {
-                    "bg-white/50 text-white": formData.branch !== text,
-                    "bg-white text-muted_gray": formData.branch === text,
-                    "rounded-tl-[10px]": id === 1,
-                  }
-                )}
-                onClick={() => {
-                  setFormData({ ...formData, branch: text });
-                }}
-              >
-                {text}
-              </div>
-            );
-          })}
+          {branchList?.map(
+            (branch: { id: number; nick_name: string }, index: number) => {
+              const { id, nick_name } = branch;
+              return (
+                <div
+                  key={id}
+                  role="button"
+                  className={clsx(
+                    "px-[24px] py-[16px] font-semibold transition ease-in-out duration-500",
+                    {
+                      "bg-white/50 text-white": formData.branch !== nick_name,
+                      "bg-white text-muted_gray": formData.branch === nick_name,
+                      "rounded-tl-[10px]": index === 0,
+                    }
+                  )}
+                  onClick={() => {
+                    setFormData({ ...formData, branch: nick_name });
+                  }}
+                >
+                  {nick_name}
+                </div>
+              );
+            }
+          )}
         </div>
       ) : null}
       <div
@@ -52,11 +86,11 @@ const SearchBox = ({ tab }: { tab?: boolean }) => {
             <DatePicker />
           </div>
           <div className="grid grid-cols-1 gap-[16px]">
-            <label className="text-muted_gray">Check Out</label>
+            <label className="text-muted_gray">Check Out </label>
             <DatePicker />
           </div>
           <div className="grid grid-cols-1 gap-[16px]">
-            <label className="text-muted_gray">Person</label>
+            <label className="text-muted_gray">Person </label>
             <Selector />
           </div>
         </div>
