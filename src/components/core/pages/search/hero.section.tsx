@@ -2,8 +2,18 @@
 import SearchBox from "../../molecules/searchbox.molecule";
 import Image from "next/image";
 import { ChevronRight } from "lucide-react";
+import { A__GET__BranchList } from "@/app/branches/_utils/action";
 
-const HeroSection = () => {
+const HeroSection = async ({defaultValues}: {defaultValues: any}) => {
+  
+  const result = await A__GET__BranchList();
+  
+  const branches = result?.data?.results?.map((item: any) => {
+    return {
+      id: item?.id,
+      nickname: item?.nick_name
+    }
+  }) || [];
   return (
     <div className="pt-[86px] min-[1120px]:pt-[127px] relative">
       <section className="bg-black/60 flex flex-col items-center justify-center gap-[16px]">
@@ -13,15 +23,17 @@ const HeroSection = () => {
           <p className="inline-flex flex-wrap items-center justify-center">
             Banani&nbsp;
             <ChevronRight className="w-4 h-4" />
-            &nbsp;Check in at 9th Jan, 2023&nbsp;
+            &nbsp;Check in at {defaultValues?.checkin}&nbsp;
             <ChevronRight className="w-4 h-4" />
-            &nbsp;Check out at 11th Jan&nbsp;
+            &nbsp;Check out at {defaultValues?.checkout}&nbsp;
             <ChevronRight className="w-4 h-4" />
-            &nbsp;2 Adults & 1 Children
+            &nbsp;{defaultValues?.persons} Adults
           </p>
         </div>
         <div className="container">
-          <SearchBox tab={true} />
+          {
+            branches ? <SearchBox tab={false} branches={branches} defaultValues={defaultValues}/>: null
+          }
         </div>
       </section>
       <Image

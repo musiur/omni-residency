@@ -20,8 +20,6 @@ export const DealsAllAround = () => {
       spaceBetween={18}
       navigation
       pagination={{ clickable: true }}
-      onSwiper={(swiper) => console.log(swiper)}
-      onSlideChange={() => console.log("slide change")}
       className="mySwiper items-stretch"
       autoplay={{
         delay: 3500,

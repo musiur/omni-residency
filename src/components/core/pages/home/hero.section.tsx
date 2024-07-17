@@ -1,8 +1,18 @@
 import { Button } from "@/components/ui/button";
 import SearchBox from "../../molecules/searchbox.molecule";
+import { A__GET__BranchList } from "@/app/branches/_utils/action";
 // import Image from "next/image";
 
-const HeroSection = () => {
+const HeroSection = async () => {
+  const result = await A__GET__BranchList();
+  
+  const branches = result?.data?.results?.map((item: any) => {
+    return {
+      id: item?.id,
+      nick_name: item?.nick_name
+    }
+  }) || [];
+
   return (
     <div className="relative min-h-[110dvh] md:min-h-[100dvh] min-[1040px]:min-h-[90dvh]">
       <video
@@ -24,7 +34,6 @@ const HeroSection = () => {
       <section className="bg-black/60 flex flex-col items-center justify-center gap-[16px] absolute top-0 left-0 w-full h-full">
         <div className="max-w-[649px] [&>*]:text-white [&>*]:text-center max-auto flex flex-col items-center justify-center gap-[24px] px-[10px] pt-[10vh]">
           <h1>Find Homestay that suits you and your family</h1>
-          <p>{">>>> || <<<"}</p>
           <p>
             Hotel are becoming increasingly popular and appealing to travellers
             who can&apos;t bear to be parted and the result new way to rent the
@@ -36,7 +45,7 @@ const HeroSection = () => {
           </div>
         </div>
         <div className="container">
-          <SearchBox tab={true} />
+          <SearchBox tab={true} branches={branches}/>
         </div>
       </section>
     </div>

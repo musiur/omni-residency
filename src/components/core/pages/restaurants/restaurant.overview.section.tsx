@@ -3,7 +3,6 @@ import { AlarmClock } from "lucide-react";
 import { RestaurantOverviewGallery } from "../../molecules/overview.gallery.molecules";
 import Link from "next/link";
 import clsx from "clsx";
-import { TRestaurantOverviewData } from "@/lib/type";
 
 type RestaurantsData = {
   id: number;

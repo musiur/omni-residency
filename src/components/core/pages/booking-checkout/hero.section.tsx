@@ -3,7 +3,6 @@ import Image from "next/image";
 import { ChevronRight } from "lucide-react";
 
 const HeroSection = ({ params }: { params: { slug: string } }) => {
-  console.log(params.slug);
   return (
     <div className="pt-[86px] min-[1120px]:pt-[127px] relative">
       <section className="bg-black/60 flex flex-col items-center justify-center gap-[16px]">

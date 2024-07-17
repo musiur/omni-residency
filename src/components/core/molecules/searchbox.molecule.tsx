@@ -1,116 +1,122 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { clsx } from "clsx";
 import { Button } from "@/components/ui/button";
-import DatePicker from "./datepicker.molecule";
-import Selector from "./select.molecule";
-import Link from "next/link";
-import { A__GET__BranchList } from "@/app/branches/_utils/action";
 
-interface FormData {
-  branch: string | undefined;
-  checkIn?: Date;
-  checkOut?: Date;
-  persons?: number;
-}
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
 
-const SearchBox = ({ tab }: { tab?: boolean }) => {
-  const [branchList, setBranchList] = useState([]);
-  const [formData, setFormData] = useState < FormData > ({
-    branch: undefined,
-    checkIn: undefined,
-    checkOut: undefined,
-    persons: undefined,
-  });
+import {
+  Form,
+} from "@/components/ui/form"
+import InputX from "./input-x.molecule";
+import { useRouter } from "next/navigation";
+import { Utils___DateExtracter, Utils___DateFormatter } from "@/lib/utils";
 
-  useEffect(() => {
-    const fetchBranchList = async () => {
-      const res = await A__GET__BranchList();
-      const branches = res.success ? res?.data?.results : [];
-      setBranchList(branches);
-      // Set initial branch after fetching
-      if (branches?.length > 0) {
-        setFormData((prevData) => ({
-          ...prevData,
-          branch: branches[0]?.nick_name,
-        }));
-      }
-    };
-    fetchBranchList();
-  }, []);
+const Schema__SearchForm = z.object({
+  branch: z.string(),
+  checkin: z.instanceof(Date),
+  checkout: z.instanceof(Date),
+  persons: z.string()
+})
 
-  // console.log({ branchList });
+export type Type___Search__SearchForm = z.infer<typeof Schema__SearchForm>
+
+
+
+const SearchBox = ({ tab, branches, defaultValues }: { tab?: boolean, branches?: any, defaultValues?: any }) => {
+  console.log(defaultValues)
+  const router = useRouter();
+  const form = useForm<Type___Search__SearchForm>({
+    resolver: zodResolver(Schema__SearchForm),
+    defaultValues: {
+      branch: branches[0]?.id?.toString() || "1",
+      checkin:  Utils___DateExtracter(defaultValues?.checkin)!,
+      checkout: Utils___DateExtracter(defaultValues?.checkout)!,
+      persons: defaultValues?.persons || "1",
+    },
+  })
+
+  const onSubmit = async (data: Type___Search__SearchForm) => {
+  
+    const convertedCheckIn = Utils___DateFormatter(data.checkin);
+    const convertedCheckOut = Utils___DateFormatter(data.checkout);
+
+    router.push(`/search?branch=${data?.branch}&checkin=${convertedCheckIn}&checkout=${convertedCheckOut}&persons=${data?.persons}`)
+
+
+  }
+
   return (
-    <form className="w-full">
-      {tab ? (
-        <div className="w-full flex items-center justify-start">
-          {branchList?.map(
-            (branch: { id: number; nick_name: string }, index: number) => {
-              const { id, nick_name } = branch;
-              return (
-                <div
-                  key={id}
-                  role="button"
-                  className={clsx(
-                    "px-[24px] py-[16px] font-semibold transition ease-in-out duration-500",
-                    {
-                      "bg-white/50 text-white": formData.branch !== nick_name,
-                      "bg-white text-muted_gray": formData.branch === nick_name,
-                      "rounded-tl-[10px]": index === 0,
-                    }
-                  )}
-                  onClick={() => {
-                    setFormData({ ...formData, branch: nick_name });
-                  }}
-                >
-                  {nick_name}
-                </div>
-              );
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
+        {tab ? (
+          <div className="w-full flex items-center justify-start">
+            {branches?.map(
+              (branch: { id: number; nick_name: string }, index: number) => {
+                const { id, nick_name } = branch;
+                const matched = form.watch("branch") === id.toString();
+                return (
+                  <div
+                    key={id}
+                    role="button"
+                    className={clsx(
+                      "px-[24px] py-[16px] font-semibold transition ease-in-out duration-500",
+                      {
+                        "bg-white/50 text-white": !matched,
+                        "bg-white text-muted_gray": matched,
+                        "rounded-tl-[10px]": index === 0,
+                      }
+                    )}
+                    onClick={() => {
+                      form.setValue("branch", id.toString())
+                    }}
+                  >
+                    {nick_name}
+                  </div>
+                );
+              }
+            )}
+          </div>
+        ) : null}
+        <div
+          className={clsx(
+            "bg-white px-[24px] py-[32px] flex flex-col lg:flex-row items-center lg:items-end gap-[32px]",
+            {
+              "rounded-[10px] mt-[56px]": !tab,
+              "rounded-b-[10px] rounded-r-[10px]": tab,
             }
           )}
+        >
+          <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[24px]">
+            <div className="grid grid-cols-1 gap-[16px]">
+              <InputX form={form} name="checkin" label="Check in" type="date" />
+            </div>
+            <div className="grid grid-cols-1 gap-[16px]">
+              <InputX form={form} name="checkout" label="Check out" type="date" />
+            </div>
+            <div className="grid grid-cols-1 gap-[16px]">
+              <InputX form={form} name="persons" label="Persons" type="select" options={Data__PersonTypes} />
+            </div>
+          </div>
+
+          <Button type="submit" className="min-w-[148px]">Search Now</Button>
         </div>
-      ) : null}
-      <div
-        className={clsx(
-          "bg-white px-[24px] py-[32px] flex flex-col lg:flex-row items-center lg:items-end gap-[32px]",
-          {
-            "rounded-[10px] mt-[56px]": !tab,
-            "rounded-b-[10px] rounded-r-[10px]": tab,
-          }
-        )}
-      >
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[24px]">
-          <div className="grid grid-cols-1 gap-[16px]">
-            <label className="text-muted_gray">Check In</label>
-            <DatePicker />
-          </div>
-          <div className="grid grid-cols-1 gap-[16px]">
-            <label className="text-muted_gray">Check Out </label>
-            <DatePicker />
-          </div>
-          <div className="grid grid-cols-1 gap-[16px]">
-            <label className="text-muted_gray">Person </label>
-            <Selector />
-          </div>
-        </div>
-        <Link href="/search">
-          <Button className="min-w-[148px]">Search Now</Button>
-        </Link>
-      </div>
-    </form>
+      </form>
+    </Form>
   );
 };
 
 export default SearchBox;
 
-const branchs = [
+const Data__PersonTypes = [
   {
-    id: 1,
-    text: "Banani",
+    label: "1",
+    value: "1",
   },
   {
-    id: 2,
-    text: "Baridhara",
+    label: "2",
+    value: "2",
   },
 ];
