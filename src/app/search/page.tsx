@@ -38,7 +38,7 @@ const Page = () => {
         )}
       </section>
       <Testimonial />
-      
+
     </div>
   );
 };

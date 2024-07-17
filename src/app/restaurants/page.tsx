@@ -11,8 +11,8 @@ const Page = async () => {
   return (
     <>
       <HeroSection />
-      {RestaurantsOverviewData?.map((item: any) => {
-        return <RestaurantOverview key={item.id} details={item} />;
+      {RestaurantsOverviewData?.map((item: any, index:number) => {
+        return <RestaurantOverview key={item.id} details={item} index={index} />;
       })}
       <Testimonial />
     </>

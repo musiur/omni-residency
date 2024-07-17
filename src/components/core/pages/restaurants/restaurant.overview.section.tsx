@@ -27,9 +27,9 @@ type RestaurantsData = {
   created_at: string;
 };
 
-const RestaurantOverview = ({ details }: { details: RestaurantsData }) => {
+const RestaurantOverview = ({ details, index }: { details: RestaurantsData, index: number }) => {
   const { id, branch, name, overview, cuisines } = details;
-  const even = id % 2 === 0;
+  const even = index % 2 === 0;
   return (
     <section className="container grid grid-cols-1 md:grid-cols-2 gap-[40px] items-center">
       <aside
