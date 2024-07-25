@@ -26,7 +26,13 @@ type RestaurantsData = {
   created_at: string;
 };
 
-const RestaurantOverview = ({ details, index }: { details: RestaurantsData, index: number }) => {
+const RestaurantOverview = ({
+  details,
+  index,
+}: {
+  details: RestaurantsData;
+  index: number;
+}) => {
   const { id, branch, name, overview, cuisines } = details;
   const even = index % 2 === 0;
   return (
