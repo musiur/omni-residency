@@ -25,7 +25,6 @@ const RoomCard = ({ details }: { details: any }) => {
   } = details;
   const even = id % 2 === 0;
 
-  console.log(details);
   return (
     <div className="relative grid grid-cols-1 md:grid-cols-2 gap-[12px] py-0 md:py-[90px] overflow-hidden rounded-[10px] md:rounded-[40px]">
       <Image
@@ -83,9 +82,9 @@ const RoomCard = ({ details }: { details: any }) => {
         <div className="pt-8">
           <p>
             From&nbsp;
-            <s className="text-gray-400 font-semibold">${regular_price}</s>
+            <s className="text-gray-400 font-semibold">{regular_price} </s>
             <span className="text-primary font-semibold">
-              ${discounted_price}
+              {discounted_price} BDT
             </span>
             &nbsp;/night - {adults} adults & {children} children
           </p>
@@ -100,16 +99,16 @@ const RoomCard = ({ details }: { details: any }) => {
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-[8px] max-w-[400px]">
           {room_amenities_set?.length
             ? room_amenities_set?.map((item: any, index: number) => {
-                return (
-                  <div
-                    key={index}
-                    className="flex items-start gap-[8px] [&>svg]:stroke-primary [&>svg]:w-4 [&>svg]:h-4 [&>svg]:stroke-[1.3px]"
-                  >
-                    {/* {item} */}
-                    <span className="capitalize">{item?.amenity}</span>
-                  </div>
-                );
-              })
+              return (
+                <div
+                  key={index}
+                  className="flex items-start gap-[8px] [&>svg]:stroke-primary [&>svg]:w-4 [&>svg]:h-4 [&>svg]:stroke-[1.3px]"
+                >
+                  {/* {item} */}
+                  <span className="capitalize">{item?.amenity}</span>
+                </div>
+              );
+            })
             : null}
         </div>
         <div className="flex items-center justify-end gap-10 pt-[16px] border-t border-gray-300">

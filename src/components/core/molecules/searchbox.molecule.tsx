@@ -32,7 +32,7 @@ const SearchBox = ({
 }) => {
   const timeNow = new Date();
   const router = useRouter();
-  const form = useForm<Type___Search__SearchForm>({
+  const form = useForm < Type___Search__SearchForm > ({
     resolver: zodResolver(Schema__SearchForm),
     defaultValues: {
       branch: branches[0]?.id?.toString() || "1",
@@ -49,7 +49,7 @@ const SearchBox = ({
   const onSubmit = async (data: Type___Search__SearchForm) => {
     const convertedCheckIn = Utils___DateFormatter(data.checkin);
     const convertedCheckOut = Utils___DateFormatter(data.checkout);
-
+    console.log("data >>>", data)
     router.push(
       `/search?branch=${data?.branch}&checkin=${convertedCheckIn}&checkout=${convertedCheckOut}&persons=${data?.persons}`
     );
@@ -132,11 +132,27 @@ export default SearchBox;
 
 const Data__PersonTypes = [
   {
-    label: "1",
+    label: "1 Adult",
     value: "1",
   },
   {
-    label: "2",
+    label: "2 Adult",
     value: "2",
+  },
+  {
+    label: "3 Adult",
+    value: "3",
+  },
+  {
+    label: "4 Adult",
+    value: "4",
+  },
+  {
+    label: "5 Adult",
+    value: "5",
+  },
+  {
+    label: "6 Adult",
+    value: "6",
   },
 ];

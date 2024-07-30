@@ -4,16 +4,17 @@ import Image from "next/image";
 import { ChevronRight } from "lucide-react";
 import { A__GET__BranchList } from "@/app/branches/_utils/action";
 
-const HeroSection = async ({defaultValues}: {defaultValues: any}) => {
-  
+const HeroSection = async ({ defaultValues }: { defaultValues: any }) => {
+
   const result = await A__GET__BranchList();
-  
-  const branches = result?.data?.results?.map((item: any) => {
-    return {
-      id: item?.id,
-      nickname: item?.nick_name
-    }
-  }) || [];
+
+  const branches: any[] = result?.data?.results?.map((item: any) => ({
+    id: item?.id,
+    nickname: item?.nick_name
+  })) || [];
+
+  const matchedBranchName: string = branches?.find(branch => branch.id === +defaultValues?.branch).nickname || null;
+
   return (
     <div className="pt-[86px] min-[1120px]:pt-[127px] relative">
       <section className="bg-black/60 flex flex-col items-center justify-center gap-[16px]">
@@ -21,7 +22,7 @@ const HeroSection = async ({defaultValues}: {defaultValues: any}) => {
           <h1>Searched for Rooms</h1>
           <h2>Showing Results for</h2>
           <p className="inline-flex flex-wrap items-center justify-center">
-            Banani&nbsp;
+            {matchedBranchName}&nbsp;
             <ChevronRight className="w-4 h-4" />
             &nbsp;Check in at {defaultValues?.checkin}&nbsp;
             <ChevronRight className="w-4 h-4" />
@@ -32,7 +33,7 @@ const HeroSection = async ({defaultValues}: {defaultValues: any}) => {
         </div>
         <div className="container">
           {
-            branches ? <SearchBox tab={false} branches={branches} defaultValues={defaultValues}/>: null
+            branches ? <SearchBox tab={false} branches={branches} defaultValues={defaultValues} /> : null
           }
         </div>
       </section>
