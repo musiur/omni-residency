@@ -3,13 +3,11 @@
 import { clsx } from "clsx";
 import { Button } from "@/components/ui/button";
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
-import {
-  Form,
-} from "@/components/ui/form"
+import { Form } from "@/components/ui/form";
 import InputX from "./input-x.molecule";
 import { useRouter } from "next/navigation";
 import { Utils___DateExtracter, Utils___DateFormatter } from "@/lib/utils";
@@ -18,35 +16,44 @@ const Schema__SearchForm = z.object({
   branch: z.string(),
   checkin: z.instanceof(Date),
   checkout: z.instanceof(Date),
-  persons: z.string()
-})
+  persons: z.string(),
+});
 
-export type Type___Search__SearchForm = z.infer<typeof Schema__SearchForm>
+export type Type___Search__SearchForm = z.infer<typeof Schema__SearchForm>;
 
-
-
-const SearchBox = ({ tab, branches, defaultValues }: { tab?: boolean, branches?: any, defaultValues?: any }) => {
-  console.log(defaultValues)
+const SearchBox = ({
+  tab,
+  branches,
+  defaultValues,
+}: {
+  tab?: boolean;
+  branches?: any;
+  defaultValues?: any;
+}) => {
+  const timeNow = new Date();
   const router = useRouter();
   const form = useForm<Type___Search__SearchForm>({
     resolver: zodResolver(Schema__SearchForm),
     defaultValues: {
       branch: branches[0]?.id?.toString() || "1",
-      checkin:  Utils___DateExtracter(defaultValues?.checkin)!,
-      checkout: Utils___DateExtracter(defaultValues?.checkout)!,
+      checkin: defaultValues?.checkin
+        ? Utils___DateExtracter(defaultValues.checkin)
+        : timeNow,
+      checkout: defaultValues?.checkout
+        ? Utils___DateExtracter(defaultValues.checkout)
+        : timeNow,
       persons: defaultValues?.persons || "1",
     },
-  })
+  });
 
   const onSubmit = async (data: Type___Search__SearchForm) => {
-  
     const convertedCheckIn = Utils___DateFormatter(data.checkin);
     const convertedCheckOut = Utils___DateFormatter(data.checkout);
 
-    router.push(`/search?branch=${data?.branch}&checkin=${convertedCheckIn}&checkout=${convertedCheckOut}&persons=${data?.persons}`)
-
-
-  }
+    router.push(
+      `/search?branch=${data?.branch}&checkin=${convertedCheckIn}&checkout=${convertedCheckOut}&persons=${data?.persons}`
+    );
+  };
 
   return (
     <Form {...form}>
@@ -70,7 +77,7 @@ const SearchBox = ({ tab, branches, defaultValues }: { tab?: boolean, branches?:
                       }
                     )}
                     onClick={() => {
-                      form.setValue("branch", id.toString())
+                      form.setValue("branch", id.toString());
                     }}
                   >
                     {nick_name}
@@ -94,14 +101,27 @@ const SearchBox = ({ tab, branches, defaultValues }: { tab?: boolean, branches?:
               <InputX form={form} name="checkin" label="Check in" type="date" />
             </div>
             <div className="grid grid-cols-1 gap-[16px]">
-              <InputX form={form} name="checkout" label="Check out" type="date" />
+              <InputX
+                form={form}
+                name="checkout"
+                label="Check out"
+                type="date"
+              />
             </div>
             <div className="grid grid-cols-1 gap-[16px]">
-              <InputX form={form} name="persons" label="Persons" type="select" options={Data__PersonTypes} />
+              <InputX
+                form={form}
+                name="persons"
+                label="Persons"
+                type="select"
+                options={Data__PersonTypes}
+              />
             </div>
           </div>
 
-          <Button type="submit" className="min-w-[148px]">Search Now</Button>
+          <Button type="submit" className="min-w-[148px]">
+            Search Now
+          </Button>
         </div>
       </form>
     </Form>

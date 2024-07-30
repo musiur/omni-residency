@@ -75,9 +75,11 @@
     scroll-behavior: smooth;
     outline: none;
   }
+
   p {
     @apply leading-[24px];
   }
+
   body {
     @apply bg-background text-secondary;
   }
@@ -117,6 +119,7 @@ h2 span {
 .mySwiper {
   z-index: 0 !important;
 }
+
 .swiper:hover {
   @media (min-width: 500px) {
     .swiper-button-next::after,
@@ -160,6 +163,7 @@ h2 span {
     height: 8px !important;
   }
 }
+
 .swiper-pagination-bullet-active {
   background: hsl(var(--secondary)) !important;
 }
