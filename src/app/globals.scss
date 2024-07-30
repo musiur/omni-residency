@@ -167,8 +167,6 @@ h2 span {
 .form-input {
   @apply flex flex-col gap-[8px];
 
-  
-
   textarea {
     @apply min-h-[200px];
   }
@@ -178,10 +176,9 @@ h2 span {
   }
 }
 
-
 input,
-  textarea,
-  select {
-    @apply px-[16px] !h-12 !max-h-12 rounded-[10px] !border !border-gray-200;
-    // height: 20px!important;
-  }
+textarea,
+select {
+  @apply px-[16px] h-12 max-h-12 rounded-[10px] border border-gray-200;
+  // height: 20px!important;
+}
