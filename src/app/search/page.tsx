@@ -1,35 +1,44 @@
-
-
 import Testimonial from "@/components/core/pages/home/testimonial.section";
 import HeroSection from "@/components/core/pages/search/hero.section";
 import RoomCard from "@/components/core/pages/search/room.card";
 import { A__SearchRooms } from "./_utils/actions";
 
-const Page = async ({ searchParams }: { searchParams: { branch: string, checkin: string, checkout: string, persons: string } }) => {
-  const result = await A__SearchRooms({ branch: searchParams?.branch, check_in: searchParams?.checkin, check_out: searchParams?.checkout, adults: searchParams?.persons });
-  ;
-  const rooms: any[] = [];
-  // console.log(result)
-  
+const Page = async ({
+  searchParams,
+}: {
+  searchParams: {
+    branch: string;
+    checkin: string;
+    checkout: string;
+    persons: string;
+  };
+}) => {
+  const result = await A__SearchRooms({
+    branch: searchParams?.branch,
+    check_in: searchParams?.checkin,
+    check_out: searchParams?.checkout,
+    adults: searchParams?.persons,
+  });
+  const rooms: any[] = result?.data?.results || [];
+
   return (
     <div>
-      <HeroSection defaultValues={{...searchParams}}/>
+      <HeroSection defaultValues={{ ...searchParams }} />
       <section className="container grid grid-cols-1 gap-[64px]">
-        {
-          rooms?.map((item: any) => {
-            return <RoomCard key={item.id} details={item} />;
-          }) || "No room found!"
-        }
+        {rooms?.map((item: any) => {
+          return <RoomCard key={item.id} details={item} />;
+        }) || "No room found!"}
       </section>
       <Testimonial />
-
     </div>
   );
 };
 
 export default Page;
 
-{/* <SearchRoomCardSkeleton /> */ }
+{
+  /* <SearchRoomCardSkeleton /> */
+}
 // async function sleeper(ms: number) {
 //   return async function (x: any) {
 //     const value = await new Promise((resolve) =>
