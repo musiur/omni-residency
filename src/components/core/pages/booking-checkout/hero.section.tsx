@@ -8,7 +8,7 @@ const HeroSection = ({ params }: { params: { slug: string } }) => {
       <section className="bg-black/60 flex flex-col items-center justify-center gap-[16px]">
         <div className="max-w-[649px] [&>*]:text-white [&>*]:text-center max-auto flex flex-col items-center justify-center gap-[24px] px-[10px]">
           <h1 className="capitalize">
-            {params.slug.replaceAll("%26", "&").replaceAll("-", " ")}
+          {params.slug.replaceAll("%26", "&").replaceAll("-", " ").replace(/%20/g, " ")}
           </h1>
           {/* <h3 className="text-[20px] md:text-[24px] font-semibold">
             Checkout our everyday deals & offerings

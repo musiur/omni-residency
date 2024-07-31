@@ -112,7 +112,7 @@ const RoomCard = ({ details, index }: { details: any, index:number  }) => {
             : null}
         </div>
         <div className="flex items-center justify-end gap-10 pt-[16px] border-t border-gray-300">
-          <Link href={`/booking-checkout/${room_name}?id=${id}`}>
+          <Link href={`/booking-checkout/${room_name}?branch=${branch?.id}&id=${id}`}>
             View details
           </Link>
           <Button>Add to cart</Button>

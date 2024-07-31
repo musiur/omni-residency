@@ -30,7 +30,6 @@ const SearchBox = ({
   branches?: any;
   defaultValues?: any;
 }) => {
-  console.log({branches})
   const timeNow = new Date();
   const router = useRouter();
   const form = useForm < Type___Search__SearchForm > ({

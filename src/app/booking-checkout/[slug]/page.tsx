@@ -19,18 +19,35 @@ import {
   Wifi,
   Wind,
 } from "lucide-react";
+import { A__GET__RoomDetails } from "../_utils/action";
 
-const Page = ({ params }: { params: { slug: string } }) => {
+const Page = async ({
+  params,
+  searchParams
+}: {
+  params: { slug: string },
+  searchParams: {
+    id: number,
+    branch: number,
+  }
+}) => {
+
+  const result = await A__GET__RoomDetails({
+    branch_id:searchParams.branch?.toString(),
+    room_id:searchParams.id?.toString(),
+  })
+  const roomDetails = result?.data || [];
+  // console.log(result, "search Results >>>")
   const OverviewFeatures = [
     {
       id: 1,
       icon: <User />,
-      text: "2 Adult",
+      text:`${roomDetails?.adults} Adult`,
     },
     {
       id: 2,
       icon: <Baby />,
-      text: "2 Children",
+      text: `${roomDetails?.children} Children`,
     },
     {
       id: 3,
@@ -40,7 +57,7 @@ const Page = ({ params }: { params: { slug: string } }) => {
     {
       id: 4,
       icon: <DollarSign />,
-      text: "$100",
+      text: `${roomDetails?.discounted_price} BDT`,
     },
     {
       id: 5,
@@ -94,21 +111,17 @@ const Page = ({ params }: { params: { slug: string } }) => {
     <div>
       <HeroSection params={params} />
       <section className="container grid grid-cols-1 md:grid-cols-2 gap-10">
-        <RoomGalleryCarousel />
+        <RoomGalleryCarousel images={roomDetails?.gallery_set} />
         <BookingForm />
       </section>
       <section className="container grid grid-cols-1 md:grid-cols-2 gap-20">
         <div className="flex flex-col gap-4">
           <h2 className="text-[20px] md:text-[24px] font-bold">Overview</h2>
           <p>
-            Our Vip Room offers a stunning view of the white sand beach. This
-            room is designed and decorated with modern style and equipped with
-            the most luxurious facilites. Little luxuries include free Wi-Fi,
-            deluxe bath amenities and a 4K technology flat-screen television
-            with cable channels.
+            {roomDetails?.overview  }
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 pt-10">
-            {OverviewFeatures.map((feature) => {
+            {OverviewFeatures?.map((feature) => {
               const { id, icon, text } = feature;
               return (
                 <div

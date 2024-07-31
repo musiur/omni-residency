@@ -13,7 +13,7 @@ import "swiper/css/thumbs";
 import { useState } from "react";
 import Image from "next/image";
 
-export const RoomGalleryCarousel = () => {
+export const RoomGalleryCarousel = ({ images }: { images: any[] }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   return (
     <div className="rounded-[10px] overflow-hidden">
@@ -25,11 +25,11 @@ export const RoomGalleryCarousel = () => {
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper2"
       >
-        {images.map((item) => {
+        {images?.map((item) => {
           const { id, image } = item;
           return (
             <SwiperSlide
-              key={id}
+              key={id + 1}
               className="pb-16 group z-0 relative min-w-[300px]"
             >
               <div
@@ -55,16 +55,16 @@ export const RoomGalleryCarousel = () => {
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper"
-        // breakpoints={{
-        //   0: {
-        //     slidesPerView: 2,
-        //   },
-        //   1260: {
-        //     slidesPerView: 4,
-        //   },
-        // }}
+      // breakpoints={{
+      //   0: {
+      //     slidesPerView: 2,
+      //   },
+      //   1260: {
+      //     slidesPerView: 4,
+      //   },
+      // }}
       >
-        {images.map((item) => {
+        {images?.map((item) => {
           const { id, image } = item;
           return (
             <SwiperSlide
@@ -89,58 +89,58 @@ export const RoomGalleryCarousel = () => {
   );
 };
 
-const images = [
-  {
-    id: 1,
-    image: "/images/home/carousel/double-delux.png",
-    title: "Delux Double",
-    location: "Dhaka, Banani",
-    link: "/booking-checkout/delux-double",
-    offPercent: 20,
-    btnText: "Show Room",
-  },
-  {
-    id: 2,
-    image: "/images/home/carousel/queen-delux.png",
-    title: "Queen Delux",
-    location: "Dhaka, Baridhara",
-    link: "/booking-checkout/queen-delux",
-    offPercent: 40,
-    btnText: "Book Now",
-  },
-  {
-    id: 3,
-    image: "/images/home/carousel/single-double.png",
-    title: "Double & Single",
-    location: "Cox's Bazar, Iconic",
-    link: "/booking-checkout/double-&-single",
-    offPercent: 30,
-    btnText: "Book Now",
-  },
-  {
-    id: 4,
-    image: "/images/home/carousel/honeymoon.png",
-    title: "Honeymoon",
-    location: "Dhaka, Banani",
-    link: "/booking-checkout/honeymoon",
-    offPercent: 10,
-    btnText: "Show Properties",
-  },
-  {
-    id: 5,
-    image: "/images/home/carousel/honeymoon.png",
-    title: "Honeymoon",
-    link: "/booking-checkout/honeymoon",
-    offPercent: 10,
-    btnText: "Show Properties",
-  },
-  {
-    id: 6,
-    image: "/images/home/carousel/honeymoon.png",
-    title: "Honeymoon",
-    location: "Dhaka, Banani",
-    link: "/booking-checkout/honeymoon",
-    offPercent: 10,
-    btnText: "Show Properties",
-  },
-];
+// const images = [
+//   {
+//     id: 1,
+//     image: "/images/home/carousel/double-delux.png",
+//     title: "Delux Double",
+//     location: "Dhaka, Banani",
+//     link: "/booking-checkout/delux-double",
+//     offPercent: 20,
+//     btnText: "Show Room",
+//   },
+//   {
+//     id: 2,
+//     image: "/images/home/carousel/queen-delux.png",
+//     title: "Queen Delux",
+//     location: "Dhaka, Baridhara",
+//     link: "/booking-checkout/queen-delux",
+//     offPercent: 40,
+//     btnText: "Book Now",
+//   },
+//   {
+//     id: 3,
+//     image: "/images/home/carousel/single-double.png",
+//     title: "Double & Single",
+//     location: "Cox's Bazar, Iconic",
+//     link: "/booking-checkout/double-&-single",
+//     offPercent: 30,
+//     btnText: "Book Now",
+//   },
+//   {
+//     id: 4,
+//     image: "/images/home/carousel/honeymoon.png",
+//     title: "Honeymoon",
+//     location: "Dhaka, Banani",
+//     link: "/booking-checkout/honeymoon",
+//     offPercent: 10,
+//     btnText: "Show Properties",
+//   },
+//   {
+//     id: 5,
+//     image: "/images/home/carousel/honeymoon.png",
+//     title: "Honeymoon",
+//     link: "/booking-checkout/honeymoon",
+//     offPercent: 10,
+//     btnText: "Show Properties",
+//   },
+//   {
+//     id: 6,
+//     image: "/images/home/carousel/honeymoon.png",
+//     title: "Honeymoon",
+//     location: "Dhaka, Banani",
+//     link: "/booking-checkout/honeymoon",
+//     offPercent: 10,
+//     btnText: "Show Properties",
+//   },
+// ];

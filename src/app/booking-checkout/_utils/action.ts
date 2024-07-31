@@ -2,16 +2,12 @@
 
 const BASEURL = process.env.BASEURL;
 
-export const A__SearchRooms = async (data: {
-  branch: string;
-  check_in: string;
-  check_out: string;
-  adults: string;
+export const A__GET__RoomDetails = async (data: {
+  branch_id: string;
+  room_id: string;
 }) => {
   try {
-    const apiEndpoint = `${BASEURL}/segments/branches/${data?.branch}/room_categories/?check_in=${
-      data?.check_in
-    }&check_out=${data?.check_out}&adults=${data?.adults}`
+    const apiEndpoint = `${BASEURL}/segments/branches/${data?.branch_id}/room_categories/${data?.room_id}/`
     // console.log("Search API endpoint :: ", apiEndpoint)
     const response = await fetch(apiEndpoint,
       {
