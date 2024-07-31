@@ -16,7 +16,7 @@ return `${year}-${month}-${day}`
 }
 
 export const Utils___DateExtracter = (dateString: string) => {
-  const [year, month, day] = dateString.split('-').map(Number);
+  const [year, month, day] = dateString?.split('-').map(Number);
   const convertedDate = new Date(year, month - 1, day);
   console.log(convertedDate)
   return convertedDate

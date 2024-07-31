@@ -1,8 +1,19 @@
 import SearchBox from "../../molecules/searchbox.molecule";
 import Image from "next/image";
 import { ChevronRight } from "lucide-react";
+import { A__GET__BranchList } from "@/app/branches/_utils/action";
 
-const HeroSection = () => {
+const HeroSection =async () => {
+  
+  const result = await A__GET__BranchList();
+
+  const branches = result?.data?.results?.map((item: any) => {
+    return {
+      id: item?.id,
+      nick_name: item?.nick_name
+    }
+  }) || [];
+
   return (
     <div className="pt-[86px] min-[1120px]:pt-[127px] relative">
       <section className="bg-black/60 flex flex-col items-center justify-center gap-[16px]">
@@ -18,7 +29,7 @@ const HeroSection = () => {
           </p>
         </div>
         <div className="container">
-          <SearchBox tab={true} />
+          <SearchBox tab={true} branches={branches} />
         </div>
       </section>
       <Image

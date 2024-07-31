@@ -49,7 +49,6 @@ const SearchBox = ({
   const onSubmit = async (data: Type___Search__SearchForm) => {
     const convertedCheckIn = Utils___DateFormatter(data.checkin);
     const convertedCheckOut = Utils___DateFormatter(data.checkout);
-    console.log("data >>>", data)
     router.push(
       `/search?branch=${data?.branch}&checkin=${convertedCheckIn}&checkout=${convertedCheckOut}&persons=${data?.persons}`
     );
@@ -64,6 +63,7 @@ const SearchBox = ({
               (branch: { id: number; nick_name: string }, index: number) => {
                 const { id, nick_name } = branch;
                 const matched = form.watch("branch") === id.toString();
+                console.log("matched branch", matched)
                 return (
                   <div
                     key={id}

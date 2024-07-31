@@ -9,10 +9,11 @@ export const A__SearchRooms = async (data: {
   adults: string;
 }) => {
   try {
-    const response = await fetch(
-      `${BASEURL}/segments/branches/${data?.branch}/room_categories/?check_in=${
-        data?.check_in
-      }&check_out=${data?.check_out}&adults=${4}`,
+    const apiEndpoint = `${BASEURL}/segments/branches/${data?.branch}/room_categories/?check_in=${
+      data?.check_in
+    }&check_out=${data?.check_out}&adults=${data?.adults}`
+    console.log("Search API endpoint :: ", apiEndpoint)
+    const response = await fetch(apiEndpoint,
       {
         method: "GET",
         headers: {
@@ -22,7 +23,6 @@ export const A__SearchRooms = async (data: {
       }
     );
     const result = await response.json();
-    console.log("search result", result);
     return result;
   } catch (error) {
     return {
