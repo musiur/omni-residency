@@ -3,10 +3,10 @@ import clsx from "clsx";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
-import { downlinks, sociallinks, uplinks } from "./navbar.molecule";
+import { sociallinks } from "./navbar.molecule";
 import Link from "next/link";
 
-const SideNav = () => {
+const SideNav = ({uplinks, downlinks}:{uplinks:any[], downlinks:any[]}) => {
   const [openNav, setOpenNav] = useState(false);
   return (
     <div>
@@ -37,7 +37,7 @@ const SideNav = () => {
         </div>
         <div className="container section grid grd-cols-1 gap-[40px]">
           <ul className="block min-[880px]:hidden grid grid-cols-1 gap-[12px]">
-            {uplinks.map((item) => {
+            {uplinks?.map((item) => {
               const { id, text, link } = item;
               return (
                 <li key={id}>
@@ -49,7 +49,7 @@ const SideNav = () => {
             })}
           </ul>
           <ul className="grid grid-cols-1 gap-[12px]">
-            {downlinks.map((item) => {
+            {downlinks?.map((item) => {
               const { id, text, link } = item;
               return (
                 <li key={id}>

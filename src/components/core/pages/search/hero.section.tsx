@@ -10,10 +10,10 @@ const HeroSection = async ({ defaultValues }: { defaultValues: any }) => {
 
   const branches: any[] = result?.data?.results?.map((item: any) => ({
     id: item?.id,
-    nickname: item?.nick_name
+    nick_name: item?.nick_name
   })) || [];
 
-  const matchedBranchName: string = branches?.find(branch => branch.id === +defaultValues?.branch).nickname || null;
+  const matchedBranchName: string = branches?.find(branch => branch.id === +defaultValues?.branch).nick_name || null;
 
   return (
     <div className="pt-[86px] min-[1120px]:pt-[127px] relative">
@@ -33,7 +33,7 @@ const HeroSection = async ({ defaultValues }: { defaultValues: any }) => {
         </div>
         <div className="container">
           {
-            branches ? <SearchBox tab={false} branches={branches} defaultValues={defaultValues} /> : null
+            branches ? <SearchBox tab={true} branches={branches} defaultValues={defaultValues} /> : null
           }
         </div>
       </section>

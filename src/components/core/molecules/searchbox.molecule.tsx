@@ -30,6 +30,7 @@ const SearchBox = ({
   branches?: any;
   defaultValues?: any;
 }) => {
+  console.log({branches})
   const timeNow = new Date();
   const router = useRouter();
   const form = useForm < Type___Search__SearchForm > ({
@@ -63,7 +64,6 @@ const SearchBox = ({
               (branch: { id: number; nick_name: string }, index: number) => {
                 const { id, nick_name } = branch;
                 const matched = form.watch("branch") === id.toString();
-                console.log("matched branch", matched)
                 return (
                   <div
                     key={id}
@@ -78,6 +78,7 @@ const SearchBox = ({
                     )}
                     onClick={() => {
                       form.setValue("branch", id.toString());
+                      console.log(form.watch("branch"), "clicked branch")
                     }}
                   >
                     {nick_name}

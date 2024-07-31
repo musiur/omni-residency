@@ -25,8 +25,8 @@ const Page = async ({
     <div>
       <HeroSection defaultValues={{ ...searchParams }} />
       <section className="container grid grid-cols-1 gap-[64px]">
-        {rooms?.length > 0 ? rooms?.map((item: any) => {
-          return <RoomCard key={item.id} details={item} />;
+        {rooms?.length > 0 ? rooms?.map((item: any, index:number) => {
+          return <RoomCard key={item.id} index={index} details={item} />;
         }) : <p className="text-center animate-pulse">No Room Available!</p>}
       </section>
       <Testimonial />

@@ -4,7 +4,7 @@ import { ImageIcon, Play } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-const RoomCard = ({ details }: { details: any }) => {
+const RoomCard = ({ details, index }: { details: any, index:number  }) => {
   const {
     id,
     gallery_set,
@@ -23,8 +23,8 @@ const RoomCard = ({ details }: { details: any }) => {
     overview,
     available_rooms_count,
   } = details;
-  const even = id % 2 === 0;
 
+  const even = index % 2 === 0;
   return (
     <div className="relative grid grid-cols-1 md:grid-cols-2 gap-[12px] py-0 md:py-[90px] overflow-hidden rounded-[10px] md:rounded-[40px]">
       <Image

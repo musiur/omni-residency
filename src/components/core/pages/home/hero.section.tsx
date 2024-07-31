@@ -6,7 +6,7 @@ import { A__GET__BranchList } from "@/app/branches/_utils/action";
 const HeroSection = async () => {
   const result = await A__GET__BranchList();
   
-  const branches = result?.data?.results?.map((item: any) => {
+  const branches:any[] = result?.data?.results?.map((item: any) => {
     return {
       id: item?.id,
       nick_name: item?.nick_name
