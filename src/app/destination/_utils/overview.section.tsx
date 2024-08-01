@@ -24,37 +24,44 @@ const Overview = () => {
         di dunia ini
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-[16px] md:gap-[40px]">
-        {places.map((place) => {
-          const { id, image, name, link } = place;
-          return (
-            <div
-              className="relative p-4 md:p-8 min-h-[323px] flex items-end justify-end rounded-[10px] overflow-hidden"
-              key={id}
-            >
-              <Image
-                src={image}
-                alt="image-of-dhaka"
-                fill
-                quality={100}
-                style={{ objectFit: "cover", objectPosition: "center" }}
-                className="z-[-1]"
-              />
-              <div className="w-full flex items-center justify-between gap-10">
-                <p className="text-white font-semibold text-[16px] md:text-[20px]">
-                  {name}
-                </p>
-                <Link href={link}>
-                  <Button
-                    variant="outline"
-                    className="bg-white/10 border-white backdrop-blur text-white font-medium"
-                  >
-                    See Hotel(s)
-                  </Button>
-                </Link>
+        {places.map(
+          (place: {
+            id: number;
+            image: string;
+            name: string;
+            link: string;
+          }) => {
+            const { id, image, name, link } = place;
+            return (
+              <div
+                className="relative p-4 md:p-8 min-h-[323px] flex items-end justify-end rounded-[10px] overflow-hidden"
+                key={id}
+              >
+                <Image
+                  src={image}
+                  alt="image-of-dhaka"
+                  fill
+                  quality={100}
+                  style={{ objectFit: "cover", objectPosition: "center" }}
+                  className="z-[-1]"
+                />
+                <div className="w-full flex items-center justify-between gap-10">
+                  <p className="text-white font-semibold text-[16px] md:text-[20px]">
+                    {name}
+                  </p>
+                  <Link href={link}>
+                    <Button
+                      variant="outline"
+                      className="bg-white/10 border-white backdrop-blur text-white font-medium"
+                    >
+                      See Hotel(s)
+                    </Button>
+                  </Link>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          }
+        )}
       </div>
     </section>
   );

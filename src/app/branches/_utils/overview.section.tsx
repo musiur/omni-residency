@@ -1,8 +1,8 @@
+import BookingDotComRating from "@/components/core/molecules/booking.com.molecule";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import BookingDotComRating from "../../molecules/booking.com.molecule";
 
 const Overview = () => {
   return (

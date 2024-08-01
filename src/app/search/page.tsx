@@ -1,6 +1,6 @@
-import Testimonial from "@/components/core/pages/home/testimonial.section";
-import HeroSection from "@/components/core/pages/search/hero.section";
-import RoomCard from "@/components/core/pages/search/room.card";
+import Testimonial from "@/app/utils/testimonial.section";
+import HeroSection from "./_utils/hero.section";
+import RoomCard from "@/app/search/_utils/room.card";
 import { A__SearchRooms } from "./_utils/actions";
 
 const Page = async ({
@@ -25,9 +25,13 @@ const Page = async ({
     <div>
       <HeroSection defaultValues={{ ...searchParams }} />
       <section className="container grid grid-cols-1 gap-[64px]">
-        {rooms?.length > 0 ? rooms?.map((item: any, index:number) => {
-          return <RoomCard key={item.id} index={index} details={item} />;
-        }) : <p className="text-center animate-pulse">No Room Available!</p>}
+        {rooms?.length > 0 ? (
+          rooms?.map((item: any, index: number) => {
+            return <RoomCard key={item.id} index={index} details={item} />;
+          })
+        ) : (
+          <p className="text-center animate-pulse">No Room Available!</p>
+        )}
       </section>
       <Testimonial />
     </div>

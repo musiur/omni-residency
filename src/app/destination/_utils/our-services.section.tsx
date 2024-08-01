@@ -5,8 +5,14 @@ import RoomService from "@/components/assets/room-services.icon";
 import SwimmingPool from "@/components/assets/swimming-pool.icon";
 import Wifi from "@/components/assets/wifi.icon";
 import { Button } from "@/components/ui/button";
-import { ChevronRight } from "lucide-react";
 import Link from "next/link";
+
+type T__ServiceCard = {
+  id: number;
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+};
 
 const OurServices = () => {
   return (
@@ -23,7 +29,7 @@ const OurServices = () => {
         </Link>
       </div>
       <div className="w-full grid grid-cols-1 min-[480px]:grid-cols-2 min-[800px]:grid-cols-3 gap-[16px] md:gap-[24px] pt-8">
-        {servicesCardData.map((card) => {
+        {servicesCardData.map((card: T__ServiceCard) => {
           const { id, title, description, icon } = card;
           return (
             <div
@@ -47,7 +53,7 @@ const OurServices = () => {
 
 export default OurServices;
 
-const servicesCardData = [
+const servicesCardData: T__ServiceCard[] = [
   {
     id: 1,
     title: "Pick Up & Drop",

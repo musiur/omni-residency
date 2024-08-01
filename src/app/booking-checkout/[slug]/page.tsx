@@ -1,7 +1,6 @@
 import BookingForm from "@/components/core/molecules/booking-form.molecule";
 import { RoomGalleryCarousel } from "@/components/core/molecules/room-gallary.molecule";
 import YouMayLike from "@/components/core/molecules/you-may-like.molecule";
-import HeroSection from "@/components/core/pages/booking-checkout/hero.section";
 import {
   AirVent,
   Baby,
@@ -11,38 +10,36 @@ import {
   Coffee,
   DollarSign,
   Home,
-  Key,
   Package2,
-  Scale,
   Tv,
   User,
   Wifi,
   Wind,
 } from "lucide-react";
 import { A__GET__RoomDetails } from "../_utils/action";
+import HeroSection from "../_utils/hero.section";
 
 const Page = async ({
   params,
-  searchParams
+  searchParams,
 }: {
-  params: { slug: string },
+  params: { slug: string };
   searchParams: {
-    id: number,
-    branch: number,
-  }
+    id: number;
+    branch: number;
+  };
 }) => {
-
   const result = await A__GET__RoomDetails({
-    branch_id:searchParams.branch?.toString(),
-    room_id:searchParams.id?.toString(),
-  })
+    branch_id: searchParams.branch?.toString(),
+    room_id: searchParams.id?.toString(),
+  });
   const roomDetails = result?.data || [];
-  // console.log(result, "search Results >>>")
+
   const OverviewFeatures = [
     {
       id: 1,
       icon: <User />,
-      text:`${roomDetails?.adults} Adult`,
+      text: `${roomDetails?.adults} Adult`,
     },
     {
       id: 2,
@@ -117,9 +114,7 @@ const Page = async ({
       <section className="container grid grid-cols-1 md:grid-cols-2 gap-20">
         <div className="flex flex-col gap-4">
           <h2 className="text-[20px] md:text-[24px] font-bold">Overview</h2>
-          <p>
-            {roomDetails?.overview  }
-          </p>
+          <p>{roomDetails?.overview}</p>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 pt-10">
             {OverviewFeatures?.map((feature) => {
               const { id, icon, text } = feature;

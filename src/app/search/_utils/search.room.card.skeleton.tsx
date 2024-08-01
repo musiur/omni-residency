@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import Skeleton from "../core/atoms/skeleton.atom";
+import Skeleton from "../../../components/core/atoms/skeleton.atom";
 
 const SearchRoomCardSkeleton = () => {
   return (

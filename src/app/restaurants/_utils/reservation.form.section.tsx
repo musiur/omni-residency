@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ReservationFormSchema, TReservationFormSchema } from "@/lib/type";
 import { Button } from "@/components/ui/button";
 import clsx from "clsx";
-import Errors from "../../atoms/errors.atom";
+import Errors from "../../../components/core/atoms/errors.atom";
 import { useToast } from "@/components/ui/use-toast";
 
 const ReservationForm = () => {

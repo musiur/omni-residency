@@ -2,7 +2,17 @@ import { Button } from "@/components/ui/button";
 import { MapPin } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import BookingDotComRating from "../../molecules/booking.com.molecule";
+import BookingDotComRating from "../../../components/core/molecules/booking.com.molecule";
+
+type T__Hotel = {
+  id: number;
+  title: string;
+  location: string;
+  address: string;
+  roomsLink: string;
+  image: string;
+  rating: number;
+};
 
 const Hotels = () => {
   return (
@@ -15,13 +25,13 @@ const Hotels = () => {
           selamanya di dunia ini
         </p>
         <div className="grid grid-cols-1 min-[600px]:grid-cols-2 gap-[16px] md:gap-[40px]">
-          {HotelsList.map((hotel) => {
+          {HotelsList.map((hotel: T__Hotel) => {
             const { id, title, location, address, roomsLink, image, rating } =
               hotel;
             return (
               <div
                 key={id}
-                className="flex flex-col flex-col min-[1120px]:flex-row items-center justify-start gap-[8px] md:gap-[16px] p-[8px] md:p-[16px] rounded-[10px] items-stretch border"
+                className="flex flex-col min-[1120px]:flex-row justify-start gap-[8px] md:gap-[16px] p-[8px] md:p-[16px] rounded-[10px] items-stretch border"
               >
                 <div className="relative min-h-[300px] min-[1120px]:min-h-[200px] min-w-[230px]">
                   <Image
@@ -57,7 +67,7 @@ const Hotels = () => {
         </div>
       </section>
       <hr />
-      <section className="container flex flex-col md:flex-row items-stretch items-center gap-[40px]">
+      <section className="container flex flex-col md:flex-row items-stretch gap-[40px]">
         <div className="flex-1">
           <h2 className="pt-[16px]">Cox&apos;s Bazar</h2>
           <p className="text-plain_gray py-[10px] text-[16px] md:text-[20px] leading-snug  md:leading-loose pb-[40px]">
@@ -85,7 +95,7 @@ const Hotels = () => {
 
 export default Hotels;
 
-const HotelsList = [
+const HotelsList: T__Hotel[] = [
   {
     id: 1,
     title: "Hotel Omni Residency",

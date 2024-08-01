@@ -1,4 +1,4 @@
-import TwoSiderMolecule from "../../molecules/twosider.molecule";
+import TwoSiderMolecule from "../../components/core/molecules/twosider.molecule";
 
 const ExploreDestination = () => {
   return (

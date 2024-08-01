@@ -1,4 +1,4 @@
-import { DealsAllAround } from "../../molecules/deals-all-around.molecules";
+import { DealsAllAround } from "../../components/core/molecules/deals-all-around.molecules";
 
 const DealsOfTheDay = () => {
   return (

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import SearchBox from "../../molecules/searchbox.molecule";
+import SearchBox from "../../../components/core/molecules/searchbox.molecule";
 import Image from "next/image";
 
 const HeroSection = () => {

@@ -1,13 +1,8 @@
-"use client";
-import HeroSection from "@/components/core/pages/restaurants/table.booking.hero.section";
+import HeroSection from "@/app/restaurants/_utils/table.booking.hero.section";
 
-import { useSearchParams } from "next/navigation";
-// import RestaurantOverview from "@/components/core/pages/restaurants/restaurant.overview.section";
-import ReservationForm from "@/components/core/pages/restaurants/reservation.form.section";
-// import { RestaurantsOverviewData } from "@/lib/data";
+import ReservationForm from "@/app/restaurants/_utils/reservation.form.section";
 
 const Page = () => {
-  const params = useSearchParams();
   return (
     <>
       <HeroSection />

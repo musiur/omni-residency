@@ -1,19 +1,20 @@
-
-import SearchBox from "../../molecules/searchbox.molecule";
+import SearchBox from "../../../components/core/molecules/searchbox.molecule";
 import Image from "next/image";
 import { ChevronRight } from "lucide-react";
 import { A__GET__BranchList } from "@/app/branches/_utils/action";
 
 const HeroSection = async ({ defaultValues }: { defaultValues: any }) => {
-
   const result = await A__GET__BranchList();
 
-  const branches: any[] = result?.data?.results?.map((item: any) => ({
-    id: item?.id,
-    nick_name: item?.nick_name
-  })) || [];
+  const branches: any[] =
+    result?.data?.results?.map((item: any) => ({
+      id: item?.id,
+      nick_name: item?.nick_name,
+    })) || [];
 
-  const matchedBranchName: string = branches?.find(branch => branch.id === +defaultValues?.branch).nick_name || null;
+  const matchedBranchName: string =
+    branches?.find((branch) => branch.id === +defaultValues?.branch)
+      .nick_name || null;
 
   return (
     <div className="pt-[86px] min-[1120px]:pt-[127px] relative">
@@ -32,9 +33,13 @@ const HeroSection = async ({ defaultValues }: { defaultValues: any }) => {
           </p>
         </div>
         <div className="container">
-          {
-            branches ? <SearchBox tab={true} branches={branches} defaultValues={defaultValues} /> : null
-          }
+          {branches ? (
+            <SearchBox
+              tab={true}
+              branches={branches}
+              defaultValues={defaultValues}
+            />
+          ) : null}
         </div>
       </section>
       <Image

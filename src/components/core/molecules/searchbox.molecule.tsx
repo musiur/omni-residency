@@ -32,10 +32,10 @@ const SearchBox = ({
 }) => {
   const timeNow = new Date();
   const router = useRouter();
-  const form = useForm < Type___Search__SearchForm > ({
+  const form = useForm<Type___Search__SearchForm>({
     resolver: zodResolver(Schema__SearchForm),
     defaultValues: {
-      branch: branches[0]?.id?.toString() || "1",
+      branch: branches?.length ? branches[0]?.id?.toString() : "1",
       checkin: defaultValues?.checkin
         ? Utils___DateExtracter(defaultValues.checkin)
         : timeNow,
@@ -59,32 +59,37 @@ const SearchBox = ({
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
         {tab ? (
           <div className="w-full flex items-center justify-start">
-            {branches?.map(
-              (branch: { id: number; nick_name: string }, index: number) => {
-                const { id, nick_name } = branch;
-                const matched = form.watch("branch") === id.toString();
-                return (
-                  <div
-                    key={id}
-                    role="button"
-                    className={clsx(
-                      "px-[24px] py-[16px] font-semibold transition ease-in-out duration-500",
-                      {
-                        "bg-white/50 text-white": !matched,
-                        "bg-white text-muted_gray": matched,
-                        "rounded-tl-[10px]": index === 0,
-                      }
-                    )}
-                    onClick={() => {
-                      form.setValue("branch", id.toString());
-                      console.log(form.watch("branch"), "clicked branch")
-                    }}
-                  >
-                    {nick_name}
-                  </div>
-                );
-              }
-            )}
+            {branches?.length
+              ? branches.map(
+                  (
+                    branch: { id: number; nick_name: string },
+                    index: number
+                  ) => {
+                    const { id, nick_name } = branch;
+                    const matched = form.watch("branch") === id.toString();
+                    return (
+                      <div
+                        key={id}
+                        role="button"
+                        className={clsx(
+                          "px-[24px] py-[16px] font-semibold transition ease-in-out duration-500",
+                          {
+                            "bg-white/50 text-white": !matched,
+                            "bg-white text-muted_gray": matched,
+                            "rounded-tl-[10px]": index === 0,
+                          }
+                        )}
+                        onClick={() => {
+                          form.setValue("branch", id.toString());
+                          console.log(form.watch("branch"), "clicked branch");
+                        }}
+                      >
+                        {nick_name}
+                      </div>
+                    );
+                  }
+                )
+              : null}
           </div>
         ) : null}
         <div

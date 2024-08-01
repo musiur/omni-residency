@@ -1,8 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images: {
-      domains: ['talhaanik56.pythonanywhere.com'],
-    },
-  }
-  
-  module.exports = nextConfig
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "talhaanik56.pythonanywhere.com",
+        port: "",
+        pathname: "/**",
+      },
+    ],
+  },
+};
+
+module.exports = nextConfig;

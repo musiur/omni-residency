@@ -2,6 +2,15 @@ import { Button } from "@/components/ui/button";
 import clsx from "clsx";
 import { Star } from "lucide-react";
 
+type T__TestimonialCard = {
+  id: number;
+  name: string;
+  address: string;
+  rating: number;
+  text: string;
+  image: string;
+};
+
 const Testimonial = () => {
   return (
     <section className="bg-[#fafafa]">
@@ -14,7 +23,7 @@ const Testimonial = () => {
         </h4>
       </div>
       <div className="container grid grid-cols-1 sm:grid-cols-2 min-[1100px]:grid-cols-3 gap-[24px] lg:gap-[48px] pt-[48px]">
-        {cardData.map((item) => {
+        {cardData.map((item: T__TestimonialCard) => {
           const { id, name, address, rating, text, image } = item;
           return (
             <div
@@ -56,7 +65,7 @@ const Testimonial = () => {
 
 export default Testimonial;
 
-const cardData = [
+const cardData: T__TestimonialCard[] = [
   {
     id: 1,
     name: "Cecep Akbar",
