@@ -8,7 +8,7 @@ export const A__GET__RoomDetails = async (data: {
 }) => {
   try {
     const apiEndpoint = `${BASEURL}/segments/branches/${data?.branch_id}/room_categories/${data?.room_id}/`
-    // console.log("Search API endpoint :: ", apiEndpoint)
+
     const response = await fetch(apiEndpoint,
       {
         method: "GET",

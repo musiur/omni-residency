@@ -81,7 +81,6 @@ const SearchBox = ({
                         )}
                         onClick={() => {
                           form.setValue("branch", id.toString());
-                          console.log(form.watch("branch"), "clicked branch");
                         }}
                       >
                         {nick_name}

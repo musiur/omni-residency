@@ -30,7 +30,7 @@ export const A__POST__CreateCart = async () => {
         const result = await response.json();
         return result;
     } catch (error) {
-        console.log(error)
+
         return {
             success: false,
             message: "Something went wrong!"
@@ -131,7 +131,7 @@ export const A__POST__AddToCart = async (id: string, data: T__CartItemAdder, pat
         revalidatePath(pathname)
         return result;
     } catch (error) {
-        console.log(error)
+
         return {
             success: false,
             message: "Something went wrong!"
@@ -161,7 +161,7 @@ export const A__PATCH__CartItemRoomQuantity = async (cartId: string, cartItemId:
 
 export const A__DELETE__CartItem = async (cartId: string, cartItemId: number, pathname: string) => {
     try {
-        console.log({ cartId, cartItemId })
+
         const response = await fetch(`${BASEURL}/segments/carts/${cartId}/cartitems/${cartItemId}/`, {
             method: "DELETE",
             headers: {
@@ -173,7 +173,6 @@ export const A__DELETE__CartItem = async (cartId: string, cartItemId: number, pa
         revalidatePath(pathname)
         return result;
     } catch (error) {
-        console.log(error)
         return {
             success: false,
             message: "Something went wrong!"

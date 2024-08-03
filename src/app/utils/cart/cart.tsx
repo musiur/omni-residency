@@ -1,35 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { A__POST__CreateCart } from "./actions";
 import { ShoppingBagIcon } from "lucide-react";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { useCartContext } from "@/lib/context/cart-provider.context";
 
-const CLIENT__SIDE = typeof window !== "undefined";
+// const CLIENT__SIDE = typeof window !== "undefined";
 
 const Cart = () => {
-  const [cart, setCart] = useState<any>(null);
+  const { cart } = useCartContext();
 
-  const CreateNewCart = async () => {
-    const result = await A__POST__CreateCart();
-    if (result?.data) {
-      localStorage.setItem("cart", JSON.stringify(result.data));
-      setCart(result.data);
-    }
-  };
-  useEffect(() => {
-    if (CLIENT__SIDE) {
-      localStorage.getItem("cart")
-        ? setCart(localStorage.getItem("cart"))
-        : CreateNewCart();
-    }
-  }, []);
-
-  console.log(cart);
   return (
     <div className="w-16 h-16 rounded-full bg-white shadow-2xl border border-primary fixed bottom-4 right-4 z-50 flex items-center justify-center">
       <Popover>
