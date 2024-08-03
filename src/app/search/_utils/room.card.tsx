@@ -1,10 +1,11 @@
+import AddToCart from "@/app/utils/cart/add-to-cart";
 import { Button } from "@/components/ui/button";
 import clsx from "clsx";
 import { ImageIcon, Play } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-const RoomCard = ({ details, index }: { details: any, index:number  }) => {
+const RoomCard = ({ details, index }: { details: any; index: number }) => {
   const {
     id,
     gallery_set,
@@ -99,23 +100,25 @@ const RoomCard = ({ details, index }: { details: any, index:number  }) => {
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-[8px] max-w-[400px]">
           {room_amenities_set?.length
             ? room_amenities_set?.map((item: any, index: number) => {
-              return (
-                <div
-                  key={index}
-                  className="flex items-start gap-[8px] [&>svg]:stroke-primary [&>svg]:w-4 [&>svg]:h-4 [&>svg]:stroke-[1.3px]"
-                >
-                  {/* {item} */}
-                  <span className="capitalize">{item?.amenity}</span>
-                </div>
-              );
-            })
+                return (
+                  <div
+                    key={index}
+                    className="flex items-start gap-[8px] [&>svg]:stroke-primary [&>svg]:w-4 [&>svg]:h-4 [&>svg]:stroke-[1.3px]"
+                  >
+                    {/* {item} */}
+                    <span className="capitalize">{item?.amenity}</span>
+                  </div>
+                );
+              })
             : null}
         </div>
         <div className="flex items-center justify-end gap-10 pt-[16px] border-t border-gray-300">
-          <Link href={`/booking-checkout/${room_name}?branch=${branch?.id}&id=${id}`}>
+          <Link
+            href={`/booking-checkout/${room_name}?branch=${branch?.id}&id=${id}`}
+          >
             View details
           </Link>
-          <Button>Add to cart</Button>
+          <AddToCart data={{ room_category_id: id, quantity: 1 }} />
         </div>
       </div>
     </div>

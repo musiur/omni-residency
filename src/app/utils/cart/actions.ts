@@ -1,5 +1,6 @@
 "use server"
 
+import { revalidatePath } from "next/cache";
 import { T__CartItemAdder } from "./types";
 
 const BASEURL = process.env.BASEURL;
@@ -57,6 +58,26 @@ export const A__GET__Cart = async (id: string) => {
     }
 }
 
+export const A__GET__CartItem = async (id: string, itemId: number) => {
+    try {
+        const response = await fetch(`${BASEURL}/segments/carts/${id}/cartitems/${itemId}/`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                accept: "application/json"
+            },
+            cache: "no-store"
+        });
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        return {
+            success: false,
+            message: "Something went wrong!"
+        }
+    }
+}
+
 export const A__GET__CartItems = async (id: string) => {
     try {
         const response = await fetch(`${BASEURL}/segments/carts/${id}/cartitems`, {
@@ -96,9 +117,9 @@ export const A__DELETE__Cart = async (id: string) => {
     }
 }
 
-export const A__POST__AddToCart = async (id: string, data: T__CartItemAdder) => {
+export const A__POST__AddToCart = async (id: string, data: T__CartItemAdder, pathname: string) => {
     try {
-        const response = await fetch(`${BASEURL}/segments/carts/${id}/cartitems`, {
+        const response = await fetch(`${BASEURL}/segments/carts/${id}/cartitems/`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -107,8 +128,10 @@ export const A__POST__AddToCart = async (id: string, data: T__CartItemAdder) => 
             body: JSON.stringify(data),
         });
         const result = await response.json();
+        revalidatePath(pathname)
         return result;
     } catch (error) {
+        console.log(error)
         return {
             success: false,
             message: "Something went wrong!"
@@ -136,8 +159,9 @@ export const A__PATCH__CartItemRoomQuantity = async (cartId: string, cartItemId:
     }
 }
 
-export const A__DELETE__CartItem = async (cartId: string, cartItemId: string) => {
+export const A__DELETE__CartItem = async (cartId: string, cartItemId: number, pathname: string) => {
     try {
+        console.log({ cartId, cartItemId })
         const response = await fetch(`${BASEURL}/segments/carts/${cartId}/cartitems/${cartItemId}/`, {
             method: "DELETE",
             headers: {
@@ -146,8 +170,10 @@ export const A__DELETE__CartItem = async (cartId: string, cartItemId: string) =>
             },
         });
         const result = await response.json();
+        revalidatePath(pathname)
         return result;
     } catch (error) {
+        console.log(error)
         return {
             success: false,
             message: "Something went wrong!"
