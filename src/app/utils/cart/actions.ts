@@ -117,7 +117,7 @@ export const A__DELETE__Cart = async (id: string) => {
     }
 }
 
-export const A__POST__AddToCart = async (id: string, data: T__CartItemAdder, pathname: string) => {
+export const A__POST__AddToCart = async (id: string, data: T__CartItemAdder) => {
     try {
         const response = await fetch(`${BASEURL}/segments/carts/${id}/cartitems/`, {
             method: "POST",
@@ -128,10 +128,9 @@ export const A__POST__AddToCart = async (id: string, data: T__CartItemAdder, pat
             body: JSON.stringify(data),
         });
         const result = await response.json();
-        revalidatePath(pathname)
         return result;
     } catch (error) {
-
+        // console.log(error)
         return {
             success: false,
             message: "Something went wrong!"
@@ -159,20 +158,21 @@ export const A__PATCH__CartItemRoomQuantity = async (cartId: string, cartItemId:
     }
 }
 
-export const A__DELETE__CartItem = async (cartId: string, cartItemId: number, pathname: string) => {
+export const A__DELETE__CartItem = async (cartId: string, cartItemId: number) => {
     try {
-
-        const response = await fetch(`${BASEURL}/segments/carts/${cartId}/cartitems/${cartItemId}/`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-                accept: "application/json"
-            },
-        });
-        const result = await response.json();
-        revalidatePath(pathname)
-        return result;
+        console.log({ cartId, cartItemId });
+        // const response = await fetch(`${BASEURL}/segments/carts/${cartId}/cartitems/${cartItemId}/`, {
+        //     method: "DELETE",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //         accept: "application/json"
+        //     },
+        // });
+        // const result = await response.json();
+        // console.log({ result })
+        // return result;
     } catch (error) {
+        console.log(error);
         return {
             success: false,
             message: "Something went wrong!"

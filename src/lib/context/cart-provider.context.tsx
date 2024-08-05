@@ -1,6 +1,12 @@
 "use client";
 
-import { A__DELETE__Cart, A__POST__CreateCart } from "@/app/utils/cart/actions";
+import {
+  A__DELETE__Cart,
+  A__DELETE__CartItem,
+  A__POST__AddToCart,
+  A__POST__CreateCart,
+} from "@/app/utils/cart/actions";
+import { T__CartItemAdder } from "@/app/utils/cart/types";
 import {
   createContext,
   useContext,
@@ -36,7 +42,7 @@ type CartContextType = {
   cart: CartItem | null;
   createCart: () => void;
   deleteCart: () => void;
-  addToCart: (item: CartItemDetail) => void;
+  addToCart: (item: T__CartItemAdder) => void;
   updateCart: (itemId: number, quantity: number) => void;
   removeFromCart: (itemId: number) => void;
   clearCart: () => void;
@@ -87,26 +93,44 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     }
   };
 
-  const addToCart = async (item: CartItemDetail) => {
+  const addToCart = async (payload: T__CartItemAdder) => {
     // Call your API to add item to the cart
     if (cart) {
-      await fetch("/api/cart", {
-        method: "POST",
-        body: JSON.stringify(item),
-        headers: { "Content-Type": "application/json" },
-      });
-
-      setCart((prevCart) => {
-        if (prevCart) {
-          return {
-            ...prevCart,
-            items: [...prevCart.items, item],
-            quantity: prevCart.quantity + item.quantity,
-            total_price: prevCart.total_price + item.total_price,
-          };
-        }
-        return prevCart;
-      });
+      const alreadyExists = cart?.items?.find(
+        (item: any) => item?.room_category?.id === payload?.room_category_id
+      );
+      console.log("Clicked", alreadyExists);
+      const result = alreadyExists
+        ? await A__DELETE__CartItem(cart.id, alreadyExists?.id)
+        : await A__POST__AddToCart(cart.id, payload);
+      const data = result?.data;
+      console.log({ result });
+      if (result?.success) {
+        setCart((prevCart) => {
+          if (prevCart) {
+            const deletedItem = prevCart?.items?.filter(
+              (item: any) =>
+                item?.room_category?.id === payload.room_category_id
+            )[0];
+            return {
+              ...prevCart,
+              items: alreadyExists
+                ? prevCart?.items?.filter(
+                    (item: any) =>
+                      item?.room_category?.id === payload.room_category_id
+                  )
+                : [...prevCart.items, data],
+              quantity: alreadyExists
+                ? prevCart.quantity - deletedItem.quantity
+                : prevCart.quantity + data.quantity,
+              total_price: alreadyExists
+                ? prevCart.total_price - deletedItem.quantity
+                : prevCart.total_price + data.total_price,
+            };
+          }
+          return prevCart;
+        });
+      }
     }
   };
 

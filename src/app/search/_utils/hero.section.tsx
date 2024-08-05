@@ -13,12 +13,12 @@ const HeroSection = async ({ defaultValues }: { defaultValues: any }) => {
     })) || [];
 
   const matchedBranchName: string =
-    branches?.find((branch) => branch.id === +defaultValues?.branch)
-      .nick_name || null;
+    branches?.find((branch) => branch.id === defaultValues?.branch)
+      ?.nick_name || null;
 
   return (
-    <div className="pt-[86px] min-[1120px]:pt-[127px] relative">
-      <section className="bg-black/60 flex flex-col items-center justify-center gap-[16px]">
+    <div className="pt-[86px] min-[1120px]:pt-[127px] relative bg-black/60">
+      <section className=" flex flex-col items-center justify-center gap-[16px]">
         <div className="max-w-[649px] [&>*]:text-white [&>*]:text-center max-auto flex flex-col items-center justify-center gap-[24px] px-[10px]">
           <h1>Searched for Rooms</h1>
           <h2>Showing Results for</h2>

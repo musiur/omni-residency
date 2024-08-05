@@ -18,10 +18,10 @@ const NavAnim = ({ children }: { children: React.ReactNode }) => {
   return (
     <header
       className={clsx(
-        "fixed top-0 left-0 w-full transition ease-in-out duration-500 [&>*]:text-white bg-black/60 z-50",
+        "fixed top-0 left-0 w-full transition ease-in-out duration-500 [&>*]:text-white  z-50",
         {
-          "backdrop-blur-xl": currentPositionY > 100,
-          "backdrop-blur-0": currentPositionY < 100,
+          "backdrop-blur-xl bg-black/60": currentPositionY > 100,
+          "backdrop-blur-0 bg-black/0": currentPositionY < 100,
           "translate-y-[-100vh]": !showNav,
           "translate-y-0": showNav,
         }

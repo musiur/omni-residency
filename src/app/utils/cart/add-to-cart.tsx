@@ -1,9 +1,9 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { useCartContext } from "@/lib/context/cart-provider.context";
 
-const CLIENT__SIDE = typeof window !== "undefined";
+// const CLIENT__SIDE = typeof window !== "undefined";
 const AddToCart = ({
   data = {
     quantity: 1,
@@ -15,9 +15,17 @@ const AddToCart = ({
     quantity: number;
   };
 }) => {
-  const handleAddToCart = async () => {};
+  const { cart, addToCart } = useCartContext();
 
-  return <Button onClick={handleAddToCart}>Add to cart</Button>;
+  return (
+    <Button onClick={() => addToCart(data)}>
+      {cart?.items?.find(
+        (item: any) => item?.room_category?.id === data?.room_category_id
+      )
+        ? "Remove from cart"
+        : "Add to cart"}
+    </Button>
+  );
 };
 
 export default AddToCart;
