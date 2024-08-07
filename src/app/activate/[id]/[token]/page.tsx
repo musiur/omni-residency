@@ -14,7 +14,7 @@ const Page = ({ params }: { params: { id: string; token: string } }) => {
     e.preventDefault();
     setPending(true);
     const result = await A__POST__AccountVerification(payload);
-    console.log(result);
+    
     ResponseX({ title: "Account verification", result });
     setPending(false);
     if (result.success) {

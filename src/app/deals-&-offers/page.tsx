@@ -1,7 +1,7 @@
-import HeroSection from "@/components/core/pages/deals-and-offers/hero.section";
-import DealsOfTheDay from "@/components/core/pages/home/deals-of-the-day.section";
-import Facilities from "@/components/core/pages/home/facilities.section";
-import Testimonial from "@/components/core/pages/home/testimonial.section";
+import HeroSection from "./_utils/hero.section";
+import DealsOfTheDay from "@/app/utils/deals-of-the-day.section";
+import Facilities from "@/app/utils/facilities.section";
+import Testimonial from "@/app/utils/testimonial.section";
 
 const Page = () => {
   return (

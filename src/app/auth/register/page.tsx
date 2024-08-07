@@ -26,7 +26,7 @@ const Register = () => {
   // form submission handler
   const onSubmit = async (data: TRegisterFormSchema) => {
     const result = await A__POST__Register(data);
-    console.log(result, "<--");
+    
     ResponseX({ title: "User register", result });
   };
 

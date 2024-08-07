@@ -8,8 +8,65 @@ import NavAnim from "@/components/anim/nav.anim";
 import SideNav from "./sidenav.molecule";
 import LoginAvatar from "./login-avatar.molecule";
 import NavFooterVisibility from "../atoms/nav-footer-visibility.atom";
+import { A__GET__BranchList } from "@/app/branches/_utils/action";
 
-const Navbar = () => {
+let branches: any[] = [];
+
+const fetchBranches = async () => {
+  const result = await A__GET__BranchList();
+  branches = result?.data?.results?.map((item: any) => ({
+    id: item?.id,
+    nick_name: item?.nick_name,
+  })) || [];
+};
+
+export const getDownlinks = () => {
+  const branchLink = branches[0]?.nick_name ? `/branches/${branches[0].nick_name}` : "";
+  return [
+    {
+      id: 1,
+      text: "Hotel",
+      link: "/",
+    },
+    {
+      id: 2,
+      text: "Branches",
+      link: branchLink,
+    },
+    {
+      id: 3,
+      text: "Destination",
+      link: "/destination",
+    },
+    {
+      id: 4,
+      text: "Reviews",
+      link: "/reviews",
+    },
+    {
+      id: 5,
+      text: "Restaurants",
+      link: "/restaurants",
+    },
+    {
+      id: 6,
+      text: "Deals & Offers",
+      link: "/deals-&-offers",
+    },
+    {
+      id: 7,
+      text: "info@hotelomniresidency.com",
+      link: "mailto:info@hotelomniresidency.com",
+      icon: <Envelope className="h-[16px] w-auto stroke-white" />,
+    },
+  ];
+};
+
+const Navbar = async () => {
+
+  await fetchBranches();
+  const downlinks = getDownlinks();
+
   return (
     <NavFooterVisibility>
       <NavAnim>
@@ -17,7 +74,7 @@ const Navbar = () => {
           <div className="w-full py-[7px]">
             <div className="container flex items-center justify-between gap-10">
               <ul className="hidden min-[880px]:flex items-center gap-[48px]">
-                {uplinks.map((item) => {
+                {uplinks?.map((item) => {
                   const { id, text, link } = item;
                   return (
                     <li key={id}>
@@ -51,13 +108,13 @@ const Navbar = () => {
                 <LoginAvatar />
 
                 <div className="block min-[1120px]:hidden">
-                  <SideNav />
+                  <SideNav uplinks={uplinks} downlinks={downlinks} />
                 </div>
               </div>
             </div>
             <div className="container hidden min-[1120px]:flex items-center justify-between gap-10 pb-[12px] pt-[5px]">
               <ul className="flex items-center gap-[48px]">
-                {downlinks.map((item) => {
+                {downlinks?.map((item) => {
                   const { id, text, link } = item;
                   return (
                     <li key={id}>
@@ -112,45 +169,6 @@ export const uplinks = [
     id: 3,
     text: "Latest News",
     link: "/latest-news",
-  },
-];
-
-export const downlinks = [
-  {
-    id: 1,
-    text: "Hotel",
-    link: "/",
-  },
-  {
-    id: 2,
-    text: "Branches",
-    link: "/branches/ctg",
-  },
-  {
-    id: 3,
-    text: "Destination",
-    link: "/destination",
-  },
-  {
-    id: 4,
-    text: "Reviews",
-    link: "/reviews",
-  },
-  {
-    id: 5,
-    text: "Restaurants",
-    link: "/restaurants",
-  },
-  {
-    id: 6,
-    text: "Deals & Offers",
-    link: "/deals-&-offers",
-  },
-  {
-    id: 7,
-    text: "info@hotelomniresidency.com",
-    link: "mailto:info@hotelomniresidency.com",
-    icon: <Envelope className="h-[16px] w-auto stroke-white" />,
   },
 ];
 

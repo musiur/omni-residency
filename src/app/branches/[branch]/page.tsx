@@ -1,10 +1,10 @@
-import HeroSection from "@/components/core/pages/branches/hero.section";
-import NearbyPlaces from "@/components/core/pages/branches/nearyby.section";
-import Overview from "@/components/core/pages/branches/overview.section";
-import { RoomCarousel } from "@/components/core/pages/branches/room-carousel.section";
-import Tabbar from "@/components/core/pages/branches/tabbar.section";
-import OurServices from "@/components/core/pages/destination/our-services.section";
-import Facilities from "@/components/core/pages/home/facilities.section";
+import HeroSection from "../_utils/hero.section";
+import NearbyPlaces from "../_utils/nearyby.section";
+import Overview from "../_utils/overview.section";
+import { RoomCarousel } from "../_utils/room-carousel.section";
+import Tabbar from "../_utils/tabbar.section";
+import OurServices from "@/app/destination/_utils/our-services.section";
+import Facilities from "@/app/utils/facilities.section";
 
 const Page = () => {
   return (

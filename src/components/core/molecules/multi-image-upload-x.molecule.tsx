@@ -16,7 +16,6 @@ const MultiImageUploadX: React.FC<ImageUploaderProps> = ({
   onChange,
   size = 3,
 }) => {
-  console.log(defaultValue);
   const [images, setImages] = useState<(string | File)[]>(
     Array.isArray(defaultValue) ? defaultValue : []
   );
@@ -31,7 +30,6 @@ const MultiImageUploadX: React.FC<ImageUploaderProps> = ({
         defaultValue.map(async (url) => {
           const response = await fetch(url);
           const data = await response.blob();
-          console.log(url);
           return new File([data], url?.split("/").pop() || "default.jpg", {
             type: data.type,
           });
@@ -119,7 +117,6 @@ const MultiImageUploadX: React.FC<ImageUploaderProps> = ({
     else return `${(size / 1048576).toFixed(1)} MB`;
   };
 
-  console.log(images);
 
   return (
     <div className="bg-white">

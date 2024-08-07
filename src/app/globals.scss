@@ -75,9 +75,11 @@
     scroll-behavior: smooth;
     outline: none;
   }
+
   p {
     @apply leading-[24px];
   }
+
   body {
     @apply bg-background text-secondary;
   }
@@ -117,6 +119,7 @@ h2 span {
 .mySwiper {
   z-index: 0 !important;
 }
+
 .swiper:hover {
   @media (min-width: 500px) {
     .swiper-button-next::after,
@@ -160,18 +163,13 @@ h2 span {
     height: 8px !important;
   }
 }
+
 .swiper-pagination-bullet-active {
   background: hsl(var(--secondary)) !important;
 }
 
 .form-input {
   @apply flex flex-col gap-[8px];
-
-  input,
-  textarea,
-  select {
-    @apply px-[16px] py-[8px] rounded-[10px] border border-gray-200;
-  }
 
   textarea {
     @apply min-h-[200px];
@@ -180,4 +178,11 @@ h2 span {
   label {
     @apply flex items-center gap-[8px] font-medium;
   }
+}
+
+input,
+textarea,
+select {
+  @apply px-[16px] h-12 max-h-12 rounded-[10px] border border-gray-200;
+  // height: 20px!important;
 }

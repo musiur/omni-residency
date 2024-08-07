@@ -1,82 +1,162 @@
 "use client";
 
-import { useState } from "react";
 import { clsx } from "clsx";
 import { Button } from "@/components/ui/button";
-import DatePicker from "./datepicker.molecule";
-import Selector from "./select.molecule";
-import Link from "next/link";
 
-const SearchBox = ({ tab }: { tab?: boolean }) => {
-  const [formData, setFormData] = useState({ branch: "Banani" });
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+
+import { Form } from "@/components/ui/form";
+import InputX from "./input-x.molecule";
+import { useRouter } from "next/navigation";
+import { Utils___DateExtracter, Utils___DateFormatter } from "@/lib/utils";
+
+const Schema__SearchForm = z.object({
+  branch: z.string(),
+  checkin: z.instanceof(Date),
+  checkout: z.instanceof(Date),
+  persons: z.string(),
+});
+
+export type Type___Search__SearchForm = z.infer<typeof Schema__SearchForm>;
+
+const SearchBox = ({
+  tab,
+  branches,
+  defaultValues,
+}: {
+  tab?: boolean;
+  branches?: any;
+  defaultValues?: any;
+}) => {
+  const timeNow = new Date();
+  const router = useRouter();
+  const form = useForm<Type___Search__SearchForm>({
+    resolver: zodResolver(Schema__SearchForm),
+    defaultValues: {
+      branch: branches?.length ? branches[0]?.id?.toString() : "1",
+      checkin: defaultValues?.checkin
+        ? Utils___DateExtracter(defaultValues.checkin)
+        : timeNow,
+      checkout: defaultValues?.checkout
+        ? Utils___DateExtracter(defaultValues.checkout)
+        : timeNow,
+      persons: defaultValues?.persons || "1",
+    },
+  });
+
+  const onSubmit = async (data: Type___Search__SearchForm) => {
+    const convertedCheckIn = Utils___DateFormatter(data.checkin);
+    const convertedCheckOut = Utils___DateFormatter(data.checkout);
+    router.push(
+      `/search?branch=${data?.branch}&checkin=${convertedCheckIn}&checkout=${convertedCheckOut}&persons=${data?.persons}`
+    );
+  };
+
   return (
-    <form className="w-full">
-      {tab ? (
-        <div className="w-full flex items-center justify-start">
-          {branchs.map((branch: { id: number; text: string }) => {
-            const { id, text } = branch;
-            return (
-              <div
-                key={id}
-                role="button"
-                className={clsx(
-                  "px-[24px] py-[16px] font-semibold transition ease-in-out duration-500",
-                  {
-                    "bg-white/50 text-white": formData.branch !== text,
-                    "bg-white text-muted_gray": formData.branch === text,
-                    "rounded-tl-[10px]": id === 1,
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
+        {tab ? (
+          <div className="w-full flex items-center justify-start">
+            {branches?.length
+              ? branches.map(
+                  (
+                    branch: { id: number; nick_name: string },
+                    index: number
+                  ) => {
+                    const { id, nick_name } = branch;
+                    const matched = form.watch("branch") === id.toString();
+                    return (
+                      <div
+                        key={id}
+                        role="button"
+                        className={clsx(
+                          "px-[24px] py-[16px] font-semibold transition ease-in-out duration-500",
+                          {
+                            "bg-white/50 text-white": !matched,
+                            "bg-white text-muted_gray": matched,
+                            "rounded-tl-[10px]": index === 0,
+                          }
+                        )}
+                        onClick={() => {
+                          form.setValue("branch", id.toString());
+                        }}
+                      >
+                        {nick_name}
+                      </div>
+                    );
                   }
-                )}
-                onClick={() => {
-                  setFormData({ ...formData, branch: text });
-                }}
-              >
-                {text}
-              </div>
-            );
-          })}
+                )
+              : null}
+          </div>
+        ) : null}
+        <div
+          className={clsx(
+            "bg-white px-[24px] py-[32px] flex flex-col lg:flex-row items-center lg:items-end gap-[32px]",
+            {
+              "rounded-[10px] mt-[56px]": !tab,
+              "rounded-b-[10px] rounded-r-[10px]": tab,
+            }
+          )}
+        >
+          <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[24px]">
+            <div className="grid grid-cols-1 gap-[16px]">
+              <InputX form={form} name="checkin" label="Check in" type="date" />
+            </div>
+            <div className="grid grid-cols-1 gap-[16px]">
+              <InputX
+                form={form}
+                name="checkout"
+                label="Check out"
+                type="date"
+              />
+            </div>
+            <div className="grid grid-cols-1 gap-[16px]">
+              <InputX
+                form={form}
+                name="persons"
+                label="Persons"
+                type="select"
+                options={Data__PersonTypes}
+              />
+            </div>
+          </div>
+
+          <Button type="submit" className="min-w-[148px]">
+            Search Now
+          </Button>
         </div>
-      ) : null}
-      <div
-        className={clsx(
-          "bg-white px-[24px] py-[32px] flex flex-col lg:flex-row items-center lg:items-end gap-[32px]",
-          {
-            "rounded-[10px] mt-[56px]": !tab,
-            "rounded-b-[10px] rounded-r-[10px]": tab,
-          }
-        )}
-      >
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[24px]">
-          <div className="grid grid-cols-1 gap-[16px]">
-            <label className="text-muted_gray">Check In</label>
-            <DatePicker />
-          </div>
-          <div className="grid grid-cols-1 gap-[16px]">
-            <label className="text-muted_gray">Check Out</label>
-            <DatePicker />
-          </div>
-          <div className="grid grid-cols-1 gap-[16px]">
-            <label className="text-muted_gray">Person</label>
-            <Selector />
-          </div>
-        </div>
-        <Link href="/search">
-          <Button className="min-w-[148px]">Search Now</Button>
-        </Link>
-      </div>
-    </form>
+      </form>
+    </Form>
   );
 };
 
 export default SearchBox;
 
-const branchs = [
+const Data__PersonTypes = [
   {
-    id: 1,
-    text: "Banani",
+    label: "1 Adult",
+    value: "1",
   },
   {
-    id: 2,
-    text: "Baridhara",
+    label: "2 Adult",
+    value: "2",
+  },
+  {
+    label: "3 Adult",
+    value: "3",
+  },
+  {
+    label: "4 Adult",
+    value: "4",
+  },
+  {
+    label: "5 Adult",
+    value: "5",
+  },
+  {
+    label: "6 Adult",
+    value: "6",
   },
 ];

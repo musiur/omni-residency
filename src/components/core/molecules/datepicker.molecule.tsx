@@ -15,7 +15,7 @@ import {
 import { CalendarIcon, ChevronDown } from "lucide-react";
 
 const DatePicker = () => {
-  const [date, setDate] = React.useState<Date>();
+  const [date, setDate] = React.useState < Date > ();
 
   return (
     <Popover>
