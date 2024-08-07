@@ -161,16 +161,16 @@ export const A__PATCH__CartItemRoomQuantity = async (cartId: string, cartItemId:
 export const A__DELETE__CartItem = async (cartId: string, cartItemId: number) => {
     try {
         console.log({ cartId, cartItemId });
-        // const response = await fetch(`${BASEURL}/segments/carts/${cartId}/cartitems/${cartItemId}/`, {
-        //     method: "DELETE",
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //         accept: "application/json"
-        //     },
-        // });
-        // const result = await response.json();
-        // console.log({ result })
-        // return result;
+        const response = await fetch(`${BASEURL}/segments/carts/${cartId}/cartitems/${cartItemId}/`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                accept: "application/json"
+            },
+        });
+        const result = await response.json();
+        console.log({ result })
+        return result;
     } catch (error) {
         console.log(error);
         return {
