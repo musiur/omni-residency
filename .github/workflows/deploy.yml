@@ -44,8 +44,4 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            docker pull ${{ secrets.DOCKER_USERNAME }}/omni-frontend:latest &&
-            docker stop omni-frontend || true &&
-            docker rm omni-frontend || true &&
-            docker run -d --name omni-frontend -p 3000:3000 ${{ secrets.DOCKER_USERNAME }}/omni-frontend:latest
+          script: ./deploy-nextjs.sh
