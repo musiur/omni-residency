@@ -1,4 +1,4 @@
-name: Omni Frontend NextJS v14+
+name: Deploy Next.js App
 
 on:
   push:
@@ -29,16 +29,23 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/omni-frontend:latest
 
-      - name: Deploy via SSH
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SSH_HOST: ${{ secrets.SSH_HOST }}
-          SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
+      - name: Set up SSH
+        id: ssh-setup
         run: |
-          echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
-          ssh -o StrictHostKeyChecking=no $SSH_USERNAME@$SSH_HOST "
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          eval $(ssh-agent)
+          ssh-add ~/.ssh/id_rsa
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v0.1.1
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
             docker pull ${{ secrets.DOCKER_USERNAME }}/omni-frontend:latest &&
             docker stop omni-frontend || true &&
             docker rm omni-frontend || true &&
             docker run -d --name omni-frontend -p 3000:3000 ${{ secrets.DOCKER_USERNAME }}/omni-frontend:latest
-          "
