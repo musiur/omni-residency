@@ -3,7 +3,7 @@ import DealsOfTheDay from "@/app/utils/deals-of-the-day.section";
 import Facilities from "@/app/utils/facilities.section";
 import Testimonial from "@/app/utils/testimonial.section";
 
-const Page = () => {
+const Page = async () => {
   return (
     <div>
       <HeroSection />

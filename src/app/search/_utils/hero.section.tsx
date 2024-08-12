@@ -14,7 +14,7 @@ const HeroSection = async ({ defaultValues }: { defaultValues: any }) => {
 
   const matchedBranchName: string =
     branches?.find((branch) => branch.id === +defaultValues?.branch)
-      .nick_name || null;
+      ?.nick_name || null;
 
   return (
     <div className="pt-[86px] min-[1120px]:pt-[127px] relative">
