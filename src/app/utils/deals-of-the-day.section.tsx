@@ -15,7 +15,7 @@ const DealsOfTheDay = async () => {
           Get Up to 40% off on selected rooms!
         </p>
       </div>
-      <DealsAllAround />
+      <DealsAllAround offers={result?.data?.results} />
     </section>
   );
 };

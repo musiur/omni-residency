@@ -13,7 +13,9 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import Image from "next/image";
 
-export const DealsAllAround = () => {
+const baseURL = process.env.NEXT_PUBLIC_BASEURL;
+
+export const DealsAllAround = ({ offers }: { offers: any }) => {
   return (
     <Swiper
       modules={[Navigation, Pagination, A11y, Autoplay]}
@@ -40,8 +42,8 @@ export const DealsAllAround = () => {
         },
       }}
     >
-      {images.map((item) => {
-        const { id, image, link, title, location, offPercent, btnText } = item;
+      {offers?.map((item: any) => {
+        const { id, name, branch, featured_image, discount_in_percentage, regular_price, discounted_price, see_details } = item;
         return (
           <SwiperSlide
             key={id}
@@ -51,22 +53,31 @@ export const DealsAllAround = () => {
               className={`relative overflow-hidden h-[245px] w-full rounded-t-[10px]`}
             >
               <Image
-                src={image}
+                src={`${baseURL}${featured_image}`}
                 alt="slide-image"
                 fill
                 style={{ objectFit: "cover", objectPosition: "center" }}
               />
               <p className="absolute top-0 left-0 p-[10px] m-[5px] rounded-full flex flex-col items-center justify-center bg-primary text-white leading-[13px]">
-                <span className="font-bold text-white">{offPercent}%</span>
+                <span className="font-bold text-white">{parseInt(discount_in_percentage)}%</span>
                 <span className="font-light">off</span>
               </p>
             </div>
-            <div className="p-[16px] flex flex-col gap-[16px]">
-              <h3 className="font-bold">{title}</h3>
-              <p>{location}</p>
-              <Link href={link}>
+            <div className="p-[16px] flex flex-col gap-[10px]">
+              <h3 className="font-bold">{name}</h3>
+              <p>{branch?.address}</p>
+              
+              <p>
+                <s className="text-gray-400 font-semibold">{parseInt(regular_price) || "00"} </s>
+                <span className="text-primary font-semibold">
+                  {parseInt(discounted_price) || "N/A"} BDT
+                </span>
+                /night
+              </p>
+              <Link href={see_details}>
                 <Button className="w-full bg-muted_gray group-hover:bg-primary">
-                  {btnText}
+                  {/* {btnText} */}
+                  See Details
                 </Button>
               </Link>
             </div>

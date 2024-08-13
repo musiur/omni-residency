@@ -1,6 +1,6 @@
 "use server";
 
-const BASEURL = process.env.BASEURL;
+const BASEURL = process.env.NEXT_PUBLIC_BASEURL;
 
 export const A__GET__OfferList = async () => {
   try {

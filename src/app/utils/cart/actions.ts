@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { T__CartItemAdder } from "./types";
 
-const BASEURL = process.env.BASEURL;
+const BASEURL = process.env.NEXT_PUBLIC_BASEURL;
 
 export const A__POST__CreateCart = async () => {
     try {

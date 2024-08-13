@@ -83,11 +83,11 @@ const RoomCard = ({ details, index }: { details: any; index: number }) => {
         <div className="pt-8">
           <p>
             From&nbsp;
-            <s className="text-gray-400 font-semibold">{regular_price} </s>
+            <s className="text-gray-400 font-semibold">{parseInt(regular_price)} </s>
             <span className="text-primary font-semibold">
-              {discounted_price} BDT
+              {parseInt(discounted_price)} BDT
             </span>
-            &nbsp;/night - {adults} adults & {children} children
+            /night - {adults} adults & {children} children
           </p>
           <h3 className="text-[20px] md:text-[32px] font-semibold pt-[4px]">
             {room_name}
