@@ -31,11 +31,11 @@ export const getDownlinks = () => {
     ? `/branches/${branches[0].nick_name}`
     : "";
   return [
-    {
-      id: 1,
-      text: "Hotel",
-      link: "/",
-    },
+    // {
+    //   id: 1,
+    //   text: "Hotel",
+    //   link: "/",
+    // },
     {
       id: 2,
       text: "Branches",
