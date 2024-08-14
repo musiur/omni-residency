@@ -1,9 +1,9 @@
-import DealsOfTheDay from "@/app/utils/deals-of-the-day.section";
-import ExploreDestination from "@/app/utils/explore-destination.section";
-import Facilities from "@/app/utils/facilities.section";
-import HeroSection from "@/app/utils/hero.section";
-import OtherServices from "@/app/utils/other-services.section";
-import Testimonial from "@/app/utils/testimonial.section";
+import DealsOfTheDay from "@/app/_utils/deals-of-the-day.section";
+import ExploreDestination from "@/app/_utils/explore-destination.section";
+import Facilities from "@/app/_utils/facilities.section";
+import HeroSection from "@/app/_utils/hero.section";
+import OtherServices from "@/app/_utils/other-services.section";
+import Testimonial from "@/app/_utils/testimonial.section";
 
 const Home = async () => {
   return (

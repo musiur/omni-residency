@@ -4,7 +4,7 @@ import "./globals.scss";
 import Navbar from "@/components/core/molecules/navbar.molecule";
 import Footer from "@/components/core/molecules/footer.molecule";
 import { Toaster } from "@/components/ui/toaster";
-import Cart from "./utils/cart/cart";
+import Cart from "./_utils/cart/cart";
 import ContextWrapper from "@/lib/context/context-wrapper";
 
 const poppins = Poppins({

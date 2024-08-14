@@ -1,4 +1,4 @@
-import AddToCart from "@/app/utils/cart/add-to-cart";
+import AddToCart from "@/app/_utils/cart/add-to-cart";
 import { Button } from "@/components/ui/button";
 import clsx from "clsx";
 import { ImageIcon, Play } from "lucide-react";

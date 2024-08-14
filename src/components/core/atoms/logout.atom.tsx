@@ -1,6 +1,6 @@
 "use client";
 
-import { CSR__DELETE__Cookie } from "@/app/utils/actions";
+import { CSR__DELETE__Cookie } from "@/app/_utils/actions";
 import { Button } from "@/components/ui/button";
 import { LogOutIcon } from "lucide-react";
 import { useRouter } from "next/navigation";

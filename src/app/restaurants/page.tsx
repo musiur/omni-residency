@@ -1,4 +1,4 @@
-import Testimonial from "@/app/utils/testimonial.section";
+import Testimonial from "@/app/_utils/testimonial.section";
 import HeroSection from "@/app/restaurants/_utils/hero.section";
 import RestaurantOverview from "@/app/restaurants/_utils/restaurant.overview.section";
 // import { RestaurantsOverviewData } from "@/lib/data";

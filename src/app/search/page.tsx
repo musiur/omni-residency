@@ -1,4 +1,4 @@
-import Testimonial from "@/app/utils/testimonial.section";
+import Testimonial from "@/app/_utils/testimonial.section";
 import HeroSection from "./_utils/hero.section";
 import RoomCard from "@/app/search/_utils/room.card";
 import { A__SearchRooms } from "./_utils/actions";

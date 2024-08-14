@@ -1,4 +1,4 @@
-import Testimonial from "../utils/testimonial.section";
+import Testimonial from "../_utils/testimonial.section";
 import HeroSection from "./utils/hero.section";
 
 const Page = () => {
