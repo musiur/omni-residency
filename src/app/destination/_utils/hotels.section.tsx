@@ -102,7 +102,7 @@ const HotelsList: T__Hotel[] = [
     location: "Banani",
     address: "S.S Khaled Road, Lalkhan Bazar",
     rating: 8.9,
-    roomsLink: "#",
+    roomsLink: "/branches/banani",
     image: "/images/destination/omni.png",
   },
   {
@@ -111,7 +111,7 @@ const HotelsList: T__Hotel[] = [
     location: "Baridhara",
     address: "S.S Khaled Road, Lalkhan Bazar",
     rating: 8.9,
-    roomsLink: "#",
+    roomsLink: "/branches/baridhara",
     image: "/images/destination/radison-blue.png",
   },
 ];
