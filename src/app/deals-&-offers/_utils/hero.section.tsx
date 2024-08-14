@@ -15,8 +15,8 @@ const HeroSection = async () => {
     }) || [];
 
   return (
-    <div className="pt-[86px] min-[1120px]:pt-[127px] relative">
-      <section className="bg-black/60 flex flex-col items-center justify-center gap-[16px]">
+    <div className="bg-black/20 pt-[86px] min-[1120px]:pt-[127px] pb-[100px] relative">
+      <section className="flex flex-col items-center justify-center gap-[16px]">
         <div className="max-w-[649px] [&>*]:text-white [&>*]:text-center max-auto flex flex-col items-center justify-center gap-[24px] px-[10px]">
           <h1>Deals & Offers</h1>
           <h3 className="text-[20px] md:text-[24px] font-semibold">
