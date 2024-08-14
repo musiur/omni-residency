@@ -15,9 +15,9 @@ const HeroSection = async () => {
     }) || [];
 
   return (
-    <div className="relative min-h-[110dvh] md:min-h-[100dvh] min-[1040px]:min-h-[90dvh]">
+    <div className="relative w-full overflow-hidden">
       <video
-        className="abosulute top-0 left-0 w-full min-h-[110dvh] md:min-h-[100dvh] min-[1040px]:min-h-[90dvh]"
+        className="absolute top-0 left-0 w-full h-full object-cover"
         autoPlay
         muted
         loop
@@ -32,8 +32,8 @@ const HeroSection = async () => {
         <source src="/videos/Omni-Residency.mp4" type="video/mp4" />
       </video>
 
-      <section className="bg-black/60 flex flex-col items-center justify-center gap-[16px] absolute top-0 left-0 w-full h-full">
-        <div className="max-w-[649px] [&>*]:text-white [&>*]:text-center max-auto flex flex-col items-center justify-center gap-[24px] px-[10px] pt-[10vh]">
+      <section className="bg-black/60 flex flex-col items-center justify-center gap-[16px] w-full h-full relative z-10 pt-[120px] md:pt-[180px] pb-[120px]">
+        <div className="max-w-[649px] [&>*]:text-white [&>*]:text-center max-auto flex flex-col items-center justify-center gap-[24px] px-[10px]">
           <h1>Find Homestay that suits you and your family</h1>
           <p>
             Hotel are becoming increasingly popular and appealing to travellers
