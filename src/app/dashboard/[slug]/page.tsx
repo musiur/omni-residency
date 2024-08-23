@@ -1,4 +1,4 @@
-import Booking from "../_uitls/bookings/page";
+import Bookings from "../_uitls/bookings/page";
 import Gym from "../_uitls/gym/page";
 import Overview from "../_uitls/overview/page";
 import Settings from "../_uitls/settings/page";
@@ -13,6 +13,6 @@ export default Page;
 const TabContents = {
   settings: <Settings />,
   overview: <Overview />,
-  bookings: <Booking />,
+  bookings: <Bookings />,
   gym: <Gym />,
 };

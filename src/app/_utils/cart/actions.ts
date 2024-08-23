@@ -1,6 +1,6 @@
 "use server"
 
-import { revalidatePath } from "next/cache";
+
 import { T__CartItemAdder } from "./types";
 
 const BASEURL = process.env.BASEURL;
@@ -16,12 +16,12 @@ export const A__POST__CreateCart = async () => {
             body: JSON.stringify({})
         });
 
-        // Check if response is ok
+
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        // Check Content-Type header to ensure it's JSON
+
         const contentType = response.headers.get('content-type');
         if (!contentType || !contentType.includes('application/json')) {
             throw new TypeError("Response not in JSON format");
@@ -130,10 +130,9 @@ export const A__POST__AddToCart = async (id: string, data: T__CartItemAdder) => 
         const result = await response.json();
         return result;
     } catch (error) {
-        // console.log(error)
         return {
             success: false,
-            message: "Something went wrong!"
+            message: "Something went wrong!",
         }
     }
 }
@@ -160,7 +159,6 @@ export const A__PATCH__CartItemRoomQuantity = async (cartId: string, cartItemId:
 
 export const A__DELETE__CartItem = async (cartId: string, cartItemId: number) => {
     try {
-        console.log({ cartId, cartItemId });
         const response = await fetch(`${BASEURL}/segments/carts/${cartId}/cartitems/${cartItemId}/`, {
             method: "DELETE",
             headers: {
@@ -169,10 +167,8 @@ export const A__DELETE__CartItem = async (cartId: string, cartItemId: number) =>
             },
         });
         const result = await response.json();
-        console.log({ result })
         return result;
     } catch (error) {
-        console.log(error);
         return {
             success: false,
             message: "Something went wrong!"

@@ -19,9 +19,9 @@ const BASEURL = process.env.BASEURL;
 
 export const A__POST__Register = async (data: TRegisterFormSchema) => {
     try {
-        
+
         const body = JSON.stringify(data);
-        
+
         const response = await fetch(`${BASEURL}/auth/users/`, {
             method: "POST",
             headers: {
@@ -31,10 +31,10 @@ export const A__POST__Register = async (data: TRegisterFormSchema) => {
             body,
         })
         const result = await response.json()
-        
+        console.log(result?.errors)
         return result;
     } catch (error) {
-        
+
         return {
             success: false,
             message: "Something went wrong",
@@ -45,7 +45,7 @@ export const A__POST__Register = async (data: TRegisterFormSchema) => {
 export const A__POST__AccountVerification = async (data: { uid: string, token: string }) => {
     try {
         const body = JSON.stringify(data);
-        
+
         const response = await fetch(`${BASEURL}/auth/users/activation/`, {
             method: "POST",
             headers: {
@@ -54,11 +54,11 @@ export const A__POST__AccountVerification = async (data: { uid: string, token: s
             },
             body,
         })
-        
+
         const result = await response.json()
         return result;
     } catch (error) {
-        
+
         return {
             success: false,
             message: "Something went wrong"
@@ -69,7 +69,7 @@ export const A__POST__AccountVerification = async (data: { uid: string, token: s
 export const A__POST__ForgotPassword = async (data: { email: string }) => {
     try {
         const body = JSON.stringify(data);
-        
+
         const response = await fetch(`${BASEURL}/auth/users/reset_password/`, {
             method: "POST",
             headers: {
@@ -78,11 +78,11 @@ export const A__POST__ForgotPassword = async (data: { email: string }) => {
             },
             body,
         })
-        
+
         const result = await response.json()
         return result;
     } catch (error) {
-        
+
         return {
             success: false,
             message: "Something went wrong"
@@ -99,7 +99,7 @@ export const A__POST__ResetPassword = async (data: {
 }) => {
     try {
         const body = JSON.stringify(data);
-        
+
         const response = await fetch(`${BASEURL}/auth/users/reset_password_confirm/`, {
             method: "POST",
             headers: {
@@ -108,11 +108,11 @@ export const A__POST__ResetPassword = async (data: {
             },
             body,
         })
-        
+
         const result = await response.json()
         return result;
     } catch (error) {
-        
+
         return {
             success: false,
             message: "Something went wrong"
@@ -133,11 +133,11 @@ export const A__POST__ChangePassword = async (data: TChangeFormSchema) => {
             },
             body,
         })
-        
+
         const result = await response.json()
         return result;
     } catch (error) {
-        
+
         return {
             success: false,
             message: "Something went wrong"
@@ -160,13 +160,13 @@ export const A__POST__Login = async (data: TLoginFormSchema) => {
             cookies().set("refresh", result.refresh);
             cookies().set("access", result.access);
         }
-        
+
         return {
             success: result?.refresh ? true : false,
             message: result?.refresh ? "Login Successful" : result.detail
         };
     } catch (error) {
-        
+
         return {
             success: false,
             message: "Something went wrong"

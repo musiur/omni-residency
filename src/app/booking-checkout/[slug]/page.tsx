@@ -16,8 +16,8 @@ import {
   Wifi,
   Wind,
 } from "lucide-react";
-import { A__GET__RoomDetails } from "../_utils/action";
-import HeroSection from "../_utils/hero.section";
+import { A__GET__RoomDetails } from "./_utils/action";
+import HeroSection from "./_utils/hero.section";
 
 const Page = async ({
   params,

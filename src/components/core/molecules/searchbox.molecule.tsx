@@ -54,6 +54,12 @@ const SearchBox = ({
     );
   };
 
+  form.watch(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("search", JSON.stringify(form.getValues()));
+    }
+  });
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
