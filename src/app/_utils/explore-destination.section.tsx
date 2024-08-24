@@ -5,14 +5,14 @@ const ExploreDestination = () => {
     <section className="container py-[90px]">
       <TwoSiderMolecule
         details={{
-          image: "/images/home/explore-destination.png",
+          image: "/explore-destination.png",
           highlighter: "Explore Destination",
           h2: (
             <>
               Enjoy unforgettable experiences with&nbsp;<span>Omni</span>
             </>
           ),
-          p: "We are best agency for homestay buat penginapan kamu bersama orang tercinta dan orang tersayang yang kamu sukai dan sayangi untuk selamanya di dunia ini",
+          p: "Established in 2019, Hotel Omni Residency offers an unparalleled experience of luxury and comfort with two premier branches located in Baridhara and Banani, Dhaka. Designed for both business and leisure travelers, our hotels provide a perfect blend of modern elegance, world-class services, and a rich array of amenities to ensure a memorable stay.",
           btnLink: "/",
           btnText: "Explore Now",
           imgOnRight: false,

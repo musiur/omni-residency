@@ -5,7 +5,7 @@ const OtherServices = () => {
     <section>
       <TwoSiderMolecule
         details={{
-          image: "/images/home/others.png",
+          image: "/other-services.png",
           highlighter: "Other Services",
           h2: (
             <>

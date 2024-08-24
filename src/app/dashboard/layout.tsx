@@ -7,7 +7,7 @@ const Layout = ({ children }: { children: ReactElement }) => {
     <PrivateRoutes>
       <div className="flex items-start gap-8">
         <DashboardSidebar />
-        <div>{children}</div>
+        <div className="w-full py-8 pr-8">{children}</div>
       </div>
     </PrivateRoutes>
   );

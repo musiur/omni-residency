@@ -33,12 +33,12 @@ const HeroSection = async () => {
       </video>
 
       <section className="bg-black/60 flex flex-col items-center justify-center gap-[16px] w-full h-full relative z-10 pt-[120px] md:pt-[180px] pb-[120px]">
-        <div className="max-w-[649px] [&>*]:text-white [&>*]:text-center max-auto flex flex-col items-center justify-center gap-[24px] px-[10px]">
-          <h1>Find Homestay that suits you and your family</h1>
+        <div className="max-w-[749px] [&>*]:text-white [&>*]:text-center max-auto flex flex-col items-center justify-center gap-[24px] px-[10px]">
+          <h1>Discover the ultimate Hotel experience in Dhaka</h1>
           <p>
-            Hotel are becoming increasingly popular and appealing to travellers
-            who can&apos;t bear to be parted and the result new way to rent the
-            right homestay for you
+            From seamless check-ins to expert concierge assistance,
+            <br />
+            we aim to make your stay as smooth and enjoyable as possible.
           </p>
           <div className="flex items-center justify-center gap-[16px] pt-[8px]">
             <Button variant="secondary">Explore Now</Button>

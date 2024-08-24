@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import clsx from "clsx";
 import { Star } from "lucide-react";
+import Image from "next/image";
 
 type T__TestimonialCard = {
   id: number;
@@ -38,7 +39,17 @@ const Testimonial = () => {
             >
               <div className="flex items-center justify-between gap-[12px]">
                 <div className="flex items-center justify-start gap-[12px]">
-                  <div className="bg-gray-300 h-10 w-10 rounded-full"></div>
+                  {image ? (
+                    <Image
+                      src={image}
+                      alt="testimonial image"
+                      width={200}
+                      height={200}
+                      className="bg-gray-300 h-10 w-10 rounded-full"
+                    />
+                  ) : (
+                    <div className="bg-gray-300 h-10 w-10 rounded-full"></div>
+                  )}
                   <div>
                     <p className="font-bold">{name}</p>
                     <p className="text-plain_gray">{address}</p>
@@ -68,26 +79,26 @@ export default Testimonial;
 const cardData: T__TestimonialCard[] = [
   {
     id: 1,
-    name: "Cecep Akbar",
-    address: "Sukabumi, Indonesia",
+    name: "Najib Nehal",
+    address: "London, England",
     rating: 4.9,
-    text: "“Hade mang aslina euy mantap lah lumayan apalagi buat rumah kedua kalau suntuk pas dirumah terus yang bikin bosan “",
-    image: "",
+    text: "Pure Luxury and Comfort! From the moment I walked in, I felt like royalty. The gym, salon, and pool were immaculate, and the service was impeccable. Hotel Omni Residency is now my go-to hotel in Dhaka.",
+    image: "/najib.png",
   },
   {
     id: 2,
-    name: "Muhammad Kusoy",
+    name: "Noor E Shahriar",
     address: "Tasikmalaya, Indonesia",
-    rating: 4.8,
-    text: "“Aslina rame pisan didiyeu mah pokokna hotel teh mantap pisan kasurnya juga empuk pisan seperti daging empal sapi “",
-    image: "",
+    rating: 5,
+    text: "A Hidden Gem in Dhaka! Staying at the Baridhara branch was a delight. The peaceful atmosphere combined with top-notch amenities made my business trip so much more enjoyable. Highly recommend it!",
+    image: "/noor.png",
   },
   {
     id: 3,
-    name: "Putri Evelyn",
+    name: "Talha Ayoub",
     address: "Jakarta, Indonesia",
     rating: 4.9,
-    text: "“Baik banget disini mah pelayanannya sangat bagus dan juga tempanya sangat nyaman serta harga yang sangat terjangkau ”",
-    image: "",
+    text: "An Unforgettable Experienc! Hotel Omni Residency in Banani truely exceeded my expectations. The staff was incredibly attentive, the rooms were luxurious, and the food was simply divine. I can't wait to come back!",
+    image: "/talha.png",
   },
 ];
