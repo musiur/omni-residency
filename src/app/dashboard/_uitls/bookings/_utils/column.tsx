@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, MoreHorizontal } from "lucide-react";
+import { ArrowUpDown, Mail, MoreHorizontal, Phone } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -15,6 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Payment } from "./types";
+import { format } from "date-fns";
 
 export const Columns___Booking: ColumnDef<Payment>[] = [
   {
@@ -40,13 +41,6 @@ export const Columns___Booking: ColumnDef<Payment>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "status",
-    header: "Status",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("status")}</div>
-    ),
-  },
-  {
     accessorKey: "email",
     header: ({ column }) => {
       return (
@@ -54,28 +48,89 @@ export const Columns___Booking: ColumnDef<Payment>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Email
+          Your Details
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
-    cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
-  },
-  {
-    accessorKey: "amount",
-    header: () => <div className="text-right">Amount</div>,
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"));
-
-      // Format the amount as a dollar amount
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount);
-
-      return <div className="text-right font-medium">{formatted}</div>;
+      const { full_name, email, mobile } = row.original;
+      return (
+        <div>
+          <p className="font-semibold">{full_name}</p>
+          <p className="flex items-center gap-2">
+            <Mail className="w-4 h-4" /> {email}
+          </p>
+          <p className="flex items-center gap-2">
+            <Phone className="w-4 h-4" /> {mobile}
+          </p>
+        </div>
+      );
     },
   },
+  {
+    accessorKey: "total_due",
+    header: () => <div>Payment</div>,
+    cell: ({ row }) => {
+      const { subtotal, total_due, payment_status, paid } = row.original;
+
+      const formatter = (amount: number) => {
+        return new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "BDT",
+        }).format(amount);
+      };
+
+      return (
+        <div className="min-w-[160px]">
+          <p className="font-semibold">Status: {payment_status}</p>
+          <p>Subtotal: {formatter(subtotal)}</p>
+          <p>Paid: {formatter(paid)}</p>
+          <p className="text-primary">Due: {formatter(total_due)}</p>
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: "status",
+    header: "Status",
+    cell: ({ row }) => (
+      <div className="capitalize">{row.getValue("status")}</div>
+    ),
+  },
+  {
+    accessorKey: "branch",
+    header: "Branch",
+    cell: ({ row }) => (
+      <div className="capitalize">{row.getValue("branch")}</div>
+    ),
+  },
+  {
+    accessorKey: "check_in",
+    header: "Check In",
+    cell: ({ row }) => (
+      <div className="capitalize text-green-400">
+        {row.getValue("check_in")}
+      </div>
+    ),
+  },
+  {
+    accessorKey: "check_out",
+    header: "Check Out",
+    cell: ({ row }) => (
+      <div className="capitalize text-red-400">{row.getValue("check_out")}</div>
+    ),
+  },
+  {
+    accessorKey: "placed_at",
+    header: "Placed At",
+    cell: ({ row }) => (
+      <div className="capitalize">
+        {format(new Date(row.getValue("placed_at")), "PPP")}
+      </div>
+    ),
+  },
+
   {
     id: "actions",
     enableHiding: false,

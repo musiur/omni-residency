@@ -167,6 +167,7 @@ export const A__DELETE__CartItem = async (cartId: string, cartItemId: number) =>
             },
         });
         const result = await response.json();
+
         return result;
     } catch (error) {
         return {

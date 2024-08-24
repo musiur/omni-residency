@@ -52,7 +52,7 @@ export const getDownlinks = () => {
           link: "/branches/baridhara",
         },
         {
-          id: 2,
+          id: 3,
           text: "All Branches",
           link: "/branches",
         },

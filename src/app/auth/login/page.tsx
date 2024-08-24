@@ -12,9 +12,10 @@ import { A__POST__Login } from "../_utils/actions";
 import ResponseX from "@/components/core/molecules/response-x.molecule";
 import InputX from "@/components/core/molecules/input-x.molecule";
 import SubmitX from "@/components/core/molecules/submit-x.molecule";
+import { useSearchParams } from "next/navigation";
 
 const Login = () => {
-  //   const { setAuth } = useAuthContext();
+  const params = useSearchParams();
   const form = useForm<TLoginFormSchema>({
     resolver: zodResolver(LoginFormSchema),
     defaultValues: {
@@ -25,7 +26,10 @@ const Login = () => {
 
   // form submission handler
   const onSubmit = async (data: TLoginFormSchema) => {
-    const result = await A__POST__Login(data);
+    const result = await A__POST__Login(
+      data,
+      params.get("from_location") || ""
+    );
     ResponseX({ title: "User login", result });
   };
 

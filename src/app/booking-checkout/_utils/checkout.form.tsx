@@ -11,6 +11,7 @@ import InputX from "@/components/core/molecules/input-x.molecule";
 import { useCartContext } from "@/lib/context/cart-provider.context";
 import { A__POST__Booking } from "./actions";
 import { useRouter } from "next/navigation";
+import SubmitX from "@/components/core/molecules/submit-x.molecule";
 
 const FormSchema = z.object({
   full_name: z.string().min(1),
@@ -68,7 +69,7 @@ const CheckoutForm = () => {
           label="Additional message"
           type="textarea"
         />
-        <Button type="submit">Book</Button>
+        <SubmitX pending={form.formState.isSubmitting} />
       </form>
     </Form>
   );

@@ -4,7 +4,7 @@ import HeroSection from "./_utils/hero.section";
 
 const Page = () => {
   return (
-    <PrivateRoutes>
+    <PrivateRoutes from_location={"/booking-checkout"}>
       <>
         <HeroSection />
         <CheckoutSection />

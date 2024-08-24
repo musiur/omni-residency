@@ -145,7 +145,7 @@ export const A__POST__ChangePassword = async (data: TChangeFormSchema) => {
     }
 }
 
-export const A__POST__Login = async (data: TLoginFormSchema) => {
+export const A__POST__Login = async (data: TLoginFormSchema, from_location: string) => {
     try {
         const response = await fetch(`${BASEURL}/auth/jwt/create`, {
             method: "POST",
@@ -157,6 +157,7 @@ export const A__POST__Login = async (data: TLoginFormSchema) => {
         const result = await response.json();
 
         if (result?.refresh) {
+            cookies().set("from_location", from_location);
             cookies().set("refresh", result.refresh);
             cookies().set("access", result.access);
         }

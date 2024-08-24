@@ -7,7 +7,8 @@ export const CSR__GET__Cookie = async (name: string) => {
 }
 
 export const CSR__SET__Cookie = async (name: string, value: string) => {
-    return cookies().set(name, value)
+    cookies().set(name, value)
+    return "Created successfully"
 }
 
 export const CSR__DELETE__Cookie = async (name: string) => {

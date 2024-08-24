@@ -16,7 +16,7 @@ import { usePathname } from "next/navigation";
 const DashboardSidebar = () => {
   const pathname = usePathname();
   return (
-    <div className="min-h-[100dvh] min-w-[240px] max-w-[280px] shadow-2xl p-4 grid grid-cols-1 gap-8">
+    <div className="fixed top-0 left-0 z-50 bg-white min-w-[1200px]:relative min-h-[100dvh] min-w-[240px] max-w-[280px] shadow-2xl p-4 grid grid-cols-1 gap-8">
       <div className="flex flex-col justify-between h-full">
         <div>
           <Link href="/">
