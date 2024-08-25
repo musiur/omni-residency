@@ -33,6 +33,8 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            BASEURL=${{ secrets.BASEURL }}
 
   update_ssh_server:
     name: Telling Digital Ocean Server to Update

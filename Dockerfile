@@ -4,6 +4,10 @@ FROM node:lts-alpine
 # Set the working directory
 WORKDIR /app
 
+ARG BASEURL
+
+ENV BASEURL=$BASEURL
+
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
