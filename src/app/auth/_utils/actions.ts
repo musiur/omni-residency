@@ -30,8 +30,7 @@ export const A__POST__Register = async (data: TRegisterFormSchema) => {
             },
             body,
         })
-        const result = await response.json()
-        console.log(result?.errors)
+        const result = await response.json();
         return result;
     } catch (error) {
 

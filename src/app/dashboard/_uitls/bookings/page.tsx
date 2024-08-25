@@ -5,7 +5,6 @@ import { Columns___Booking } from "./_utils/column";
 
 const Bookings = async () => {
   const result = await A__GET__Bookings();
-  console.log(result?.data?.results);
   const data: Payment[] = result?.data?.results?.map((item: any) => {
     const {
       id,

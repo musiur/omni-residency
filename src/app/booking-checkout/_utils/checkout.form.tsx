@@ -22,7 +22,7 @@ const FormSchema = z.object({
 
 const CheckoutForm = () => {
   const router = useRouter();
-  const { cart, deleteCart } = useCartContext();
+  const { cart, clearCart } = useCartContext();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -34,7 +34,6 @@ const CheckoutForm = () => {
   });
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(data);
     if (typeof window !== "undefined") {
       if (localStorage.getItem("search")) {
         const searchInfo = JSON.parse(localStorage.getItem("search") || "");
@@ -46,11 +45,9 @@ const CheckoutForm = () => {
           branch_id: parseInt(branch || 1),
           cart_id: cart?.id,
         };
-        console.log(payload);
         const result = await A__POST__Booking(payload);
-        console.log(result);
         if (result?.success) {
-          deleteCart();
+          clearCart();
           router.push("/dashboard/bookings");
         }
       }

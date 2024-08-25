@@ -146,12 +146,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     }
   };
 
-  const clearCart = async () => {
-    // Call your API to clear the cart
-    await fetch("/api/cart", {
-      method: "DELETE",
-    });
-
+  const clearCart = () => {
     setCart(null);
     localStorage.removeItem("cart");
   };
