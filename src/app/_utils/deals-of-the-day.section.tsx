@@ -1,6 +1,9 @@
 import { DealsAllAround } from "../../components/core/molecules/deals-all-around.molecules";
+import { A__GET__OfferList } from "../deals-&-offers/_utils/action";
 
-const DealsOfTheDay = () => {
+const DealsOfTheDay = async () => {
+  const result = await A__GET__OfferList();
+  console.log("response", result);
   return (
     <section className="container">
       <div className="flex flex-col items-center justify-center gap-[8px] pb-[32px]">
@@ -12,7 +15,7 @@ const DealsOfTheDay = () => {
           Get Up to 40% off on selected rooms!
         </p>
       </div>
-      <DealsAllAround />
+      <DealsAllAround offers={result?.data?.results} />
     </section>
   );
 };

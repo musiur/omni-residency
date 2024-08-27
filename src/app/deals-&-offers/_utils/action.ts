@@ -2,9 +2,9 @@
 
 const BASEURL = process.env.NEXT_PUBLIC_BASEURL;
 
-export const A__GET__BranchList = async () => {
+export const A__GET__OfferList = async () => {
   try {
-    const response = await fetch(`${BASEURL}/segments/branches/`, {
+    const response = await fetch(`${BASEURL}/segments/offers/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

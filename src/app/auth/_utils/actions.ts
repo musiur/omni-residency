@@ -15,7 +15,7 @@
 import { cookies } from "next/headers";
 import { TChangeFormSchema, TLoginFormSchema, TRegisterFormSchema, TResetFormSchema } from "./types/types";
 
-const BASEURL = process.env.BASEURL;
+const BASEURL = process.env.NEXT_PUBLIC_BASEURL;
 
 export const A__POST__Register = async (data: TRegisterFormSchema) => {
     try {
