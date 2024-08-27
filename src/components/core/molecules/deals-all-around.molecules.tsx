@@ -13,7 +13,6 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import Image from "next/image";
 
-const baseURL = process.env.NEXT_PUBLIC_BASEURL;
 
 export const DealsAllAround = ({ offers }: { offers: any }) => {
   return (
@@ -48,14 +47,15 @@ export const DealsAllAround = ({ offers }: { offers: any }) => {
           <SwiperSlide
             key={id}
             className="pb-16 group z-0 relative"
-            // max-w-[300px]
+          // max-w-[300px]
           >
             <div
               className={`relative overflow-hidden h-[245px] w-full rounded-t-[10px]`}
             >
               <Image
-                src={`${baseURL}${featured_image}`}
-                alt="slide-image"
+                // src={featured_image}
+                src={`https://talhaanik56.pythonanywhere.com${featured_image}`}
+                alt="slider-image"
                 fill
                 style={{ objectFit: "cover", objectPosition: "center" }}
               />
@@ -67,7 +67,7 @@ export const DealsAllAround = ({ offers }: { offers: any }) => {
             <div className="p-[16px] flex flex-col gap-[10px]">
               <h3 className="font-bold">{name}</h3>
               <p>{branch?.address}</p>
-              
+
               <p>
                 <s className="text-gray-400 font-semibold">{parseInt(regular_price) || "00"} </s>
                 <span className="text-primary font-semibold">

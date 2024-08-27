@@ -1,6 +1,6 @@
 "use server";
 
-const BASEURL = process.env.NEXT_PUBLIC_BASEURL;
+const BASEURL = process.env.BASEURL;
 
 export const A__GET__BranchList = async () => {
   try {
@@ -12,7 +12,7 @@ export const A__GET__BranchList = async () => {
       cache: "no-store",
     });
     const result = await response.json();
-    
+
     return result;
   } catch (error) {
     return {

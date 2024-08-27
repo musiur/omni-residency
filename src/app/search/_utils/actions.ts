@@ -1,6 +1,6 @@
 "use server";
 
-const BASEURL = process.env.NEXT_PUBLIC_BASEURL;
+const BASEURL = process.env.BASEURL;
 
 export const A__SearchRooms = async (data: {
   branch: string;
@@ -9,18 +9,15 @@ export const A__SearchRooms = async (data: {
   adults: string;
 }) => {
   try {
-    const apiEndpoint = `${BASEURL}/segments/branches/${data?.branch}/room_categories/?check_in=${data?.check_in
-      }&check_out=${data?.check_out}&adults=${data?.adults}`
+    const apiEndpoint = `${BASEURL}/segments/branches/${data?.branch}/room_categories/?check_in=${data?.check_in}&check_out=${data?.check_out}&adults=${data?.adults}`;
 
-    const response = await fetch(apiEndpoint,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        cache: "no-store",
-      }
-    );
+    const response = await fetch(apiEndpoint, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      cache: "no-store",
+    });
     const result = await response.json();
     // console.log(result?.data?.results)
     return result;
