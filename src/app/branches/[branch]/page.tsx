@@ -10,7 +10,7 @@ const Page = () => {
   return (
     <div>
       <HeroSection />
-      <Tabbar />
+      {/* <Tabbar /> */}
       <Overview />
       <RoomCarousel />
       <Facilities />

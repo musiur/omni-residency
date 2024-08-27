@@ -45,7 +45,8 @@ export const DealsAllAround = () => {
         return (
           <SwiperSlide
             key={id}
-            className="pb-16 group z-0 relative max-w-[300px]"
+            className="pb-16 group z-0 relative"
+            // max-w-[300px]
           >
             <div
               className={`relative overflow-hidden h-[245px] w-full rounded-t-[10px]`}
