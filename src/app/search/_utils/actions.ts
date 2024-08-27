@@ -22,7 +22,7 @@ export const A__SearchRooms = async (data: {
       }
     );
     const result = await response.json();
-
+    // console.log(result?.data?.results)
     return result;
   } catch (error) {
     return {

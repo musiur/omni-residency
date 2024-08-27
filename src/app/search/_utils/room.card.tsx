@@ -50,7 +50,7 @@ const RoomCard = ({ details, index }: { details: any; index: number }) => {
       >
         <Image
           src={gallery_set[0]?.image || ""}
-          alt="hero-background-image"
+          alt="room-image"
           fill
           quality={100}
           style={{ objectFit: "cover", objectPosition: "center", zIndex: "-1" }}

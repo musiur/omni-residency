@@ -4,14 +4,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import { toast } from "@/components/ui/use-toast";
 import InputX from "@/components/core/molecules/input-x.molecule";
 import { useCartContext } from "@/lib/context/cart-provider.context";
 import { A__POST__Booking } from "./actions";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import SubmitX from "@/components/core/molecules/submit-x.molecule";
+import ResponseX from "@/components/core/molecules/response-x.molecule";
+import { CSR__DELETE__Cookie } from "@/app/_utils/actions";
 
 const FormSchema = z.object({
   full_name: z.string().min(1),
@@ -22,6 +22,7 @@ const FormSchema = z.object({
 
 const CheckoutForm = () => {
   const router = useRouter();
+  const pathname = usePathname();
   const { cart, clearCart } = useCartContext();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -46,6 +47,15 @@ const CheckoutForm = () => {
           cart_id: cart?.id,
         };
         const result = await A__POST__Booking(payload);
+
+        ResponseX({ title: "Booking", result });
+        if (result?.status_code === 401) {
+          await CSR__DELETE__Cookie("access");
+          await CSR__DELETE__Cookie("refresh");
+          router.push(
+            `/auth/login?from_location=${pathname?.replaceAll("/", "___")}`
+          );
+        }
         if (result?.success) {
           clearCart();
           router.push("/dashboard/bookings");
