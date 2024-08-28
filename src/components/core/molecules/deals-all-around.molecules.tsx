@@ -50,7 +50,7 @@ export const DealsAllAround = ({ offers }: { offers: any }) => {
           // max-w-[300px]
           >
             <div
-              className={`relative overflow-hidden h-[245px] w-full rounded-t-[10px]`}
+              className={`relative overflow-hidden h-[240px] w-full rounded-t-[10px]`}
             >
               <Image
                 // src={featured_image}
@@ -64,18 +64,10 @@ export const DealsAllAround = ({ offers }: { offers: any }) => {
                 <span className="font-light">off</span>
               </p>
             </div>
-            <div className="p-[16px] flex flex-col gap-[10px]">
-              <h3 className="font-bold">{name}</h3>
-              <p>{branch?.address}</p>
-
-              <p>
-                <s className="text-gray-400 font-semibold">{parseInt(regular_price) || "00"} </s>
-                <span className="text-primary font-semibold">
-                  {parseInt(discounted_price) || "N/A"} BDT
-                </span>
-                /night
-              </p>
-              <Link href={see_details}>
+            <div className="py-[16px] flex flex-col gap-[16px]">
+              <h3 className="font-bold">{title}</h3>
+              <p>{location}</p>
+              <Link href={link}>
                 <Button className="w-full bg-muted_gray group-hover:bg-primary">
                   {/* {btnText} */}
                   See Details

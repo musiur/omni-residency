@@ -5,9 +5,17 @@ import Image from "next/image";
 import { useState } from "react";
 import { sociallinks } from "./navbar.molecule";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
-const SideNav = ({uplinks, downlinks}:{uplinks:any[], downlinks:any[]}) => {
+const SideNav = ({
+  uplinks,
+  downlinks,
+}: {
+  uplinks: any[];
+  downlinks: any[];
+}) => {
   const [openNav, setOpenNav] = useState(false);
+  const router = useRouter();
   return (
     <div>
       <div
@@ -22,6 +30,7 @@ const SideNav = ({uplinks, downlinks}:{uplinks:any[], downlinks:any[]}) => {
           "fixed top-0 left-0 w-full h-[100vh] bg-secondary z-50 transition ease-in-out duration-300",
           { "translate-x-0": openNav, "translate-x-[10000px]": !openNav }
         )}
+        onClick={() => setOpenNav(false)}
       >
         <div className="container py-8 flex justify-between items-center gap-[48px]">
           <Image
@@ -36,14 +45,20 @@ const SideNav = ({uplinks, downlinks}:{uplinks:any[], downlinks:any[]}) => {
           </div>
         </div>
         <div className="container section grid grd-cols-1 gap-[40px]">
-          <ul className="block min-[880px]:hidden grid grid-cols-1 gap-[12px]">
+          <ul className="min-[880px]:hidden grid grid-cols-1 gap-[12px]">
             {uplinks?.map((item) => {
               const { id, text, link } = item;
               return (
-                <li key={id}>
-                  <Link href={link} className="hover:text-primary">
-                    {text}
-                  </Link>
+                <li
+                  key={id}
+                  role="button"
+                  className="hover:text-primary"
+                  onClick={() => {
+                    // setOpenNav(false);
+                    router.push(link);
+                  }}
+                >
+                  {text}
                 </li>
               );
             })}

@@ -4,7 +4,7 @@ module.exports = {
       {
         protocol: "https",
         hostname: "api.hotelomniresidency.com",
-        port: "",
+        port: "9443",
         pathname: "/**",
       },
       {
