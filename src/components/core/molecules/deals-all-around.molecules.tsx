@@ -65,9 +65,9 @@ export const DealsAllAround = ({ offers }: { offers: any }) => {
               </p>
             </div>
             <div className="py-[16px] flex flex-col gap-[16px]">
-              <h3 className="font-bold">{title}</h3>
-              <p>{location}</p>
-              <Link href={link}>
+              <h3 className="font-bold">{name}</h3>
+              <p>{branch?.name}</p>
+              <Link href={'#'}>
                 <Button className="w-full bg-muted_gray group-hover:bg-primary">
                   {/* {btnText} */}
                   See Details

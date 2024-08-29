@@ -13,7 +13,7 @@ const Home = async () => {
       <DealsOfTheDay />
       <Facilities />
       <OtherServices />
-      <Testimonial />
+      <Testimonial showReviewBtn={true} noOfReviews={3} />
     </div>
   );
 };
