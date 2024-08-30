@@ -64,10 +64,18 @@ export const DealsAllAround = ({ offers }: { offers: any }) => {
                 <span className="font-light">off</span>
               </p>
             </div>
-            <div className="py-[16px] flex flex-col gap-[16px]">
-              <h3 className="font-bold">{title}</h3>
-              <p>{location}</p>
-              <Link href={link}>
+            <div className="py-[16px] flex flex-col gap-[10px]">
+            <h3 className="font-bold">{name}</h3>
+              <p>{branch?.address}</p>
+              
+              <p>
+                <s className="text-gray-400 font-semibold">{parseInt(regular_price) || "00"} </s>
+                <span className="text-primary font-semibold">
+                  {parseInt(discounted_price) || "N/A"} BDT
+                </span>
+                /night
+              </p>
+              <Link href={"#"}>
                 <Button className="w-full bg-muted_gray group-hover:bg-primary">
                   {/* {btnText} */}
                   See Details
