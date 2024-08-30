@@ -9,7 +9,7 @@ const Page = async () => {
       <HeroSection />
       <DealsOfTheDay />
       <Facilities />
-      <Testimonial />
+      <Testimonial noOfReviews={3} />
     </div>
   );
 };

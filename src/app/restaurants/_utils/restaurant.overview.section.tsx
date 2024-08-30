@@ -54,21 +54,21 @@ const RestaurantOverview = ({
           </h3>
           <div className="flex flex-col gap-[16px]">
             <div className="flex items-center gap-[4px]">
-              <AlarmClock className="w-5 h-5 stroke-[1.3px] stroke-secondary" />
+              <AlarmClock className="w-5 h-5 stroke-[1.3px] stroke-secondary animate-pulse" />
               <span className="font-semibold">Breakfast:</span>
               <span>
                 {details.breakfast_opening} - {details.breakfast_closing}
               </span>
             </div>
             <div className="flex items-center gap-[4px]">
-              <AlarmClock className="w-5 h-5 stroke-[1.3px] stroke-secondary" />
+              <AlarmClock className="w-5 h-5 stroke-[1.3px] stroke-secondary animate-pulse" />
               <span className="font-semibold">Lunch:</span>
               <span>
                 {details.lunch_opening} - {details.lunch_closing}
               </span>
             </div>
             <div className="flex items-center gap-[4px]">
-              <AlarmClock className="w-5 h-5 stroke-[1.3px] stroke-secondary" />
+              <AlarmClock className="w-5 h-5 stroke-[1.3px] stroke-secondary animate-pulse" />
               <span className="font-semibold">Dinner:</span>
               <span>
                 {details.dinner_opening} - {details.dinner_closing}
@@ -80,10 +80,10 @@ const RestaurantOverview = ({
           <h3 className="text-[16px] md:text-[20px] font-semibold pb-2">
             Cuisine
           </h3>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             {cuisines.map((item: any) => (
               <p
-                className="border px-3 py-1 rounded-md shadow-sm"
+                className="border px-3 py-1 rounded-full shadow-md"
                 key={item.id}
               >
                 {item.cuisine}

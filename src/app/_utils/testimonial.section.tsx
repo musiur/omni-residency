@@ -10,28 +10,26 @@ import { A__GET__AllReviews } from "../reviews/_utils/action";
 const Testimonial = async ({
   showReviewBtn = true,
   noOfReviews,
-
 }: {
-  showReviewBtn: boolean,
+  showReviewBtn?: boolean,
   noOfReviews?: number
 }) => {
-  const results = await A__GET__AllReviews();
-  const allData = results?.data?.results || [];
-  const data = noOfReviews ? allData.slice(0, noOfReviews) : allData;
+  const response = await A__GET__AllReviews();
+  const allData = response?.data?.results || [];
+  const cardData = noOfReviews ? allData.slice(0, noOfReviews) : allData;
 
-  // console.log("response", data);
   return (
     <section className="bg-[#fafafa]">
       <div className="container flex flex-col items-center justify-center gap-[24px]">
         <p className="px-[16px] py-[12px] rounded-full bg-muted_orange text-primary font-medium inline-flex text-center">
-          Testimonial {noOfReviews}
+          Testimonial
         </p>
         <h4 className="text-[20px] md:text-[24px] font-extrabold">
           Some of our customer reviews
         </h4>
       </div>
       <div className="container grid grid-cols-1 sm:grid-cols-2 min-[1100px]:grid-cols-3 gap-[24px] lg:gap-[48px] pt-[48px]">
-        {data?.map((item: any, index: number) => {
+        {cardData?.map((item: any, index: number) => {
           const { id, guest, rating, description } = item;
           return (
             <div
@@ -39,8 +37,8 @@ const Testimonial = async ({
               className={clsx(
                 "p-[16px] md:p-[20px] rounded-[10px] drop-shadow-spreed bg-white",
                 {
-                  "col-span-1 sm:col-span-2 min-[1100px]:col-span-1": index === 2 && data.length >= 3,
-                  "col-span-1": index !== 2 || data.length < 3,
+                  "col-span-1 sm:col-span-2 min-[1100px]:col-span-1": index === 2 && cardData?.length >= 3,
+                  "col-span-1": index !== 2 || cardData?.length < 3,
                 }
               )}
             >
