@@ -30,7 +30,7 @@ const Page = async ({
             return <RoomCard key={item.id} index={index} details={item} />;
           })
         ) : (
-          <p className="text-center animate-pulse">No Room Available!</p>
+          <p className="text-center animate-pulse py-2 text-primary">No Room Available!</p>
         )}
       </section>
       <Testimonial noOfReviews={3} />

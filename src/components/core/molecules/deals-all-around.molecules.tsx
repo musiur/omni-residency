@@ -37,7 +37,7 @@ export const DealsAllAround = ({ offers }: { offers: any }) => {
           slidesPerView: 3,
         },
         1260: {
-          slidesPerView: 4,
+          slidesPerView: 3,
         },
       }}
     >
@@ -54,7 +54,7 @@ export const DealsAllAround = ({ offers }: { offers: any }) => {
             >
               <Image
                 // src={featured_image}
-                src={`https://talhaanik56.pythonanywhere.com${featured_image}`}
+                src={featured_image}
                 alt="slider-image"
                 fill
                 style={{ objectFit: "cover", objectPosition: "center" }}
