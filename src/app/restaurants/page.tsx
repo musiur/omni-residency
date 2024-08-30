@@ -15,7 +15,7 @@ const Page = async () => {
           <RestaurantOverview key={item.id} details={item} index={index} />
         );
       })}
-      <Testimonial />
+      <Testimonial noOfReviews={3} />
     </>
   );
 };

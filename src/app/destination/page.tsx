@@ -15,7 +15,7 @@ const Page = () => {
       <hr />
       <OurServices />
       <OtherServices />
-      <Testimonial />
+      <Testimonial noOfReviews={3} />
     </div>
   );
 };

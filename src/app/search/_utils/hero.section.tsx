@@ -13,7 +13,7 @@ const HeroSection = async ({ defaultValues }: { defaultValues: any }) => {
     })) || [];
 
   const matchedBranchName: string =
-    branches?.find((branch) => branch.id === defaultValues?.branch)
+    branches?.find((branch) => branch.id === +defaultValues?.branch)
       ?.nick_name || null;
 
   return (

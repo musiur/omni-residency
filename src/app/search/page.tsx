@@ -30,84 +30,13 @@ const Page = async ({
             return <RoomCard key={item.id} index={index} details={item} />;
           })
         ) : (
-          <p className="text-center animate-pulse">No Room Available!</p>
+          <p className="text-center animate-pulse py-2 text-primary">No Room Available!</p>
         )}
       </section>
-      <Testimonial />
+      <Testimonial noOfReviews={3} />
     </div>
   );
 };
 
 export default Page;
 
-{
-  /* <SearchRoomCardSkeleton /> */
-}
-// async function sleeper(ms: number) {
-//   return async function (x: any) {
-//     const value = await new Promise((resolve) =>
-//       setTimeout(() => resolve(x), ms)
-//     );
-//     return value;
-//   };
-// }
-
-// const roomsData = [
-//   {
-//     id: 1,
-//     title: "Standard Room",
-//     startFrom: 100,
-//     shortDescription:
-//       "All our delux room has big windows to help you take a broad view of the cityscape and nature",
-//     facilities: [
-//       { id: 1, icon: <User2 />, key: "adults", value: 2 },
-//       { id: 2, icon: <Baby />, key: "children", value: 2 },
-//       { id: 3, icon: <AreaChart />, key: "area", value: 30 },
-//       { id: 4, icon: <BedDouble />, key: "bed", value: 2 },
-//       { id: 5, icon: <Bath />, key: "bath", value: 1 },
-//       { id: 6, icon: <CarFront />, key: "parking", value: true },
-//     ],
-//     viewLink: "#",
-//     image: "/images/home/hero-background.png",
-//     videoLink: "#",
-//     photosLink: "#",
-//   },
-//   {
-//     id: 2,
-//     title: "Standard Room",
-//     startFrom: 100,
-//     shortDescription:
-//       "All our delux room has big windows to help you take a broad view of the cityscape and nature",
-//     facilities: [
-//       { id: 1, icon: <User2 />, key: "adults", value: 2 },
-//       { id: 2, icon: <Baby />, key: "children", value: 2 },
-//       { id: 3, icon: <AreaChart />, key: "area", value: 30 },
-//       { id: 4, icon: <BedDouble />, key: "bed", value: 2 },
-//       { id: 5, icon: <Bath />, key: "bath", value: 1 },
-//       { id: 6, icon: <CarFront />, key: "parking", value: true },
-//     ],
-//     viewLink: "#",
-//     image: "/images/home/hero-background.png",
-//     videoLink: "#",
-//     photosLink: "#",
-//   },
-//   {
-//     id: 3,
-//     title: "Standard Room",
-//     startFrom: 100,
-//     shortDescription:
-//       "All our delux room has big windows to help you take a broad view of the cityscape and nature",
-//     facilities: [
-//       { id: 1, icon: <User2 />, key: "adults", value: 2 },
-//       { id: 2, icon: <Baby />, key: "children", value: 2 },
-//       { id: 3, icon: <AreaChart />, key: "area", value: 30 },
-//       { id: 4, icon: <BedDouble />, key: "bed", value: 2 },
-//       { id: 5, icon: <Bath />, key: "bath", value: 1 },
-//       { id: 6, icon: <CarFront />, key: "parking", value: true },
-//     ],
-//     viewLink: "#",
-//     image: "/images/home/hero-background.png",
-//     videoLink: "#",
-//     photosLink: "#",
-//   },
-// ];

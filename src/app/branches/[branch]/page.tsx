@@ -6,7 +6,10 @@ import { RoomCarousel } from "./_utils/room-carousel.section";
 import OurServices from "@/app/destination/_utils/our-services.section";
 import Facilities from "@/app/_utils/facilities.section";
 
-const Page = () => {
+const Page = ({params}:{params:{
+  branch:string
+}}) => {
+  console.log(params?.branch)
   return (
     <div>
       <HeroSection />
