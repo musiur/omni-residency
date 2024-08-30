@@ -10,7 +10,7 @@ const Facilities = () => {
             highlighter: "Restaurants",
             h2: <>Enjoy the most lively cuisines at our branches!</>,
             p: "Indulge in gourmet dining at our restaurants, offering a diverse selection of international and local cuisine prepared by top chefs. Relax with a cup of freshly brewed coffee or a light snack at our stylish cafes, perfect for casual meetings or unwinding after a busy day.",
-            btnLink: "/",
+            btnLink: "/restaurants",
             btnText: "Book a table",
             imgOnRight: false,
             imgMaxW: false,
