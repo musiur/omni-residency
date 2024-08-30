@@ -24,7 +24,7 @@ const Facilities = () => {
             highlighter: "Fitness Center",
             h2: <>Keep your health and fitness always in check</>,
             p: "Stay fit and energized during your stay with our state-of-the-art fitness center, equipped with the latest exercise machines and professional trainers.",
-            btnLink: "/",
+            btnLink: "/gym",
             btnText: "Become a member",
             imgOnRight: true,
             imgMaxW: false,

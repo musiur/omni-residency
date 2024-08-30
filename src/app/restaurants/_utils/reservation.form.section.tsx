@@ -6,10 +6,14 @@ import { ReservationFormSchema, TReservationFormSchema } from "@/lib/type";
 import { Button } from "@/components/ui/button";
 import clsx from "clsx";
 import Errors from "../../../components/core/atoms/errors.atom";
-import { useToast } from "@/components/ui/use-toast";
+import { A__POST__RestaurantReservation } from "./actions";
+import ResponseX from "@/components/core/molecules/response-x.molecule";
+import { useSearchParams } from "next/navigation";
 
 const ReservationForm = () => {
-  const { toast } = useToast();
+  const params = useSearchParams();
+  const restaurant_id = params.get("id");
+
   const {
     register,
     handleSubmit,
@@ -20,12 +24,12 @@ const ReservationForm = () => {
   });
 
   const onSubmit = async (data: TReservationFormSchema) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    toast({
-      title: "Reservation",
-      description: "Request has been placed successfully!",
+    const result = await A__POST__RestaurantReservation({
+      ...data,
+      restaurant_id,
     });
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+
+    ResponseX({ title: "Restaurant Reservation", result });
     reset();
   };
   return (
@@ -50,15 +54,15 @@ const ReservationForm = () => {
               <label>
                 Your Number <span className="text-pink-600">*</span>
               </label>
-              <input {...register("number")} type="text" required />
-              <Errors details={{ errors, name: "number" }} />
+              <input {...register("mobile")} type="text" required />
+              <Errors details={{ errors, name: "mobile" }} />
             </div>
             <div className="form-input">
               <label>
                 Reservation Date <span className="text-pink-600">*</span>
               </label>
-              <input {...register("date")} type="date" required />
-              <Errors details={{ errors, name: "date" }} />
+              <input {...register("reservation_date")} type="date" required />
+              <Errors details={{ errors, name: "reservation_date" }} />
             </div>
           </div>
           <div className="grid grid-cols-1 gap-[20px]">
@@ -71,15 +75,15 @@ const ReservationForm = () => {
             </div>
             <div className="form-input">
               <label>Total Number of People</label>
-              <input {...register("numberOfPeople")} type="number" />
-              <Errors details={{ errors, name: "numberOfPeople" }} />
+              <input {...register("number_of_people")} type="number" />
+              <Errors details={{ errors, name: "number_of_people" }} />
             </div>
             <div className="form-input">
               <label>
                 Reservation Time <span className="text-pink-600">*</span>
               </label>
-              <input {...register("time")} type="time" required />
-              <Errors details={{ errors, name: "time" }} />
+              <input {...register("reservation_time")} type="time" required />
+              <Errors details={{ errors, name: "reservation_time" }} />
             </div>
           </div>
         </div>
@@ -87,8 +91,8 @@ const ReservationForm = () => {
           <label>
             Additional Information like arrival time, cuisine, menu etc.
           </label>
-          <textarea {...register("additionalInformation")} />
-          <Errors details={{ errors, name: "additionalInformation" }} />
+          <textarea {...register("additional_information")} />
+          <Errors details={{ errors, name: "additional_information" }} />
         </div>
         <div className="flex justify-center">
           <Button
