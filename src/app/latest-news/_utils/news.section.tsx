@@ -32,7 +32,7 @@ const News = () => {
   return (
     <section className="container section">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {newsItems.map((item) => (
+        {/* {newsItems.map((item) => (
           <Card key={item.id} className="bg-white shadow-md px-0">
             <CardContent className="p-0">
               <div className="relative w-full h-[240px]">
@@ -53,7 +53,8 @@ const News = () => {
               <Button>Read More</Button>
             </CardFooter>
           </Card>
-        ))}
+        ))} */}
+        Comming soon...
       </div>
     </section>
   );

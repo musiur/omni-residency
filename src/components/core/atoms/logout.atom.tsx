@@ -15,7 +15,7 @@ const Logout = () => {
   return (
     <Button
       variant="outline"
-      className="py-3 px-4 w-full items-center gap-2 hover:text-pink-600"
+      className="py-3 px-4 items-center gap-2 hover:text-pink-600"
       onClick={() => logout()}
     >
       <LogOutIcon className="w-4 h-4" />

@@ -5,9 +5,9 @@ import DashboardSidebar from "./_uitls/dashboard-sidebar";
 const Layout = ({ children }: { children: ReactElement }) => {
   return (
     <PrivateRoutes>
-      <div className="flex items-start">
+      <div className="space-y-8">
         <DashboardSidebar />
-        <div className="w-full py-16 px-8">{children}</div>
+        <div className="container py-16">{children}</div>
       </div>
     </PrivateRoutes>
   );
