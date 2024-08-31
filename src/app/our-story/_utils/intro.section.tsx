@@ -23,7 +23,7 @@ const Intro = () => {
         </div>
         <div className="lg:w-1/2">
           <Image
-            src="/images/branches/ahosan-manzil.avif"
+            src="/premium-twin.jpg"
             alt="Hotel Introduction"
             width={500}
             height={500}
