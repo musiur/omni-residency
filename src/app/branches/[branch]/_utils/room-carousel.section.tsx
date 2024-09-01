@@ -14,7 +14,7 @@ import "swiper/css/scrollbar";
 import Image from "next/image";
 import { BedDouble } from "lucide-react";
 
-export const RoomCarousel = () => {
+export const RoomCarousel = ({ data }: { data: any }) => {
   return (
     <section className="container" id="rooms">
       <div className="pb-[32px]">
@@ -42,12 +42,12 @@ export const RoomCarousel = () => {
             slidesPerView: 3,
           },
           1260: {
-            slidesPerView: 4,
+            slidesPerView: 3,
           },
         }}
       >
-        {images.map((item) => {
-          const { id, image, link, title, location, offPercent, btnText } =
+        {data?.map((item:any) => {
+          const { id, room_category } =
             item;
           return (
             <SwiperSlide key={id} className="pb-16 group z-0 relative">
@@ -55,13 +55,13 @@ export const RoomCarousel = () => {
                 className={`relative overflow-hidden h-[260px] w-full rounded-t-[10px]`}
               >
                 <Image
-                  src={image}
+                  src={room_category?.featured_image}
                   alt="slide-image"
                   fill
                   className="bg-cover bg-center"
                 />
                 <p className="absolute top-0 left-0 p-[10px] m-[5px] rounded-full flex flex-col items-center justify-center bg-primary text-white leading-[13px]">
-                  <span className="font-bold text-white">{offPercent}%</span>
+                  <span className="font-bold text-white">{parseInt(room_category?.discount_in_percentage)}%</span>
                   <span className="font-light">off</span>
                 </p>
                 <div className="absolute bottom-0 left-0 w-full backdrop-blur bg-white/80 p-[16px]">
@@ -76,12 +76,12 @@ export const RoomCarousel = () => {
               </div>
               <div className="py-[16px] flex flex-col gap-[16px]">
                 <h3 className="font-bold">
-                  {title}&nbsp;<span className="font-light">{location}</span>
+                  {room_category?.room_name}&nbsp;<span className="font-light">{room_category?.branch?.address}</span>
                 </h3>
                 <p></p>
-                <Link href={link}>
+                <Link href={`/booking-checkout/${room_category?.room_name}?branch=${room_category?.branch?.name}&id=${room_category?.branch?.id}`}>
                   <Button className="w-full bg-muted_gray group-hover:bg-primary">
-                    {btnText}
+                    See Details
                   </Button>
                 </Link>
               </div>
@@ -93,58 +93,58 @@ export const RoomCarousel = () => {
   );
 };
 
-const images = [
-  {
-    id: 1,
-    image: "/images/home/carousel/double-delux.jpg",
-    title: "Delux Double",
-    location: "Dhaka, Banani",
-    link: "/booking-checkout/delux-double",
-    offPercent: 20,
-    btnText: "Show Room",
-  },
-  {
-    id: 2,
-    image: "/images/home/carousel/queen.jpg",
-    title: "Queen Delux",
-    location: "Dhaka, Baridhara",
-    link: "/booking-checkout/queen-delux",
-    offPercent: 40,
-    btnText: "Book Now",
-  },
-  {
-    id: 3,
-    image: "/images/home/carousel/double-delux.jpg",
-    title: "Double & Single",
-    location: "Cox's Bazar, Iconic",
-    link: "/booking-checkout/double-&-single",
-    offPercent: 30,
-    btnText: "Book Now",
-  },
-  {
-    id: 4,
-    image: "/images/home/carousel/queen1.jpg",
-    title: "Honeymoon",
-    location: "Dhaka, Banani",
-    link: "/booking-checkout/honeymoon",
-    offPercent: 10,
-    btnText: "Show Properties",
-  },
-  // {
-  //   id: 5,
-  //   image: "/images/home/carousel/honeymoon.png",
-  //   title: "Honeymoon",
-  //   link: "/booking-checkout/honeymoon",
-  //   offPercent: 10,
-  //   btnText: "Show Properties",
-  // },
-  // {
-  //   id: 6,
-  //   image: "/images/home/carousel/honeymoon.png",
-  //   title: "Honeymoon",
-  //   location: "Dhaka, Banani",
-  //   link: "/booking-checkout/honeymoon",
-  //   offPercent: 10,
-  //   btnText: "Show Properties",
-  // },
-];
+// const images = [
+//   {
+//     id: 1,
+//     image: "/images/home/carousel/double-delux.jpg",
+//     title: "Delux Double",
+//     location: "Dhaka, Banani",
+//     link: "/booking-checkout/delux-double",
+//     offPercent: 20,
+//     btnText: "Show Room",
+//   },
+//   {
+//     id: 2,
+//     image: "/images/home/carousel/queen.jpg",
+//     title: "Queen Delux",
+//     location: "Dhaka, Baridhara",
+//     link: "/booking-checkout/queen-delux",
+//     offPercent: 40,
+//     btnText: "Book Now",
+//   },
+//   {
+//     id: 3,
+//     image: "/images/home/carousel/double-delux.jpg",
+//     title: "Double & Single",
+//     location: "Cox's Bazar, Iconic",
+//     link: "/booking-checkout/double-&-single",
+//     offPercent: 30,
+//     btnText: "Book Now",
+//   },
+//   {
+//     id: 4,
+//     image: "/images/home/carousel/queen1.jpg",
+//     title: "Honeymoon",
+//     location: "Dhaka, Banani",
+//     link: "/booking-checkout/honeymoon",
+//     offPercent: 10,
+//     btnText: "Show Properties",
+//   },
+//   // {
+//   //   id: 5,
+//   //   image: "/images/home/carousel/honeymoon.png",
+//   //   title: "Honeymoon",
+//   //   link: "/booking-checkout/honeymoon",
+//   //   offPercent: 10,
+//   //   btnText: "Show Properties",
+//   // },
+//   // {
+//   //   id: 6,
+//   //   image: "/images/home/carousel/honeymoon.png",
+//   //   title: "Honeymoon",
+//   //   location: "Dhaka, Banani",
+//   //   link: "/booking-checkout/honeymoon",
+//   //   offPercent: 10,
+//   //   btnText: "Show Properties",
+//   // },
+// ];

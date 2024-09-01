@@ -2,8 +2,7 @@
 
 const BASEURL = process.env.BASEURL;
 
-
-export const A__GET__Branch = async (id: number) => {
+ export const A__GET__Branch = async (id: number) => {
     try {
         const response = await fetch(`${BASEURL}/segments/branches/${id}`, {
             method: "GET",
