@@ -29,7 +29,7 @@ const RoomCard = ({ details, index }: { details: any; index: number }) => {
   return (
     <div className="relative grid grid-cols-1 md:grid-cols-2 gap-[12px] py-0 md:py-[90px] overflow-hidden rounded-[10px] md:rounded-[40px]">
       <Image
-        src={featured_image}
+        src={featured_image}  
         alt="hero-background-image"
         fill
         quality={100}
