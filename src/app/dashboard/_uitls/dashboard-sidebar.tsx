@@ -1,99 +1,39 @@
 "use client";
 
-import Logout from "@/components/core/atoms/logout.atom";
-import { Button } from "@/components/ui/button";
 import clsx from "clsx";
-import {
-  BookCheckIcon,
-  LogOutIcon,
-  Menu,
-  PieChartIcon,
-  Settings,
-  X,
-} from "lucide-react";
-import Image from "next/image";
+import { BookCheckIcon, PieChartIcon, Settings } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
 
 const DashboardSidebar = () => {
   const pathname = usePathname();
-  const [show, setShow] = useState(false);
   return (
-    <>
-      <div
-        className={clsx(
-          "fixed z-50 top-0 left-0 bg-white min-[1200px]:relative min-h-[100vh] min-w-[240px] max-w-[280px] shadow-2xl p-4 grid grid-cols-1 gap-8",
-          {
-            "hidden min-[1200px]:block opacity-0 min-[1200px]:opacity-100":
-              !show,
-            "fixed min-[1200px]:relative": show,
-          }
-        )}
-      >
-        <div className="flex flex-col justify-between h-full">
-          <div className="mb-10">
-            <div
-              className={clsx(
-                "h-8 w-8 flex items-center justify-center rounded-md border",
-                {
-                  hidden: !show,
-                  "block min-[1200px]:hidden": show,
-                }
-              )}
-              role="button"
-              onClick={() => setShow(false)}
-            >
-              <X />
-            </div>
-            <Link href="/">
-              <Image
-                src="/brandlogo.png"
-                alt=""
-                width={500}
-                height={200}
-                className="max-h-[60px] w-auto mx-auto"
-              />
+    <div className="flex items-center justify-between gap-10 flex-wrap shadow p-4 pt-24 lg:pt-40 bg-black/60 min-w-[280px] overflow-auto">
+      <ul className="container flex items-center gap-4">
+        {Menu__Data.map((item) => {
+          const matched = pathname === item.link;
+          return (
+            <Link key={item.id} href={item.link}>
+              <li
+                className={clsx(
+                  "px-4 py-2 transition ease-linear duration-150 [&>svg]:w-4 rounded-lg [&>svg]:h-4 flex items-center gap-2 border-b-4",
+                  {
+                    "border-white/80 text-white hover:border-white/40 bg-primary hover:bg-primary/80":
+                      matched,
+                    "border-none hover:border-gray-200 bg-white/10 text-white":
+                      !matched,
+                  }
+                )}
+              >
+                {item.icon}
+                {item.text}
+              </li>
             </Link>
-            <ul className="pt-8 grid grid-cols-1 gap-2">
-              {Menu__Data.map((item) => {
-                const matched = pathname === item.link;
-                return (
-                  <Link key={item.id} href={item.link}>
-                    <li
-                      className={clsx(
-                        "px-4 py-2 transition ease-linear duration-150 rounded-lg [&>svg]:w-4 [&>svg]:h-4 flex items-center gap-2",
-                        {
-                          "bg-primary text-white hover:bg-primary/80": matched,
-                          "bg-white hover:bg-gray-200": !matched,
-                        }
-                      )}
-                    >
-                      {item.icon}
-                      {item.text}
-                    </li>
-                  </Link>
-                );
-              })}
-            </ul>
-          </div>
-          <Logout />
-        </div>
-      </div>
-      <div
-        className={clsx(
-          "top-0 left-0 border p-2 rounded-md ml-2 mt-2 bg-white",
-          {
-            block: show,
-            "fixed min-[1200px]:relative block min-[1200px]:hidden": !show,
-          }
-        )}
-        role="button"
-        onClick={() => setShow(true)}
-      >
-        <Menu />
-      </div>
-    </>
+          );
+        })}
+        <li className="text-white/0">asdf</li>
+      </ul>
+    </div>
   );
 };
 

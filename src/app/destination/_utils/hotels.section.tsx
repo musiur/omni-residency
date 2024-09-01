@@ -20,9 +20,14 @@ const Hotels = () => {
       <section className="container">
         <h2 className="pt-[16px]">Dhaka</h2>
         <p className="text-plain_gray py-[10px] text-[16px] md:text-[20px] leading-snug  md:leading-loose pb-[40px]">
-          We are best hotel for homestay buat penginapan kamu bersama orang
-          tercinta dan orang tersayang yang kamu sukai dan sayangi untuk
-          selamanya di dunia ini
+          Welcome to Hotel Omni Residency. Our four-star luxury hotel is
+          situated at the heart of Dhaka city in the sophisticated area of
+          Banani. We are surrounded by the most exclusive restaurants, large
+          marketplaces and high-class extravagant services. Adjacent to several
+          commercial and diplomatic areas like Gulshan and Banani, Omni
+          Residency is accessible from all points of the vibrant city. The hotel
+          is equipped with advanced fire security systems and is completely
+          noise free and highly secured.
         </p>
         <div className="grid grid-cols-1 min-[600px]:grid-cols-2 gap-[16px] md:gap-[40px]">
           {HotelsList.map((hotel: T__Hotel) => {
@@ -70,11 +75,11 @@ const Hotels = () => {
       <section className="container flex flex-col md:flex-row items-stretch gap-[40px]">
         <div className="flex-1">
           <h2 className="pt-[16px]">Cox&apos;s Bazar</h2>
-          <p className="text-plain_gray py-[10px] text-[16px] md:text-[20px] leading-snug  md:leading-loose pb-[40px]">
+          {/* <p className="text-plain_gray py-[10px] text-[16px] md:text-[20px] leading-snug  md:leading-loose pb-[40px]">
             We are best hotel for homestay buat penginapan kamu bersama orang
             tercinta dan orang tersayang yang kamu sukai dan sayangi untuk
             selamanya di dunia ini
-          </p>
+          </p> */}
           <p className="text-[16px] md:text-[20px] font-bold text-primary">
             COMMING SOON!
           </p>
@@ -100,18 +105,20 @@ const HotelsList: T__Hotel[] = [
     id: 1,
     title: "Hotel Omni Residency",
     location: "Banani",
-    address: "S.S Khaled Road, Lalkhan Bazar",
+    address:
+      "House No 42, Road No 15, Block - D, Banani, Dhaka, Gulshan, 1213 Dhaka, Bangladesh",
     rating: 8.9,
     roomsLink: "/branches/banani",
-    image: "/images/destination/omni.png",
+    image: "/omni-building-banani.jpg",
   },
   {
     id: 1,
     title: "Hotel Omni Residency",
     location: "Baridhara",
-    address: "S.S Khaled Road, Lalkhan Bazar",
+    address:
+      "House #06, Road #14.Block #K, Baridhara Diplomatic zone, 1213 Dhaka, Bangladesh",
     rating: 8.9,
     roomsLink: "/branches/baridhara",
-    image: "/images/destination/radison-blue.png",
+    image: "/omni-building-baridhara.jpg",
   },
 ];

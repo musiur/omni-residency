@@ -1,5 +1,5 @@
 const Overview = () => {
-  return <div>Overview</div>;
+  return <div className="min-h-[40dvh]">Comming soon...</div>;
 };
 
 export default Overview;

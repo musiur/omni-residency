@@ -42,12 +42,12 @@ const Footer = () => {
         </div>
         <section className="container flex flex-wrap justify-between gap-[48px] pt-[90px]">
           <div className="flex flex-col gap-[20px] max-w-[300px]">
-            <h6 className="text-[16px] lg:text-[20px] text-secondary font-semibold">
+            {/* <h6 className="text-[16px] lg:text-[20px] text-secondary font-semibold">
               <span className="text-[16px] lg:text-[20px] text-primary font-semibold">
                 Omni
               </span>
               &nbsp;Residency
-            </h6>
+            </h6> */}
             <div className="[&>*]:text-plain_gray flex flex-col gap-[16px]">
               <p>Hotel are becoming increasingly popular and appealing</p>
               <Textcon
@@ -96,8 +96,8 @@ export default Footer;
 
 const Brands = [
   {
-    id: 1,
-    image: "/images/footer/omni-gtm.png",
+    id: 4,
+    image: "/images/footer/omni-residency.png",
     link: "/",
   },
   {
@@ -110,11 +110,7 @@ const Brands = [
   //   image: "/images/footer/omni-trading.png",
   //   link: "/",
   // },
-  {
-    id: 4,
-    image: "/images/footer/omni-residency.png",
-    link: "/",
-  },
+
   {
     id: 5,
     image: "/images/footer/gmt-trading.png",
