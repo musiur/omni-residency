@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import SearchBox from "../../components/core/molecules/searchbox.molecule";
 import { A__GET__BranchList } from "@/app/branches/_utils/action";
+import Link from "next/link";
 // import Image from "next/image";
 
 const HeroSection = async () => {
@@ -41,8 +42,12 @@ const HeroSection = async () => {
             we aim to make your stay as smooth and enjoyable as possible.
           </p>
           <div className="flex items-center justify-center gap-[16px] pt-[8px]">
-            <Button variant="secondary">Explore Now</Button>
-            <Button>View Offer</Button>
+            <Link href="/destination">
+              <Button variant="secondary">Explore Now</Button>
+            </Link>
+            <Link href="/deals-&-offers">
+              <Button>View Offer</Button>
+            </Link>
           </div>
         </div>
         <div className="container">

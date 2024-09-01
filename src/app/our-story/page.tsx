@@ -8,7 +8,7 @@ const Page = () => {
     <>
       <HeroSection />
       <Intro />
-      <MileStone />
+      {/* <MileStone /> */}
       <Vision />
     </>
   );

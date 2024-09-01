@@ -13,7 +13,7 @@ const ExploreDestination = () => {
             </>
           ),
           p: "Established in 2019, Hotel Omni Residency offers an unparalleled experience of luxury and comfort with two premier branches located in Baridhara and Banani, Dhaka. Designed for both business and leisure travelers, our hotels provide a perfect blend of modern elegance, world-class services, and a rich array of amenities to ensure a memorable stay.",
-          btnLink: "/",
+          btnLink: "/destination",
           btnText: "Explore Now",
           imgOnRight: false,
           imgMaxW: true,

@@ -36,17 +36,14 @@ export const RoomCarousel = () => {
           slidesPerView: 3,
         },
         1260: {
-          slidesPerView: 4,
+          slidesPerView: 3,
         },
       }}
     >
       {images.map((item) => {
         const { id, image, link, title, location, offPercent, btnText } = item;
         return (
-          <SwiperSlide
-            key={id}
-            className="pb-16 group z-0 relative max-w-[300px]"
-          >
+          <SwiperSlide key={id} className="pb-16 group z-0 relative">
             <div
               className={`relative overflow-hidden h-[245px] w-full rounded-t-[10px]`}
             >
@@ -62,7 +59,7 @@ export const RoomCarousel = () => {
                 <span className="font-light">off</span>
               </p>
             </div>
-            <div className="p-[16px] flex flex-col gap-[16px]">
+            <div className="py-[16px] flex flex-col gap-[16px]">
               <h3 className="font-bold">{title}</h3>
               <p>{location}</p>
               <Link href={link}>

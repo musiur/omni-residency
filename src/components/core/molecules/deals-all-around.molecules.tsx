@@ -42,7 +42,7 @@ export const DealsAllAround = ({ offers }: { offers: any }) => {
       }}
     >
       {offers?.map((item: any) => {
-        const { id, name, branch, featured_image, discount_in_percentage, regular_price, discounted_price, see_details } = item;
+        const { id, name, branch, featured_image, discount_in_percentage, regular_price, discounted_price } = item;
         return (
           <SwiperSlide
             key={id}
@@ -65,9 +65,9 @@ export const DealsAllAround = ({ offers }: { offers: any }) => {
               </p>
             </div>
             <div className="py-[16px] flex flex-col gap-[10px]">
-            <h3 className="font-bold">{name}</h3>
+              <h3 className="font-bold">{name}</h3>
               <p>{branch?.address}</p>
-              
+
               <p>
                 <s className="text-gray-400 font-semibold">{parseInt(regular_price) || "00"} </s>
                 <span className="text-primary font-semibold">
@@ -75,12 +75,14 @@ export const DealsAllAround = ({ offers }: { offers: any }) => {
                 </span>
                 /night
               </p>
-              <Link href={"#"}>
+              <Link
+                href={`/booking-checkout/${name}?branch=${branch?.id}&id=${id}`}
+              >
                 <Button className="w-full bg-muted_gray group-hover:bg-primary">
-                  {/* {btnText} */}
                   See Details
                 </Button>
               </Link>
+
             </div>
           </SwiperSlide>
         );

@@ -1,8 +1,18 @@
 import { Button } from "@/components/ui/button";
 import SearchBox from "../../../components/core/molecules/searchbox.molecule";
 import Image from "next/image";
+import { A__GET__BranchList } from "@/app/branches/_utils/action";
 
-const HeroSection = () => {
+const HeroSection = async () => {
+  const result = await A__GET__BranchList();
+
+  const branches: any[] =
+    result?.data?.results?.map((item: any) => {
+      return {
+        id: item?.id,
+        nick_name: item?.nick_name,
+      };
+    }) || [];
   return (
     <div className="bg-black/20 pt-[86px] min-[1120px]:pt-[127px] pb-[80px] relative">
       <section className="flex flex-col items-center justify-center gap-[16px]">
@@ -14,7 +24,7 @@ const HeroSection = () => {
           </div>
         </div>
         <div className="container">
-          <SearchBox tab={true} />
+          <SearchBox tab={true} branches={branches} />
         </div>
       </section>
       <Image

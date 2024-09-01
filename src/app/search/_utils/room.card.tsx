@@ -26,6 +26,7 @@ const RoomCard = ({ details, index }: { details: any; index: number }) => {
   } = details;
 
   const even = index % 2 === 0;
+  const room_name_as_path = room_name?.replaceAll(" ", "-")?.toLowerCase();
   return (
     <div className="relative grid grid-cols-1 md:grid-cols-2 gap-[12px] py-0 md:py-[90px] overflow-hidden rounded-[10px] md:rounded-[40px]">
       <Image
@@ -114,7 +115,7 @@ const RoomCard = ({ details, index }: { details: any; index: number }) => {
         </div>
         <div className="flex items-center justify-end gap-10 pt-[16px] border-t border-gray-300">
           <Link
-            href={`/booking-checkout/${room_name}?branch=${branch?.id}&id=${id}`}
+            href={`/booking-checkout/${room_name_as_path}?branch=${branch?.id}&id=${id}`}
           >
             View details
           </Link>

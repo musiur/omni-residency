@@ -3,11 +3,11 @@ import { z } from "zod";
 export const ReservationFormSchema = z.object({
   name: z.string().min(3, "Name must have at least 3 characters"),
   email: z.string().email(),
-  number: z.string().min(11, "Need a valid contact number e.g 01XXXXXXXXX"),
-  numberOfPeople: z.string(),
-  date: z.string(),
-  time: z.string(),
-  additionalInformation: z.string(),
+  mobile: z.string().min(11, "Need a valid mobile number e.g 01XXXXXXXXX"),
+  number_of_people: z.string(),
+  reservation_date: z.string(),
+  reservation_time: z.string(),
+  additional_information: z.string(),
 });
 
 export type TReservationFormSchema = z.infer<typeof ReservationFormSchema>;

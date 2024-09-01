@@ -32,10 +32,15 @@ const SearchBox = ({
 }) => {
   const timeNow = new Date();
   const router = useRouter();
+
   const form = useForm<Type___Search__SearchForm>({
     resolver: zodResolver(Schema__SearchForm),
     defaultValues: {
-      branch: branches?.length ? branches[0]?.id?.toString() : "1",
+      branch: defaultValues?.branch
+        ? defaultValues.branch
+        : branches?.length
+        ? branches[0]?.id?.toString()
+        : "1",
       checkin: defaultValues?.checkin
         ? Utils___DateExtracter(defaultValues.checkin)
         : timeNow,

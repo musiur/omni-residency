@@ -14,8 +14,8 @@ type RestaurantsData = {
   status: string;
   overview: string;
   featured_image: string;
-  gallery_set: Array<{ id: number; image: string }>;
-  cuisines: Array<{ id: number; cuisine: string }>;
+  gallery_set: { id: number; image: string }[];
+  cuisines: { id: number; cuisine: string }[];
   breakfast_opening: string;
   breakfast_closing: string;
   lunch_opening: string;
@@ -35,6 +35,7 @@ const RestaurantOverview = ({
 }) => {
   const { id, branch, name, overview, cuisines } = details;
   const even = index % 2 === 0;
+  const name_as_path = name?.replaceAll(" ", "-")?.toLowerCase();
   return (
     <section className="container grid grid-cols-1 md:grid-cols-2 gap-[40px] items-center">
       <aside
@@ -91,7 +92,11 @@ const RestaurantOverview = ({
             ))}
           </div>
         </div>
-        <Link href={`/restaurants/table-booking?branch=banani`}>
+        <Link
+          href={`/restaurants/table-booking?branch=${branch?.name?.toLowerCase()}&branchid=${
+            branch?.id
+          }&name=${name_as_path}&id=${id}`}
+        >
           <Button>Book a Table</Button>
         </Link>
       </aside>

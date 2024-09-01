@@ -31,7 +31,7 @@ const ChangePassword = () => {
   };
 
   return (
-    <div className="p-[20px] md:p-[40px] rounded-[10px] border border-dark_gray backdrop-blur shadow-md min-w-[280px] w-[550px] max-w-[550px] mx-auto md:mx-0 input-field">
+    <div className="w-[280px] mx-auto md:mx-0 input-field">
       <Form {...form}>
         <form
           className="flex flex-col gap-[32px]"
