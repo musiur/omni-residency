@@ -1,7 +1,7 @@
 import Testimonial from "@/app/_utils/testimonial.section";
-import HeroSection from "@/app/restaurants/_utils/hero.section";
 import { A__GET__GymList } from "./_utils/actions";
 import GymOverview from "./_utils/gym.overview.section";
+import HeroSection from "../_utils/hero.section";
 
 const Page = async () => {
   const response = await A__GET__GymList();
