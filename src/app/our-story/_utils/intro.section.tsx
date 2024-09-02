@@ -4,7 +4,7 @@ const Intro = () => {
   return (
     <section className="container section">
       <h2 className="text-4xl font-semibold mb-8">Introduction</h2>
-      <div className="flex flex-col lg:flex-row gap-12">
+      <div className="flex flex-col lg:flex-row gap-12 overflow-hidden rounded-b-lg">
         <div className="lg:w-1/2 space-y-4">
           <p className="text-gray-700 leading-relaxed">
             Welcome to Hotel Omni Residency, where luxury meets comfort in the
@@ -20,10 +20,17 @@ const Intro = () => {
             state-of-the-art facilities and world-class amenities, ensuring your
             stay is as relaxing and fulfilling as possible.
           </p>
+          <Image
+            src="/omni-building-baridhara.jpg"
+            alt="Hotel Introduction"
+            width={500}
+            height={500}
+            className="rounded-lg shadow-lg w-full h-full"
+          />
         </div>
         <div className="lg:w-1/2">
           <Image
-            src="/premium-twin.jpg"
+            src="/omni-building-banani.jpg"
             alt="Hotel Introduction"
             width={500}
             height={500}
@@ -36,3 +43,5 @@ const Intro = () => {
 };
 
 export default Intro;
+
+

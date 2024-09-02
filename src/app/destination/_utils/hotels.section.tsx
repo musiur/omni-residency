@@ -75,11 +75,14 @@ const Hotels = () => {
       <section className="container flex flex-col md:flex-row items-stretch gap-[40px]">
         <div className="flex-1">
           <h2 className="pt-[16px]">Cox&apos;s Bazar</h2>
-          {/* <p className="text-plain_gray py-[10px] text-[16px] md:text-[20px] leading-snug  md:leading-loose pb-[40px]">
-            We are best hotel for homestay buat penginapan kamu bersama orang
-            tercinta dan orang tersayang yang kamu sukai dan sayangi untuk
-            selamanya di dunia ini
-          </p> */}
+          <p className="text-plain_gray py-[10px] text-[16px] md:text-[20px] leading-snug  md:leading-loose pb-[40px]">
+            Comingsoon, Hotel Omni Residency is expanding to the
+            beautifulcoastal city of Cox&apos;s Bazaar, where we are
+            constructing a luxurious new branch. Known for itsstunning 120km
+            longbeach, Cox&apos;s Bazaar is the ultimate destination for beach
+            lovers, nature enthusiasts, and those seeking a tranquil retreat by
+            the sea.
+          </p>
           <p className="text-[16px] md:text-[20px] font-bold text-primary">
             COMMING SOON!
           </p>
