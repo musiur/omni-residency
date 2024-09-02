@@ -13,8 +13,8 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import Image from "next/image";
 
-
 export const DealsAllAround = ({ offers }: { offers: any }) => {
+  console.log(offers);
   return (
     <Swiper
       modules={[Navigation, Pagination, A11y, Autoplay]}
@@ -41,26 +41,34 @@ export const DealsAllAround = ({ offers }: { offers: any }) => {
         },
       }}
     >
-      {offers?.map((item: any) => {
-        const { id, name, branch, featured_image, discount_in_percentage, regular_price, discounted_price } = item;
+      {offers?.map((item: any, index: number) => {
+        const {
+          id,
+          name,
+          branch,
+          featured_image,
+          discount_in_percentage,
+          regular_price,
+          discounted_price,
+        } = item;
         return (
           <SwiperSlide
-            key={id}
+            key={`${id}-${index}`}
             className="pb-16 group z-0 relative"
-          // max-w-[300px]
           >
             <div
               className={`relative overflow-hidden h-[240px] w-full rounded-t-[10px]`}
             >
               <Image
-                // src={featured_image}
                 src={featured_image}
                 alt="slider-image"
                 fill
                 style={{ objectFit: "cover", objectPosition: "center" }}
               />
               <p className="absolute top-0 left-0 p-[10px] m-[5px] rounded-full flex flex-col items-center justify-center bg-primary text-white leading-[13px]">
-                <span className="font-bold text-white">{parseInt(discount_in_percentage)}%</span>
+                <span className="font-bold text-white">
+                  {parseInt(discount_in_percentage)}%
+                </span>
                 <span className="font-light">off</span>
               </p>
             </div>
@@ -69,7 +77,9 @@ export const DealsAllAround = ({ offers }: { offers: any }) => {
               <p>{branch?.address}</p>
 
               <p>
-                <s className="text-gray-400 font-semibold">{parseInt(regular_price) || "00"} </s>
+                <s className="text-gray-400 font-semibold">
+                  {parseInt(regular_price) || "00"}{" "}
+                </s>
                 <span className="text-primary font-semibold">
                   {parseInt(discounted_price) || "N/A"} BDT
                 </span>
@@ -82,7 +92,6 @@ export const DealsAllAround = ({ offers }: { offers: any }) => {
                   See Details
                 </Button>
               </Link>
-
             </div>
           </SwiperSlide>
         );
@@ -90,4 +99,3 @@ export const DealsAllAround = ({ offers }: { offers: any }) => {
     </Swiper>
   );
 };
-

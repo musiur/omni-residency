@@ -25,3 +25,13 @@ export type T__SelectOption = {
   label: string,
   value: string
 }
+export const GymRequestMembershipFormSchema = z.object({
+  name: z.string().min(3, "Name must have at least 3 characters"),
+  gender: z.enum(["male", "female"]),
+  age: z.number(),
+  email: z.string().email(),
+  mobile: z.string().min(11, "Need a valid mobile number e.g 01XXXXXXXXX"),
+  additional_information: z.string(),
+});
+
+export type TGymRequestMembershipFormSchema = z.infer<typeof GymRequestMembershipFormSchema>;

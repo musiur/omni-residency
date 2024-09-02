@@ -1,6 +1,7 @@
 import { RoomCarousel } from "./room-carousel.molecule";
 
-const YouMayLike = () => {
+const YouMayLike = async () => {
+  // const result = await A__GET__
   return (
     <section className="container">
       <div className="flex flex-col items-center justify-center gap-[8px] pb-[32px]">
