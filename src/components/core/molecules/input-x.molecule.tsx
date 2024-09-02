@@ -57,6 +57,7 @@ const InputX = ({
   label = "Input Field",
   placeholder = "",
   options = [{ label: "Test", value: "test" }],
+  required = false,
 }: {
   form: any;
   name: string;
@@ -64,6 +65,7 @@ const InputX = ({
   label: string;
   placeholder?: string;
   options?: T__SelectOption[];
+  required?: boolean;
 }) => {
   /**
    * State to manage showing password fields input as text or, password
@@ -156,7 +158,9 @@ const InputX = ({
       name={name}
       render={({ field }) => (
         <FormItem className="space-y-2">
-          <FormLabel>{label}</FormLabel>
+          <FormLabel>
+            {label} {required ? <span className="text-pink-600">*</span> : null}
+          </FormLabel>
           <FormControl>
             {type === "date" ? (
               <Popover>

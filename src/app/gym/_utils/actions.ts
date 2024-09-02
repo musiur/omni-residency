@@ -23,7 +23,7 @@ export const A__GET__GymList = async () => {
 
 export const A__POST__RequestGymMembership = async (data: any) => {
   try {
-    const response = await fetch(`${BASEURL}/refuel/gyms/${data.branch}/memberships/`, {
+    const response = await fetch(`${BASEURL}/refuel/gyms/${data?.branchid}/memberships/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

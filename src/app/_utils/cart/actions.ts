@@ -27,10 +27,10 @@ export const A__POST__CreateCart = async () => {
     const result = await response.json();
     return result;
   } catch (error) {
-    console.log("cart error", error)
     return {
       success: false,
       message: "Something went wrong!",
+      error
     };
   }
 };

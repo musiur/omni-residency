@@ -1,5 +1,5 @@
-import ReservationForm from "@/app/restaurants/_utils/reservation.form.section";
 import GymRequestMembershipHeroSection from "../_utils/request-membership.hero.section";
+import GymRequestMembershipForm from "../_utils/request-membership.form";
 
 const Page = ({
   searchParams,
@@ -9,7 +9,7 @@ const Page = ({
   return (
     <>
       <GymRequestMembershipHeroSection details={searchParams} />
-      <ReservationForm />
+      <GymRequestMembershipForm />
     </>
   );
 };

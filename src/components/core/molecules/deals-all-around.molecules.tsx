@@ -14,7 +14,6 @@ import "swiper/css/scrollbar";
 import Image from "next/image";
 
 export const DealsAllAround = ({ offers }: { offers: any }) => {
-  console.log(offers);
   return (
     <Swiper
       modules={[Navigation, Pagination, A11y, Autoplay]}
