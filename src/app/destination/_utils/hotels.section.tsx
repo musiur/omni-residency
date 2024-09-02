@@ -60,7 +60,7 @@ const Hotels = () => {
                     </p>
                   </div>
                   <div className="py-5">
-                    <BookingDotComRating rating={8.9} />
+                    <BookingDotComRating rating={rating} />
                   </div>
                   <Link href={roomsLink}>
                     <Button>View Room(s)</Button>
@@ -110,7 +110,7 @@ const HotelsList: T__Hotel[] = [
     location: "Banani",
     address:
       "House No 42, Road No 15, Block - D, Banani, Dhaka, Gulshan, 1213 Dhaka, Bangladesh",
-    rating: 8.9,
+    rating: 8.3,
     roomsLink: "/branches/banani",
     image: "/omni-building-banani.jpg",
   },
@@ -120,7 +120,7 @@ const HotelsList: T__Hotel[] = [
     location: "Baridhara",
     address:
       "House #06, Road #14.Block #K, Baridhara Diplomatic zone, 1213 Dhaka, Bangladesh",
-    rating: 8.9,
+    rating: 10,
     roomsLink: "/branches/baridhara",
     image: "/omni-building-baridhara.jpg",
   },
