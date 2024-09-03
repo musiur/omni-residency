@@ -17,7 +17,7 @@ const NearbyPlaces = ({ data }
           selamanya di dunia ini
         </p>
         <Link href="#">
-          <Button>View All</Button>
+          {/* <Button>View All</Button> */}
         </Link>
       </div>
       <div className="flex-[0.6] grid grid-cols-1 md:grid-cols-2 gap-[16px]">

@@ -4,12 +4,12 @@ import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-const Overview = () => {
+const Overview = ({ data }: { data: any }) => {
   return (
     <section className="container" id="overview">
       <div className="flex items-center gap-10">
         <BookingDotComRating rating={8.9} />
-        <Link href="/" className="group flex items-center gap-2">
+        <Link href="/reviews" className="group flex items-center gap-2">
           <span className="text-primary/80 group-hover:text-primary font-medium">
             View All Review
           </span>
@@ -17,16 +17,14 @@ const Overview = () => {
         </Link>
       </div>
       <h2 className="pt-[16px]">Overview</h2>
-      <p className="text-plain_gray py-[10px] text-[16px] md:text-[20px] leading-snug  md:leading-loose pb-[40px]">
-        We are best hotel for homestay buat penginapan kamu bersama orang
-        tercinta dan orang tersayang yang kamu sukai dan sayangi untuk selamanya
-        di dunia ini
+      <p className="text-plain_gray py-[10px] [&>span]:font-semibold [&>span]:px-2 [&>span]:text-black [&>span]:bg-primary/10 text-[16px] md:text-[20px] leading-snug  md:leading-loose pb-[40px]">
+        {data?.overview}
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-[12px] md:gap-[24px]">
         <div className="grid grid-cols-1 gap-[12px] md:gap-[24px] min-h-[80vh]">
           <div className="relative rounded-[10px] overflow-hidden">
             <Image
-              src="/images/branches/hotel1.avif"
+              src={data?.images?.img1}
               alt="image-of-dhaka"
               fill
               quality={100}
@@ -37,7 +35,7 @@ const Overview = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-[12px] md:gap-[24px]">
             <div className="relative rounded-[10px] overflow-hidden">
               <Image
-                src="/images/branches/hotel2.avif"
+                src={data?.images?.img2}
                 alt="image-of-dhaka"
                 fill
                 quality={100}
@@ -47,7 +45,7 @@ const Overview = () => {
             </div>
             <div className="relative rounded-[10px] overflow-hidden">
               <Image
-                src="/images/branches/hotel3.avif"
+                src={data?.images?.img4}
                 alt="image-of-dhaka"
                 fill
                 quality={100}
@@ -59,7 +57,7 @@ const Overview = () => {
         </div>
         <div className="relative rounded-[10px] overflow-hidden">
           <Image
-            src="/images/branches/hotel4.avif"
+            src={data?.images?.img3}
             alt="image-of-dhaka"
             fill
             quality={100}
@@ -69,7 +67,7 @@ const Overview = () => {
         </div>
       </div>
       <div className="flex justify-end pt-[32px]">
-        <Button>See the full galary</Button>
+        {/* <Button>See the full galary</Button> */}
       </div>
     </section>
   );
