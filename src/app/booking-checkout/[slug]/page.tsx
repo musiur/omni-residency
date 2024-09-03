@@ -1,6 +1,5 @@
 import BookingForm from "@/components/core/molecules/booking-form.molecule";
 import { RoomGalleryCarousel } from "@/components/core/molecules/room-gallary.molecule";
-import YouMayLike from "@/components/core/molecules/you-may-like.molecule";
 import {
   AirVent,
   Baby,
@@ -18,6 +17,8 @@ import {
 } from "lucide-react";
 import { A__GET__RoomDetails } from "./_utils/action";
 import HeroSection from "./_utils/hero.section";
+import { A__GET__FavouriteRooms } from "@/app/branches/_utils/action";
+import { RoomCarousel } from "@/app/branches/[branch]/_utils/room-carousel.section";
 
 const Page = async ({
   params,
@@ -104,6 +105,8 @@ const Page = async ({
       text: "Parking",
     },
   ];
+
+  const favouriteRooms = await A__GET__FavouriteRooms(searchParams.branch);
   return (
     <div>
       <HeroSection params={params} />
@@ -153,7 +156,7 @@ const Page = async ({
 
         <div />
       </section>
-      <YouMayLike />
+      <RoomCarousel data={favouriteRooms?.data?.results} />
     </div>
   );
 };

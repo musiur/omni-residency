@@ -4,12 +4,18 @@ import Overview from "./_utils/overview.section";
 import { RoomCarousel } from "./_utils/room-carousel.section";
 import OurServices from "@/app/destination/_utils/our-services.section";
 import Facilities from "@/app/_utils/facilities.section";
-import { A__GET__BranchList, A__GET__FavouriteRooms, A__GET__NearbyTouristSpots } from "../_utils/action";
+import {
+  A__GET__BranchList,
+  A__GET__FavouriteRooms,
+  A__GET__NearbyTouristSpots,
+} from "../_utils/action";
 
-const Page = async ({ params }: {
+const Page = async ({
+  params,
+}: {
   params: {
-    branch: string,
-  }
+    branch: string;
+  };
 }) => {
   const result = await A__GET__BranchList();
 
