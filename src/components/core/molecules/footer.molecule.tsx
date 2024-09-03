@@ -85,7 +85,16 @@ const Footer = () => {
           })}
         </section>
         <div className="px-10 pb-10 text-center text-plain_gray">
-          Copyright @ {new Date().getFullYear()} All Right Reserved
+          Copyright @ {new Date().getFullYear()} All Right Reserved <br />
+          Developed by{" "}
+          <Link
+            href="https://rubytech.xyz"
+            target="_blank"
+            passHref={true}
+            className="underline hover:text-blue-500"
+          >
+            Rubytech
+          </Link>
         </div>
       </footer>
     </NavFooterVisibility>
