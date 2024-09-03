@@ -3,6 +3,7 @@ import { A__GET__OfferList } from "../deals-&-offers/_utils/action";
 
 const DealsOfTheDay = async () => {
   const result = await A__GET__OfferList();
+  console.log(result?.data);
   return (
     <section className="container">
       <div className="flex flex-col items-center justify-center gap-[8px] pb-[32px]">
