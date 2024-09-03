@@ -135,7 +135,7 @@ const BookingForm = ({ price, roomCount }: { price: string, roomCount:number }) 
         )}
         <div className="flex flex-col items-end justify-end">
           <p className="font-bold text-[12px] md:text-[16px]">Total {price}</p>
-          <p>Available rooms {roomCount || "N/A"}  </p>
+          {/* <p>Available rooms {roomCount || "N/A"}  </p> */}
         </div>
       </div>
     </div>
