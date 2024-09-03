@@ -109,13 +109,15 @@ const Page = async ({
 
   const favouriteRooms = await A__GET__FavouriteRooms(searchParams?.branch);
 
-  // console.log("room details", roomDetails)
   return (
     <div>
       <HeroSection params={params} />
       <section className="container grid grid-cols-1 md:grid-cols-2 gap-10">
         <RoomGalleryCarousel images={roomDetails?.gallery_set} />
-        <BookingForm price={roomDetails?.discounted_price} roomCount={roomDetails?.no_of_rooms || undefined} />
+        <BookingForm
+          price={roomDetails?.discounted_price}
+          roomCount={roomDetails?.no_of_rooms || undefined}
+        />
       </section>
       <section className="container grid grid-cols-1 md:grid-cols-2 gap-20">
         <div className="flex flex-col gap-4">
