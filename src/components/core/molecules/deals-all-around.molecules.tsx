@@ -49,7 +49,22 @@ export const DealsAllAround = ({ offers }: { offers: any }) => {
           discount_in_percentage,
           regular_price,
           discounted_price,
+          see_details,
         } = item;
+        // room/restaurant/gym name as path
+        const mastered_service_name = name?.toLowerCase()?.replaceAll(" ", "-");
+
+        // details redirect link maker
+        let mastered_redirect_link = `/booking-checkout/${mastered_service_name}?branch=${branch?.id}&id=${id}`;
+        if (see_details?.includes("gym")) {
+          mastered_redirect_link = `/gyms/request-membership?branch=${branch?.name?.toLowerCase()}&branchid=${
+            branch?.id
+          }&name=${mastered_service_name}&id=${id}`;
+        } else if (see_details?.includes("restaurant")) {
+          mastered_redirect_link = `/restaurants/table-booking?branch=${branch?.name?.toLowerCase()}&branchid=${
+            branch?.id
+          }&name=${mastered_service_name}&id=${id}`;
+        }
         return (
           <SwiperSlide
             key={`${id}-${index}`}
@@ -84,9 +99,7 @@ export const DealsAllAround = ({ offers }: { offers: any }) => {
                 </span>
                 /night
               </p>
-              <Link
-                href={`/booking-checkout/${name}?branch=${branch?.id}&id=${id}`}
-              >
+              <Link href={mastered_redirect_link}>
                 <Button className="w-full bg-muted_gray group-hover:bg-primary">
                   See Details
                 </Button>
