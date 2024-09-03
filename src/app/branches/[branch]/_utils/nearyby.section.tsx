@@ -3,12 +3,12 @@ import { MapPin } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-const NearbyPlaces = ({ data }
-  : {
-    data: any
-  }) => {
+const NearbyPlaces = ({ data }: { data: any }) => {
   return (
-    <section className="container flex flex-col-reverse min-[900px]:flex-row  items-center gap-[40px]" id="nearby-attractions">
+    <section
+      className="container flex flex-col-reverse min-[900px]:flex-row  items-start gap-[40px]"
+      id="nearby-attractions"
+    >
       <div className="flex-[0.4]">
         <h2 className="pt-[16px]">Nearby Attractions</h2>
         <p className="text-plain_gray py-[10px] text-[16px] md:text-[20px] leading-snug pb-[40px]">
@@ -16,13 +16,13 @@ const NearbyPlaces = ({ data }
           tercinta dan orang tersayang yang kamu sukai dan sayangi untuk
           selamanya di dunia ini
         </p>
-        <Link href="#">
+        {/* <Link href="#">
           <Button>View All</Button>
-        </Link>
+        </Link> */}
       </div>
       <div className="flex-[0.6] grid grid-cols-1 md:grid-cols-2 gap-[16px]">
-        {data?.map((item:any) => {
-          const { id, name,featured_image, distance_from_hotel_in_km } = item;
+        {data?.map((item: any) => {
+          const { id, name, featured_image, distance_from_hotel_in_km } = item;
           return (
             <div
               className="relative rounded-[10px] overflow-hidden min-h-[300px] flex items-end"
@@ -45,7 +45,9 @@ const NearbyPlaces = ({ data }
                     </span>
                   </p>
                 </div>
-                <p className="text-gray-100 font-light">Lorem ipsum dolor sit amet.</p>
+                <p className="text-gray-100 font-light">
+                  Lorem ipsum dolor sit amet.
+                </p>
               </div>
             </div>
           );
