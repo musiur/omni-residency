@@ -51,7 +51,6 @@ export const RoomCarousel = ({ data }: { data: any }) => {
           const mastered_service_name = room_category?.room_name
             ?.replaceAll(" ", "-")
             ?.toLowerCase();
-
           let mastered_redirect_link = `/booking-checkout/${mastered_service_name}?branch=${room_category?.branch?.id}&id=${room_category?.branch?.id}`;
           return (
             <SwiperSlide key={id} className="pb-16 group z-0 relative">

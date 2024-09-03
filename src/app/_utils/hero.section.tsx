@@ -5,8 +5,8 @@ import Link from "next/link";
 // import Image from "next/image";
 
 const HeroSection = async () => {
+  
   const result = await A__GET__BranchList();
-
   const branches: any[] =
     result?.data?.results?.map((item: any) => {
       return {

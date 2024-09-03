@@ -1,51 +1,93 @@
 "use client";
+import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import DatePicker from "./datepicker.molecule";
-import Selector from "./select.molecule";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { User } from "lucide-react";
+import InputX from "./input-x.molecule";
+import { useEffect } from "react";
+import AddToCart from "@/app/_utils/cart/add-to-cart";
 
 const BookingFormSchema = z.object({
-  checkin: z.date(),
-  checkout: z.date(),
-  guest: z.number(),
-  room: z.number(),
-  services: z.array(
-    z.object({
-      id: z.string().optional(),
-      label: z.string(),
-      value: z.string(),
-    })
-  ),
-  extraServices: z.array(
-    z.object({
-      id: z.string().optional(),
-      label: z.string(),
-      value: z.string(),
-      price: z.number(),
-    })
-  ),
+  branch: z.string(),
+  checkin: z.instanceof(Date),
+  checkout: z.instanceof(Date),
+  persons: z.string(),
 });
 
 type TBookingFormSchema = z.infer<typeof BookingFormSchema>;
 
-const BookingForm = () => {
+const BookingForm = ({ price, roomCount }: { price: string, roomCount:number }) => {
+  const searchParams = useSearchParams();
+  const timeNow = new Date();
+
+  const roomID = searchParams.get("id");
+  const parsedRoomID = roomID ? parseInt(roomID, 10) : undefined;
+
+  // Function to get initial values
+  const getInitialValues = (): TBookingFormSchema => {
+    let storedSearch: Partial<{
+      branch: string;
+      checkin: string;
+      checkout: string;
+      persons: string;
+    }> = {};
+
+    // Try to get values from localStorage
+    if (typeof window !== 'undefined') {
+      const storedData = localStorage.getItem("search");
+      if (storedData) {
+        try {
+          storedSearch = JSON.parse(storedData);
+        } catch (error) {
+          console.error("Error parsing stored search data:", error);
+        }
+      }
+    }
+
+    // If branch is not in localStorage, get it from URL
+    if (!storedSearch.branch) {
+      const branchFromUrl = searchParams.get("branch");
+      if (branchFromUrl) {
+        storedSearch.branch = branchFromUrl;
+      }
+    }
+
+    return {
+      branch: storedSearch.branch || '1',
+      checkin: storedSearch.checkin
+        ? new Date(storedSearch.checkin)
+        : timeNow,
+      checkout: storedSearch.checkout
+        ? new Date(storedSearch.checkout)
+        : timeNow,
+      persons: storedSearch.persons || "1",
+    };
+  };
+
   const form = useForm<TBookingFormSchema>({
     resolver: zodResolver(BookingFormSchema),
-    defaultValues: {},
+    defaultValues: getInitialValues(),
   });
+
+  // Watch for changes in form values
+  const watchedValues = form.watch();
+
+  // Update localStorage when form values change
+  useEffect(() => {
+    const updateLocalStorage = () => {
+      const searchData = {
+        ...watchedValues,
+        checkin: watchedValues.checkin.toISOString(),
+        checkout: watchedValues.checkout.toISOString(),
+      };
+      localStorage.setItem("search", JSON.stringify(searchData));
+    };
+
+    updateLocalStorage();
+  }, [watchedValues]);
+
   return (
     <div className="border p-4 md:p-8 rounded-[10px] flex flex-col items-center justify-between gap-8">
       <div className="grid grid-cols-1 gap-8">
@@ -58,95 +100,42 @@ const BookingForm = () => {
           <form>
             <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8">
               <div className="grid grid-cols-1 gap-[16px]">
-                <label className="text-muted_gray">Check In</label>
-                <DatePicker />
+                <InputX
+                  form={form}
+                  name="checkin"
+                  label="Check in"
+                  type="date" />
               </div>
               <div className="grid grid-cols-1 gap-[16px]">
-                <label className="text-muted_gray">Check Out</label>
-                <DatePicker />
+                <InputX
+                  form={form}
+                  name="checkout"
+                  label="Check out"
+                  type="date"
+                />
               </div>
               <div className="grid grid-cols-1 gap-[16px]">
-                <label className="text-muted_gray">Guests</label>
-                <Selector />
-              </div>
-              <div className="grid grid-cols-1 gap-[16px]">
-                <label className="text-muted_gray">Rooms</label>
-                <Select>
-                  <SelectTrigger className="w-full">
-                    <div className="flex items-center gap-[8px]">
-                      <User className="w-4 h-4 stroke-plain_gray" />
-                      <SelectValue placeholder="Select Room Number" />
-                    </div>
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectLabel>Rooms</SelectLabel>
-                      {[1, 2, 3, 4, 5, 6].map((num) => {
-                        return (
-                          <SelectItem value={num.toString()} key={num}>
-                            {num}
-                          </SelectItem>
-                        );
-                      })}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="grid grid-cols-1 gap-[16px]">
-                <label className="text-muted_gray">Services</label>
-                <Select>
-                  <SelectTrigger className="w-full">
-                    <div className="flex items-center gap-[8px]">
-                      <User className="w-4 h-4 stroke-plain_gray" />
-                      <SelectValue placeholder="Select services" />
-                    </div>
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectLabel>Services</SelectLabel>
-                      {[1, 2, 3, 4, 5, 6].map((num) => {
-                        return (
-                          <SelectItem value={num.toString()} key={num}>
-                            {num}
-                          </SelectItem>
-                        );
-                      })}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="grid grid-cols-1 gap-[16px]">
-                <label className="text-muted_gray opacity-0">Services</label>
-                <Select>
-                  <SelectTrigger className="w-full">
-                    <div className="flex items-center gap-[8px]">
-                      <User className="w-4 h-4 stroke-plain_gray" />
-                      <SelectValue placeholder="Select services" />
-                    </div>
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectLabel>Services</SelectLabel>
-                      {[1, 2, 3, 4, 5, 6].map((num) => {
-                        return (
-                          <SelectItem value={num.toString()} key={num}>
-                            {num}
-                          </SelectItem>
-                        );
-                      })}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
+                <InputX
+                  form={form}
+                  name="persons"
+                  label="Persons"
+                  type="select"
+                  options={Data__PersonTypes}
+                />
               </div>
             </div>
           </form>
         </Form>
       </div>
       <div className="w-full flex items-center justify-between gap-4 bg-primary/20 p-2 md:p-4 rounded-[10px]">
-        <Button>Book now</Button>
+        {parsedRoomID !== undefined ? (
+          <AddToCart data={{ room_category_id: parsedRoomID, quantity: 1 }} />
+        ) : (
+          <Button>Book now</Button>
+        )}
         <div className="flex flex-col items-end justify-end">
-          <p className="font-bold text-[12px] md:text-[16px]">Total $127</p>
-          <p>Available rooms 3</p>
+          <p className="font-bold text-[12px] md:text-[16px]">Total {price}</p>
+          <p>Available rooms {roomCount || "N/A"}  </p>
         </div>
       </div>
     </div>
@@ -154,3 +143,12 @@ const BookingForm = () => {
 };
 
 export default BookingForm;
+
+const Data__PersonTypes = [
+  { label: "1 Adult", value: "1" },
+  { label: "2 Adult", value: "2" },
+  { label: "3 Adult", value: "3" },
+  { label: "4 Adult", value: "4" },
+  { label: "5 Adult", value: "5" },
+  { label: "6 Adult", value: "6" },
+];
