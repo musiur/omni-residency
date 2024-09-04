@@ -54,7 +54,7 @@ const News = () => {
             </CardFooter>
           </Card>
         ))} */}
-        Comming soon...
+        Coming soon...
       </div>
     </section>
   );

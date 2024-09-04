@@ -84,7 +84,7 @@ const Hotels = () => {
             the sea.
           </p>
           <p className="text-[16px] md:text-[20px] font-bold text-primary">
-            COMMING SOON!
+            COMING SOON!
           </p>
         </div>
         <div className="flex-1 relative rounded-[10px] overflow-hidden min-h-[300px]">

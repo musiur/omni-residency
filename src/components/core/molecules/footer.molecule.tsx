@@ -85,8 +85,8 @@ const Footer = () => {
           })}
         </section>
         <div className="px-10 pb-10 text-center text-plain_gray">
-          Copyright @ {new Date().getFullYear()} All Right Reserved <br />
-          Developed by{" "}
+          Copyright @ {new Date().getFullYear()} All Right Reserved & Developed
+          by
           <Link
             href="https://rubytech.xyz"
             target="_blank"
@@ -161,16 +161,16 @@ const Links = [
       {
         id: 1,
         text: "Baridhara",
-        link: "",
+        link: "/branches/baridhara",
       },
       {
         id: 2,
         text: "Banani",
-        link: "",
+        link: "/branches/banani",
       },
       {
         id: 3,
-        text: "Iconic",
+        text: "Iconic: Coming soon.",
         link: "",
       },
     ],
