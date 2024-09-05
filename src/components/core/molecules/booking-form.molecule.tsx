@@ -1,13 +1,12 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import InputX from "./input-x.molecule";
-import { useEffect } from "react";
 import AddToCart from "@/app/_utils/cart/add-to-cart";
+import { useEffect, useState } from "react";
 
 const BookingFormSchema = z.object({
   branch: z.string(),
@@ -18,9 +17,16 @@ const BookingFormSchema = z.object({
 
 type TBookingFormSchema = z.infer<typeof BookingFormSchema>;
 
-const BookingForm = ({ price, roomCount }: { price: string, roomCount:number }) => {
+const BookingForm = ({ price }: { price: string }) => {
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   const searchParams = useSearchParams();
   const timeNow = new Date();
+  const tomorrow = new Date(timeNow);
+  tomorrow.setDate(timeNow.getDate() + 1);
 
   const roomID = searchParams.get("id");
   const parsedRoomID = roomID ? parseInt(roomID, 10) : undefined;
@@ -35,7 +41,7 @@ const BookingForm = ({ price, roomCount }: { price: string, roomCount:number }) 
     }> = {};
 
     // Try to get values from localStorage
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       const storedData = localStorage.getItem("search");
       if (storedData) {
         try {
@@ -55,13 +61,11 @@ const BookingForm = ({ price, roomCount }: { price: string, roomCount:number }) 
     }
 
     return {
-      branch: storedSearch.branch || '1',
-      checkin: storedSearch.checkin
-        ? new Date(storedSearch.checkin)
-        : timeNow,
+      branch: storedSearch.branch || "1",
+      checkin: storedSearch.checkin ? new Date(storedSearch.checkin) : timeNow,
       checkout: storedSearch.checkout
         ? new Date(storedSearch.checkout)
-        : timeNow,
+        : tomorrow,
       persons: storedSearch.persons || "1",
     };
   };
@@ -71,70 +75,75 @@ const BookingForm = ({ price, roomCount }: { price: string, roomCount:number }) 
     defaultValues: getInitialValues(),
   });
 
-  // Watch for changes in form values
-  const watchedValues = form.watch();
-
   // Update localStorage when form values change
-  useEffect(() => {
-    const updateLocalStorage = () => {
-      const searchData = {
-        ...watchedValues,
-        checkin: watchedValues.checkin.toISOString(),
-        checkout: watchedValues.checkout.toISOString(),
-      };
-      localStorage.setItem("search", JSON.stringify(searchData));
+  const updateLocalStorage = () => {
+    const formValues = form.getValues();
+    const searchData = {
+      ...formValues,
+      checkin: formValues.checkin.toISOString(),
+      checkout: formValues.checkout.toISOString(),
     };
+    localStorage.setItem("search", JSON.stringify(searchData));
+  };
 
-    updateLocalStorage();
-  }, [watchedValues]);
+  if (isClient) {
+    form.watch(() => {
+      if (typeof window !== "undefined") {
+        updateLocalStorage();
+      }
+    });
+  }
 
   return (
-    <div className="border p-4 md:p-8 rounded-[10px] flex flex-col items-center justify-between gap-8">
-      <div className="grid grid-cols-1 gap-8">
+    <div className="border p-4 md:p-8 rounded-[10px] w-full flex flex-col items-center justify-between gap-8">
+      <div className="grid grid-cols-1 gap-8 w-full">
         <div className="w-full">
           <p className="inline-flex text-[16px] md:text-[20px] font-semibold text-primary pb-2 border-b-2 border-primary">
             Booking
           </p>
         </div>
-        <Form {...form}>
-          <form>
-            <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <div className="grid grid-cols-1 gap-[16px]">
-                <InputX
-                  form={form}
-                  name="checkin"
-                  label="Check in"
-                  type="date" />
+        {isClient ? (
+          <Form {...form}>
+            <form>
+              <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 gap-[16px]">
+                  <InputX
+                    form={form}
+                    name="checkin"
+                    label="Check in"
+                    type="date"
+                  />
+                </div>
+                <div className="grid grid-cols-1 gap-[16px]">
+                  <InputX
+                    form={form}
+                    name="checkout"
+                    label="Check out"
+                    type="date"
+                  />
+                </div>
+                <div className="grid grid-cols-1 gap-[16px]">
+                  <InputX
+                    form={form}
+                    name="persons"
+                    label="Persons"
+                    type="select"
+                    options={Data__PersonTypes}
+                  />
+                </div>
               </div>
-              <div className="grid grid-cols-1 gap-[16px]">
-                <InputX
-                  form={form}
-                  name="checkout"
-                  label="Check out"
-                  type="date"
-                />
-              </div>
-              <div className="grid grid-cols-1 gap-[16px]">
-                <InputX
-                  form={form}
-                  name="persons"
-                  label="Persons"
-                  type="select"
-                  options={Data__PersonTypes}
-                />
-              </div>
-            </div>
-          </form>
-        </Form>
+            </form>
+          </Form>
+        ) : null}
       </div>
       <div className="w-full flex items-center justify-between gap-4 bg-primary/20 p-2 md:p-4 rounded-[10px]">
         {parsedRoomID !== undefined ? (
           <AddToCart data={{ room_category_id: parsedRoomID, quantity: 1 }} />
-        ) : (
-          <Button>Book now</Button>
-        )}
+        ) : null}
         <div className="flex flex-col items-end justify-end">
-          <p className="font-bold text-[12px] md:text-[16px]">Total {price}</p>
+          <p className="font-bold text-[12px] md:text-[16px]">
+            BDT{price} /night
+          </p>
           {/* <p>Available rooms {roomCount || "N/A"}  </p> */}
         </div>
       </div>

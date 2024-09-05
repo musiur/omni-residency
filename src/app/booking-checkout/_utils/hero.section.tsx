@@ -9,7 +9,7 @@ const HeroSection = () => {
         </div>
       </section>
       <Image
-        src="/images/home/hero-background.png"
+        src="/close.jpg"
         alt="hero-background-image"
         fill
         quality={100}

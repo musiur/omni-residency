@@ -33,7 +33,7 @@ const HeroSection = async () => {
         </div>
       </section>
       <Image
-        src="/images/home/branch-hero.jpg"
+        src="/close.jpg"
         alt="hero-background-image"
         fill
         quality={100}

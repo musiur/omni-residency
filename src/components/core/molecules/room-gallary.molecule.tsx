@@ -15,6 +15,12 @@ import Image from "next/image";
 
 export const RoomGalleryCarousel = ({ images }: { images: any[] }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
+  // Generate unique IDs for Swiper Slides for accessibility
+  function generateUniqueId() {
+    const secondsSinceEpoch = Math.floor(Date.now() / 1000); // Convert milliseconds to seconds
+    return `id-${secondsSinceEpoch}`;
+  }
   return (
     <div className="rounded-[10px] overflow-hidden">
       <Swiper
@@ -25,10 +31,10 @@ export const RoomGalleryCarousel = ({ images }: { images: any[] }) => {
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper2"
       >
-        {images?.map((item, index: number) => {
+        {images?.map((item, index) => {
           return (
             <SwiperSlide
-              key={index}
+              key={generateUniqueId()}
               className="pb-16 group z-0 relative min-w-[300px]"
             >
               <div
@@ -67,7 +73,7 @@ export const RoomGalleryCarousel = ({ images }: { images: any[] }) => {
           const { id, image } = item;
           return (
             <SwiperSlide
-              key={id}
+              key={generateUniqueId()}
               className="pb-16 group z-0 relative max-w-[300px] cursor-pointer"
             >
               <div

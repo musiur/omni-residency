@@ -58,6 +58,7 @@ const InputX = ({
   placeholder = "",
   options = [{ label: "Test", value: "test" }],
   required = false,
+  disabled = false,
 }: {
   form: any;
   name: string;
@@ -66,6 +67,7 @@ const InputX = ({
   placeholder?: string;
   options?: T__SelectOption[];
   required?: boolean;
+  disabled?: boolean;
 }) => {
   /**
    * State to manage showing password fields input as text or, password
@@ -88,10 +90,17 @@ const InputX = ({
           e.target.value && field.onChange(parseInt(e.target.value));
         }}
         type={type}
+        disabled={disabled}
       />
     ),
     textarea: (field: any) => (
-      <Textarea placeholder={placeholder} {...field} type={type} rows="8" />
+      <Textarea
+        disabled={disabled}
+        placeholder={placeholder}
+        {...field}
+        type={type}
+        rows="8"
+      />
     ),
     password: (field: any) => (
       <div className="relative">
@@ -103,6 +112,7 @@ const InputX = ({
             "text-4xl caret-white": !showPass,
             "text-base": showPass,
           })}
+          disabled={disabled}
         />
         <div
           className="inline-flex w-8 h-8 items-center justify-center absolute top-[8px] right-2"
@@ -131,7 +141,11 @@ const InputX = ({
       </div>
     ),
     select: (field: any) => (
-      <Select onValueChange={field.onChange} defaultValue={field.value}>
+      <Select
+        onValueChange={field.onChange}
+        defaultValue={field.value}
+        disabled={disabled}
+      >
         <FormControl>
           <SelectTrigger>
             <SelectValue placeholder={placeholder} />

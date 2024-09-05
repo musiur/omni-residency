@@ -31,6 +31,9 @@ const SearchBox = ({
   defaultValues?: any;
 }) => {
   const timeNow = new Date();
+  const tomorrow = new Date(timeNow);
+  tomorrow.setDate(timeNow.getDate() + 1);
+
   const router = useRouter();
 
   const form = useForm<Type___Search__SearchForm>({
@@ -46,7 +49,7 @@ const SearchBox = ({
         : timeNow,
       checkout: defaultValues?.checkout
         ? Utils___DateExtracter(defaultValues.checkout)
-        : timeNow,
+        : tomorrow,
       persons: defaultValues?.persons || "1",
     },
   });
