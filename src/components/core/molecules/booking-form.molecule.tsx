@@ -122,7 +122,7 @@ const BookingForm = ({ price }: { price: string }) => {
                     type="date"
                   />
                 </div>
-                <div className="grid grid-cols-1 gap-[16px]">
+                {/* <div className="grid grid-cols-1 gap-[16px]">
                   <InputX
                     form={form}
                     name="persons"
@@ -130,7 +130,7 @@ const BookingForm = ({ price }: { price: string }) => {
                     type="select"
                     options={Data__PersonTypes}
                   />
-                </div>
+                </div> */}
               </div>
             </form>
           </Form>
