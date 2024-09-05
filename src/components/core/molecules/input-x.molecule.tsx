@@ -108,10 +108,6 @@ const InputX = ({
           placeholder={placeholder}
           {...field}
           type={!showPass ? type : "text"}
-          className={clsx({
-            "text-4xl caret-white": !showPass,
-            "text-base": showPass,
-          })}
           disabled={disabled}
         />
         <div
