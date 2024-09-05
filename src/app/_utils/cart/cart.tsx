@@ -42,9 +42,8 @@ const Cart = () => {
                       key={id}
                       className="relative flex items-center justify-start gap-2 group"
                     >
-                      <div className="absolute top-0 right-0 z-[-1] group-hover:z-50">
+                      <div className="absolute top-0 right-0 z-50">
                         <div className="rounded-md bg-white/50 backdrop-blur flex items-center justify-between p-1 border">
-                          {/* <QuantityCalculator /> */}
                           <Trash2Icon
                             className="p-[4px] border rounded-md border-gray-300 hover:stroke-red-600 hover:border-red-400 cursor-pointer"
                             onClick={() =>
