@@ -20,3 +20,22 @@ export const Utils___DateExtracter = (dateString: string) => {
   const convertedDate = new Date(year, month - 1, day);
   return convertedDate
 }
+
+export function Utils___CalculateBookingPrice(checkin: Date, checkout: Date, costPerNight: number): number {
+  // const checkinDate = new Date(checkin);
+  // const checkoutDate = new Date(checkout);
+  const checkinDate = checkin;
+  const checkoutDate = checkout;
+
+  // Calculate the difference in time (in milliseconds)
+  const timeDifference = checkoutDate.getTime() - checkinDate.getTime();
+
+  // Convert time difference from milliseconds to days
+  const daysDifference = timeDifference / (1000 * 3600 * 24);
+
+  // Round up for partial days
+  const numberOfDays = Math.ceil(daysDifference);
+
+  // Calculate total cost
+  return numberOfDays * costPerNight;
+}

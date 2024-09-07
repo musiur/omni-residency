@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { useSearchParams } from "next/navigation";
 import { Form } from "@/components/ui/form";
@@ -7,6 +8,7 @@ import { z } from "zod";
 import InputX from "./input-x.molecule";
 import AddToCart from "@/app/_utils/cart/add-to-cart";
 import { useEffect, useState } from "react";
+import { Utils___CalculateBookingPrice } from "@/lib/utils";
 
 const BookingFormSchema = z.object({
   branch: z.string(),
@@ -22,6 +24,8 @@ const BookingForm = ({ price }: { price: string }) => {
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  const [calculatedPrice, setCalculatedPrice] = useState(parseFloat(price));
 
   const searchParams = useSearchParams();
   const timeNow = new Date();
@@ -86,13 +90,30 @@ const BookingForm = ({ price }: { price: string }) => {
     localStorage.setItem("search", JSON.stringify(searchData));
   };
 
+  const CalculatePrice = () => {
+    setCalculatedPrice(
+      Utils___CalculateBookingPrice(
+        form.getValues("checkin"),
+        form.getValues("checkout"),
+        parseFloat(price)
+      )
+    );
+  };
+
   if (isClient) {
     form.watch(() => {
       if (typeof window !== "undefined") {
         updateLocalStorage();
+        CalculatePrice();
       }
     });
   }
+
+  useEffect(() => {
+    if (isClient) {
+      CalculatePrice();
+    }
+  }, [isClient]);
 
   return (
     <div className="border p-4 md:p-8 rounded-[10px] w-full flex flex-col items-center justify-between gap-8">
@@ -142,7 +163,8 @@ const BookingForm = ({ price }: { price: string }) => {
         ) : null}
         <div className="flex flex-col items-end justify-end">
           <p className="font-bold text-[12px] md:text-[16px]">
-            BDT{price} /night
+            BDT&nbsp;
+            {calculatedPrice}&nbsp; /night
           </p>
           {/* <p>Available rooms {roomCount || "N/A"}  </p> */}
         </div>
