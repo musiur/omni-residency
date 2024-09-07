@@ -70,7 +70,7 @@ const Cart = () => {
                         <p>
                           BDT <s className="text-gray-400">{regular_price}</s>{" "}
                           {discounted_price}
-                          &nbsp;x&nbsp;
+                          &nbsp;/night
                           {/* <span className="font-semibold">{quantity}</span> */}
                         </p>
                       </div>

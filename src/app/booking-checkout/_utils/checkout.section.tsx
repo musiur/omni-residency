@@ -41,7 +41,7 @@ const CheckoutSection = () => {
                       <p>
                         BDT <s className="text-gray-400">{regular_price}</s>{" "}
                         {discounted_price}
-                        &nbsp;x&nbsp;
+                        &nbsp;/night
                         {/* <span className="font-semibold">{quantity}</span> */}
                       </p>
                       <div className="rounded-md bg-white/50 backdrop-blur w-full flex items-center justify-end p-1">
