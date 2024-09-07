@@ -70,9 +70,10 @@ const Cart = () => {
                         <p>
                           BDT <s className="text-gray-400">{regular_price}</s>{" "}
                           {discounted_price}
-                          &nbsp;/night
-                          {/* <span className="font-semibold">{quantity}</span> */}
+                          &nbsp;x&nbsp;
+                          <span className="font-semibold">{quantity}</span>
                         </p>
+                        <QuantityCalculator itemId={id} quantity={quantity} />
                       </div>
                     </div>
                   );
