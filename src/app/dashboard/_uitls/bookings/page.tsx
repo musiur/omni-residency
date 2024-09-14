@@ -35,9 +35,12 @@ const Bookings = async () => {
       payment_status,
     };
   });
+  console.log(result)
   return (
     <div>
-      <DataTable data={data} columns={Columns___Booking} />
+      {
+        data ? <DataTable data={data} columns={Columns___Booking} />: null
+      }
     </div>
   );
 };
