@@ -8,7 +8,7 @@ const TableBookingHeroSection = ({
 }) => {
   const { branch, name } = details;
   return (
-    <div className="bg-black/60 pt-[127px] relative pb-[100px]">
+    <div className="bg-black/80 pt-[127px] relative pb-[100px]">
       <section className="flex flex-col items-center justify-center gap-[16px]">
         <div className="max-w-[649px] [&>*]:text-white [&>*]:text-center max-auto flex flex-col items-center justify-center gap-[24px] px-[10px]">
           <h1>Make a reservation</h1>

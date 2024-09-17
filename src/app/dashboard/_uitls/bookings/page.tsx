@@ -35,7 +35,7 @@ const Bookings = async () => {
       payment_status,
     };
   });
-  console.log(result)
+  
   return (
     <div>
       {

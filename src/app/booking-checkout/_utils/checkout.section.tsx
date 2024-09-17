@@ -66,7 +66,7 @@ const CheckoutSection = () => {
           </div>
         ) : (
           <div>
-            No items added! <Link href="/">Select your room</Link>
+            No items added! <Link href="/" className="text-primary hover:underline">Select your room</Link>
           </div>
         )}
       </div>

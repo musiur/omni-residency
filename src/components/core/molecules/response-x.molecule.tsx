@@ -8,7 +8,7 @@ const ResponseX = ({
   result: any;
 }) => {
   const { success, message, detail, errors } = result;
-  console.log(errors);
+  
   toast({
     variant: success ? "default" : "destructive",
     title,

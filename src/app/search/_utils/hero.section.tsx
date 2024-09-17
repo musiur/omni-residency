@@ -17,7 +17,7 @@ const HeroSection = async ({ defaultValues }: { defaultValues: any }) => {
       ?.nick_name || null;
 
   return (
-    <div className="pt-[86px] min-[1120px]:pt-[127px] pb-[80px] relative bg-black/60">
+    <div className="pt-[86px] min-[1120px]:pt-[127px] pb-[80px] relative bg-black/80">
       <section className=" flex flex-col items-center justify-center gap-[16px]">
         <div className="max-w-[649px] [&>*]:text-white [&>*]:text-center max-auto flex flex-col items-center justify-center gap-[24px] px-[10px]">
           <h1>Searched for Rooms</h1>

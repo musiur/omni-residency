@@ -117,7 +117,7 @@ const GymOverview = ({
           </div>
         </div>
         <Link
-          href={`/gym/request-membership?branch=${branch?.name?.toLowerCase()}&branchid=${
+          href={`/gyms/request-membership?branch=${branch?.name?.toLowerCase()}&branchid=${
             branch?.id
           }&name=${name_as_path}&id=${id}`}
         >

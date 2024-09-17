@@ -3,7 +3,7 @@ import { ChevronRight } from "lucide-react";
 
 const HeroSection = ({ params }: { params: { slug: string } }) => {
   return (
-    <div className="bg-black/20 pt-[86px] min-[1120px]:pt-[127px] pb-[100px] relative">
+    <div className="bg-black/80 pt-[86px] min-[1120px]:pt-[127px] pb-[100px] relative">
       <section className="flex flex-col items-center justify-center gap-[16px]">
         <div className="max-w-[649px] [&>*]:text-white [&>*]:text-center max-auto flex flex-col items-center justify-center gap-[24px] px-[10px]">
           <h1 className="capitalize">
