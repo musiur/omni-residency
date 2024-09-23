@@ -48,6 +48,7 @@ type CartContextType = {
   updateCart: (itemId: number, quantity: number) => void;
   removeFromCart: (itemId: number) => void;
   clearCart: () => void;
+  loading: boolean
 };
 
 // Create the context
@@ -59,6 +60,7 @@ type CartProviderProps = {
 
 export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [cart, setCart] = useState<CartItem | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     // Load cart from local storage on mount
@@ -78,8 +80,10 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   }, [cart]);
 
   const createCart = async () => {
+    setLoading(true)
     // Call your API to create a new cart
     const result = await A__POST__CreateCart();
+    setLoading(false)
     const newCart = result?.data;
     if (newCart) setCart(newCart);
   };
@@ -87,7 +91,9 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const deleteCart = async () => {
     // Call your API to delete the cart
     if (cart?.id) {
+      setLoading(true)
       const result = await A__DELETE__Cart(cart.id);
+      setLoading(false)
       if (result?.success) {
         setCart(null);
         localStorage.removeItem("cart");
@@ -101,6 +107,8 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
       const alreadyExists = cart?.items?.find(
         (item: any) => item?.room_category?.id === payload?.room_category_id
       );
+
+      setLoading(true)
       const result = alreadyExists
         ? await A__DELETE__CartItem(cart.id, alreadyExists?.id)
         : await A__POST__AddToCart(cart.id, payload);
@@ -111,12 +119,14 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
           setCart(cartFromServer.data);
         }
       }
+      setLoading(false)
     }
   };
 
   const updateCart = async (itemId: any, quantity: number) => {
     // Call your API to update item quantity in the cart
     if (cart) {
+      setLoading(true)
       const result = await A__PATCH__CartItemRoomQuantity(
         cart.id,
         itemId,
@@ -129,12 +139,15 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
           setCart(cartFromServer.data);
         }
       }
+
+      setLoading(false)
     }
   };
 
   const removeFromCart = async (itemId: number) => {
     // Call your API to remove item from the cart
     if (cart) {
+      setLoading(true)
       const result = await A__DELETE__CartItem(cart.id, itemId);
 
       if (result?.success) {
@@ -143,6 +156,8 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
           setCart(cartFromServer.data);
         }
       }
+
+      setLoading(false)
     }
   };
 
@@ -161,6 +176,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
         updateCart,
         removeFromCart,
         clearCart,
+        loading
       }}
     >
       {children}

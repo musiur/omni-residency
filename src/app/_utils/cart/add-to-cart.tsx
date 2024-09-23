@@ -15,15 +15,15 @@ const AddToCart = ({
     quantity: number;
   };
 }) => {
-  const { cart, addToCart } = useCartContext();
+  const { cart, addToCart, loading } = useCartContext();
 
   return (
     <Button onClick={() => addToCart(data)}>
       {cart?.items?.find(
         (item: any) => item?.room_category?.id === data?.room_category_id
       )
-        ? "Remove from cart"
-        : "Add to cart"}
+        ? loading ? "Removing..." : "Remove from cart"
+        : loading ? "Adding..." : "Add to cart"}
     </Button>
   );
 };
