@@ -18,7 +18,7 @@ const AddToCart = ({
   const { cart, addToCart, loading } = useCartContext();
 
   return (
-    <Button onClick={() => addToCart(data)}>
+    <Button onClick={() => addToCart(data)} disabled={loading}>
       {cart?.items?.find(
         (item: any) => item?.room_category?.id === data?.room_category_id
       )
