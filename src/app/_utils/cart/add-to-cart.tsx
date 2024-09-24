@@ -16,14 +16,15 @@ const AddToCart = ({
   };
 }) => {
   const { cart, addToCart, loading } = useCartContext();
+  const uniqueToken = "addToCart" + data?.room_category_id.toString();
 
   return (
-    <Button onClick={() => addToCart(data)} disabled={loading}>
+    <Button onClick={() => addToCart(data, uniqueToken)} disabled={loading.status}>
       {cart?.items?.find(
         (item: any) => item?.room_category?.id === data?.room_category_id
       )
-        ? loading ? "Removing..." : "Remove from cart"
-        : loading ? "Adding..." : "Add to cart"}
+        ? loading.status && loading.token === uniqueToken ? "Removing..." : "Remove from cart"
+        : loading.status && loading.token === uniqueToken ? "Adding..." : "Add to cart"}
     </Button>
   );
 };

@@ -4,6 +4,7 @@ import {
   A__DELETE__Cart,
   A__DELETE__CartItem,
   A__GET__Cart,
+  A__PATCH__Cart,
   A__PATCH__CartItemRoomQuantity,
   A__POST__AddToCart,
   A__POST__CreateCart,
@@ -30,6 +31,7 @@ export type CartItemDetail = {
   room_category: RoomCategory;
   quantity: number;
   total_price: number;
+  days: number
 };
 
 export type CartItem = {
@@ -38,17 +40,24 @@ export type CartItem = {
   quantity: number;
   total_price: number;
   created_at: string;
+  check_in: string;
+  check_out: string
 };
 
 type CartContextType = {
   cart: CartItem | null;
-  createCart: () => void;
-  deleteCart: () => void;
-  addToCart: (item: T__CartItemAdder) => void;
-  updateCart: (itemId: number, quantity: number) => void;
-  removeFromCart: (itemId: number) => void;
+  createCart: (token?: string) => void;
+  deleteCart: (token?: string) => void;
+  addToCart: (item: T__CartItemAdder, token?: string) => void;
+  updateCartItem: (itemId: number, quantity: number, token?: string) => void;
+  removeFromCart: (itemId: number, token?: string) => void;
+  updateCart: (check_in: string, check_out: string) => void;
   clearCart: () => void;
-  loading: boolean
+  loading: {
+    token: string;
+    status: boolean;
+  };
+  setLoading: Function
 };
 
 // Create the context
@@ -60,7 +69,10 @@ type CartProviderProps = {
 
 export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [cart, setCart] = useState<CartItem | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<{ token: string, status: boolean }>({
+    token: "na",
+    status: false
+  });
 
   useEffect(() => {
     // Load cart from local storage on mount
@@ -79,21 +91,50 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     }
   }, [cart]);
 
-  const createCart = async () => {
-    setLoading(true)
+  const createCart = async (token?: string) => {
+    setLoading({
+      token: token || "createCart",
+      status: true
+    })
     // Call your API to create a new cart
     const result = await A__POST__CreateCart();
-    setLoading(false)
+    setLoading({
+      token: "createCart",
+      status: false
+    })
     const newCart = result?.data;
     if (newCart) setCart(newCart);
   };
 
-  const deleteCart = async () => {
+  const updateCart = async (check_in: string, check_out: string) => {
+    if (cart) {
+      setLoading({
+        token: "updateCart",
+        status: true
+      })
+      const result = await A__PATCH__Cart(cart.id, check_in, check_out);
+      setLoading({
+        token: "updateCart",
+        status: false
+      })
+      if (result?.success) {
+        setCart(result?.data);
+      }
+    }
+  }
+
+  const deleteCart = async (token?: string) => {
     // Call your API to delete the cart
     if (cart?.id) {
-      setLoading(true)
+      setLoading({
+        token: token || "deleteCart",
+        status: false
+      })
       const result = await A__DELETE__Cart(cart.id);
-      setLoading(false)
+      setLoading({
+        token: "na",
+        status: false
+      })
       if (result?.success) {
         setCart(null);
         localStorage.removeItem("cart");
@@ -101,14 +142,17 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     }
   };
 
-  const addToCart = async (payload: T__CartItemAdder) => {
+  const addToCart = async (payload: T__CartItemAdder, token?: string) => {
     // Call your API to add item to the cart
     if (cart) {
       const alreadyExists = cart?.items?.find(
         (item: any) => item?.room_category?.id === payload?.room_category_id
       );
 
-      setLoading(true)
+      setLoading({
+        token: token || "addToCart",
+        status: true
+      })
       const result = alreadyExists
         ? await A__DELETE__CartItem(cart.id, alreadyExists?.id)
         : await A__POST__AddToCart(cart.id, payload);
@@ -119,14 +163,20 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
           setCart(cartFromServer.data);
         }
       }
-      setLoading(false)
+      setLoading({
+        token: "na",
+        status: false
+      })
     }
   };
 
-  const updateCart = async (itemId: any, quantity: number) => {
+  const updateCartItem = async (itemId: any, quantity: number, token?: string) => {
     // Call your API to update item quantity in the cart
     if (cart) {
-      setLoading(true)
+      setLoading({
+        token: token || "updateCartItem",
+        status: true
+      })
       const result = await A__PATCH__CartItemRoomQuantity(
         cart.id,
         itemId,
@@ -140,14 +190,20 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
         }
       }
 
-      setLoading(false)
+      setLoading({
+        token: "na",
+        status: false
+      })
     }
   };
 
   const removeFromCart = async (itemId: number) => {
     // Call your API to remove item from the cart
     if (cart) {
-      setLoading(true)
+      setLoading({
+        token: "removeFromCart",
+        status: true
+      })
       const result = await A__DELETE__CartItem(cart.id, itemId);
 
       if (result?.success) {
@@ -157,7 +213,10 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
         }
       }
 
-      setLoading(false)
+      setLoading({
+        token: "na",
+        status: false
+      })
     }
   };
 
@@ -173,10 +232,12 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
         createCart,
         deleteCart,
         addToCart,
-        updateCart,
+        updateCartItem,
         removeFromCart,
         clearCart,
-        loading
+        updateCart,
+        loading,
+        setLoading
       }}
     >
       {children}

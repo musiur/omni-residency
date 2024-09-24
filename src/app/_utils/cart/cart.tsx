@@ -1,6 +1,6 @@
 "use client";
 
-import { ShoppingBagIcon, Trash2Icon } from "lucide-react";
+import { ShoppingBagIcon, Sun, Trash2Icon } from "lucide-react";
 import {
   Popover,
   PopoverContent,
@@ -13,7 +13,8 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 const Cart = () => {
-  const { cart, addToCart } = useCartContext();
+  const { cart, addToCart, loading } = useCartContext();
+  console.log(cart)
 
   return (
     <div className="w-16 h-16 rounded-full bg-white shadow-2xl border border-primary fixed bottom-4 right-4 z-50 flex items-center justify-center">
@@ -26,7 +27,7 @@ const Cart = () => {
             </span>
           </div>
         </PopoverTrigger>
-        <PopoverContent className="mr-3 min-w-[280px]">
+        <PopoverContent className="mr-3 min-w-[280px] shadow-2xl border-2 border-primary">
           {cart?.items?.length ? (
             <div className="space-y-4">
               <h6 className="font-semibold">Available items in cart</h6>
@@ -37,22 +38,27 @@ const Cart = () => {
                   const { room_name, regular_price, discounted_price } =
                     room_category;
 
+                  const uniqueToken = item?.id?.toString() + room_category?.id?.toString() + "remove"
+
                   return (
                     <div
                       key={id}
                       className="relative flex items-center justify-start gap-2 group"
                     >
                       <div className="absolute top-0 right-0 z-50">
-                        <div className="rounded-md bg-white/50 backdrop-blur flex items-center justify-between p-1 border">
-                          <Trash2Icon
-                            className="p-[4px] border rounded-md border-gray-300 hover:stroke-red-600 hover:border-red-400 cursor-pointer"
-                            onClick={() =>
-                              addToCart({
-                                room_category_id: room_category.id,
-                                quantity: item.quantity,
-                              })
-                            }
-                          />
+                        <div className="rounded-md bg-white/50 backdrop-blur flex items-center justify-between p-1">
+                          {
+                            loading.status && loading.token === uniqueToken ? <Sun className="p-[4px] border rounded-full border-gray-300 hover:stroke-red-600 hover:border-red-400 cursor-pointer animate-spin" /> :
+                              <Trash2Icon
+                                className="p-[4px] border rounded-md border-gray-300 hover:stroke-red-600 hover:border-red-400 cursor-pointer"
+                                onClick={() =>
+                                  addToCart({
+                                    room_category_id: room_category.id,
+                                    quantity: item.quantity,
+                                  }, uniqueToken)
+                                }
+                              />
+                          }
                         </div>
                       </div>
                       <div>

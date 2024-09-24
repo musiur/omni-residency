@@ -55,6 +55,26 @@ export const A__GET__Cart = async (id: string) => {
   }
 };
 
+export const A__PATCH__Cart = async (id: string, check_in: string, check_out: string) => {
+  try {
+    const response = await fetch(`${BASEURL}/segments/carts/${id}/`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        accept: "application/json",
+      },
+      body: JSON.stringify({ check_in, check_out }),
+    });
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    return {
+      success: false,
+      message: "Someting went wrong!",
+    };
+  }
+};
+
 export const A__GET__CartItem = async (id: string, itemId: number) => {
   try {
     const response = await fetch(
@@ -89,6 +109,7 @@ export const A__GET__CartItems = async (id: string) => {
       cache: "no-store",
     });
     const result = await response.json();
+    console.log(result?.data)
     return result;
   } catch (error) {
     return {
