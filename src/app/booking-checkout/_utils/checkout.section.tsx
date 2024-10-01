@@ -1,14 +1,46 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import { useCartContext } from "@/lib/context/cart-provider.context";
 import { Trash2Icon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import CheckoutForm from "./checkout.form";
 import QuantityCalculator from "@/app/_utils/cart/quantity-calculator";
+import { useEffect, useState } from "react";
+import {
+  Utils___CalculateBookingPrice,
+  Utils___DateDifference,
+} from "@/lib/utils";
 
 const CheckoutSection = () => {
   const { cart, addToCart } = useCartContext();
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [days, setDays] = useState(0);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const searchData = localStorage.getItem("search");
+      if (searchData && cart?.total_price) {
+        const dates = JSON.parse(searchData);
+        const checkin = new Date(dates.checkin);
+        const checkout = new Date(dates.checkout);
+        const countedDays = Utils___DateDifference(checkout, checkin);
+        countedDays && setDays(countedDays);
+
+        console.log({
+          checkin,
+          checkout,
+          price: cart.total_price,
+          countedDays,
+        });
+        const calculatedPrice = Utils___CalculateBookingPrice(
+          checkin,
+          checkout,
+          cart.total_price
+        );
+        calculatedPrice && setTotalPrice(calculatedPrice);
+      }
+    }
+  }, [cart]);
   return (
     <section className="container">
       <div className="max-w-[440px] mx-auto">
@@ -59,14 +91,22 @@ const CheckoutSection = () => {
                 );
               })}
               <div className="text-primary font-bold text-xl">
-                Total BDT {cart?.total_price}
+                {days && cart.total_price && totalPrice ? (
+                  <div>
+                    BDT {cart.total_price} /night x {days} days = BDT{" "}
+                    {totalPrice}
+                  </div>
+                ) : null}
               </div>
             </div>
             <CheckoutForm />
           </div>
         ) : (
           <div>
-            No items added! <Link href="/" className="text-primary hover:underline">Select your room</Link>
+            No items added!{" "}
+            <Link href="/" className="text-primary hover:underline">
+              Select your room
+            </Link>
           </div>
         )}
       </div>

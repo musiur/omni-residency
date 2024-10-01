@@ -39,3 +39,10 @@ export function Utils___CalculateBookingPrice(checkin: Date, checkout: Date, cos
   // Calculate total cost
   return numberOfDays * costPerNight;
 }
+
+export function Utils___DateDifference(date1: Date, date2: Date) {
+  const timeDifference = date1.getTime() - date2.getTime();
+  const daysDifference = timeDifference / (1000 * 3600 * 24);
+  const numberOfDays = Math.ceil(daysDifference);
+  return numberOfDays
+}

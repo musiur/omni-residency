@@ -109,7 +109,6 @@ export const A__GET__CartItems = async (id: string) => {
       cache: "no-store",
     });
     const result = await response.json();
-    console.log(result?.data)
     return result;
   } catch (error) {
     return {
@@ -129,6 +128,7 @@ export const A__DELETE__Cart = async (id: string) => {
       },
     });
     const result = await response.json();
+
     return result;
   } catch (error) {
     return {

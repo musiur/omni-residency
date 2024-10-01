@@ -9,6 +9,7 @@ import InputX from "./input-x.molecule";
 import AddToCart from "@/app/_utils/cart/add-to-cart";
 import { useEffect, useState } from "react";
 import { Utils___CalculateBookingPrice } from "@/lib/utils";
+import { useCartContext } from "@/lib/context/cart-provider.context";
 
 const BookingFormSchema = z.object({
   branch: z.string(),
@@ -20,6 +21,8 @@ const BookingFormSchema = z.object({
 type TBookingFormSchema = z.infer<typeof BookingFormSchema>;
 
 const BookingForm = ({ price }: { price: string }) => {
+  const { deleteCart, createCart } = useCartContext();
+
   const [isClient, setIsClient] = useState(false);
   useEffect(() => {
     setIsClient(true);
@@ -31,9 +34,6 @@ const BookingForm = ({ price }: { price: string }) => {
   const timeNow = new Date();
   const tomorrow = new Date(timeNow);
   tomorrow.setDate(timeNow.getDate() + 1);
-
-  const roomID = searchParams.get("id");
-  const parsedRoomID = roomID ? parseInt(roomID, 10) : undefined;
 
   // Function to get initial values
   const getInitialValues = (): TBookingFormSchema => {
@@ -81,6 +81,8 @@ const BookingForm = ({ price }: { price: string }) => {
 
   // Update localStorage when form values change
   const updateLocalStorage = () => {
+    deleteCart();
+    
     const formValues = form.getValues();
     const searchData = {
       ...formValues,
@@ -88,6 +90,11 @@ const BookingForm = ({ price }: { price: string }) => {
       checkout: formValues.checkout.toISOString(),
     };
     localStorage.setItem("search", JSON.stringify(searchData));
+
+    setTimeout(() => {
+      
+      window.location.replace(window.location.href);
+    }, 1000);
   };
 
   const CalculatePrice = () => {
@@ -126,6 +133,14 @@ const BookingForm = ({ price }: { price: string }) => {
         {isClient ? (
           <Form {...form}>
             <form>
+              <p className="border border-primary/30 p-4 rounded-md mb-8 bg-primary/10">
+                <span className="pr-2 font-semibold">
+                  Changing checkin-checkout date will remove items from your
+                  cart.
+                </span>
+                &nbsp;Newly created cart will be given to add new items for new
+                checkin-checkout date.
+              </p>
               <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div className="grid grid-cols-1 gap-[16px]">
                   <InputX
@@ -143,30 +158,25 @@ const BookingForm = ({ price }: { price: string }) => {
                     type="date"
                   />
                 </div>
-                {/* <div className="grid grid-cols-1 gap-[16px]">
-                  <InputX
-                    form={form}
-                    name="persons"
-                    label="Persons"
-                    type="select"
-                    options={Data__PersonTypes}
-                  />
-                </div> */}
               </div>
             </form>
           </Form>
         ) : null}
       </div>
       <div className="w-full flex items-center justify-between gap-4 bg-primary/20 p-2 md:p-4 rounded-[10px]">
-        {parsedRoomID !== undefined ? (
-          <AddToCart data={{ room_category_id: parsedRoomID, quantity: 1 }} />
+        {searchParams.get("id") ? (
+          <AddToCart
+            data={{
+              room_category_id: parseInt(searchParams.get("id") || "0"),
+              quantity: 1,
+            }}
+          />
         ) : null}
         <div className="flex flex-col items-end justify-end">
           <p className="font-bold text-[12px] md:text-[16px]">
             BDT&nbsp;
             {calculatedPrice}&nbsp;
           </p>
-          {/* <p>Available rooms {roomCount || "N/A"}  </p> */}
         </div>
       </div>
     </div>
