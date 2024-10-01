@@ -164,7 +164,7 @@ const BookingForm = ({ price }: { price: string }) => {
         <div className="flex flex-col items-end justify-end">
           <p className="font-bold text-[12px] md:text-[16px]">
             BDT&nbsp;
-            {calculatedPrice}&nbsp; /night
+            {calculatedPrice}&nbsp;
           </p>
           {/* <p>Available rooms {roomCount || "N/A"}  </p> */}
         </div>
