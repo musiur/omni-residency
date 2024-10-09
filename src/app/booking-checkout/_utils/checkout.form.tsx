@@ -38,11 +38,13 @@ const CheckoutForm = () => {
     if (typeof window !== "undefined") {
       if (localStorage.getItem("search")) {
         const searchInfo = JSON.parse(localStorage.getItem("search") || "");
+        console.log(localStorage.getItem("search"),searchInfo)
+        console.log(new Date(searchInfo.checkin).toDateString())
         const { checkin, checkout, branch } = searchInfo;
         const payload = {
           ...data,
-          check_in: checkin.split("T")[0],
-          check_out: checkout.split("T")[0],
+          check_in: new Date(checkin),
+          check_out: new Date(checkout),
           branch_id: parseInt(branch || 1),
           cart_id: cart?.id,
         };

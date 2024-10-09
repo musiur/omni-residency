@@ -11,6 +11,8 @@ import { Form } from "@/components/ui/form";
 import InputX from "./input-x.molecule";
 import { useRouter } from "next/navigation";
 import { Utils___DateExtracter, Utils___DateFormatter } from "@/lib/utils";
+import { useEffect } from "react";
+import { useCartContext } from "@/lib/context/cart-provider.context";
 
 const Schema__SearchForm = z.object({
   branch: z.string(),
@@ -30,6 +32,8 @@ const SearchBox = ({
   branches?: any;
   defaultValues?: any;
 }) => {
+  const { updateCart, cart } = useCartContext();
+
   const timeNow = new Date();
   const tomorrow = new Date(timeNow);
   tomorrow.setDate(timeNow.getDate() + 1);
@@ -63,10 +67,28 @@ const SearchBox = ({
   };
 
   form.watch(() => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("search", JSON.stringify(form.getValues()));
-    }
+    const values = form.getValues();
+    console.log(JSON.stringify(values))
+    localStorage.setItem("search", JSON.stringify(values));
   });
+
+  useEffect(() => {
+    updateCart(
+      form.getValues("checkin").toISOString(),
+      form.getValues("checkout").toISOString()
+    );
+  }, [form.getValues("checkin"), form.getValues("checkout")]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedSearchData = localStorage.getItem("search");
+      if (storedSearchData) {
+        const parsedData = JSON.parse(storedSearchData);
+        form.setValue("checkin", new Date(parsedData.checkin));
+        form.setValue("checkout", new Date(parsedData.checkout));
+      }
+    }
+  }, []);
 
   return (
     <Form {...form}>

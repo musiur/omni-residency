@@ -197,11 +197,18 @@ const InputX = ({
                     mode="single"
                     selected={field.value}
                     onSelect={(value) => {
-                      value && field.onChange(new Date(value));
+                      value && field.onChange(value);
                     }}
-                    disabled={(date: any) =>
-                      date < new Date() && date > new Date("1900-01-01")
-                    }
+                    disabled={(date: any) => {
+                      // date < new Date() &&
+                      // date > new Date("1900-01-01")
+                      // Get today's date and reset the time to 00:00:00 for accurate comparison
+                      const today = new Date();
+                      today.setHours(0, 0, 0, 0);
+
+                      // Disable dates before today
+                      return date < today;
+                    }}
                     initialFocus
                   />
                 </PopoverContent>

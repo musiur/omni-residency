@@ -11,10 +11,36 @@ import Image from "next/image";
 import QuantityCalculator from "./quantity-calculator";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import {
+  Utils___CalculateBookingPrice,
+  Utils___DateDifference,
+} from "@/lib/utils";
 
 const Cart = () => {
   const { cart, addToCart, loading } = useCartContext();
-  console.log(cart)
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [days, setDays] = useState(0);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const searchData = localStorage.getItem("search");
+      if (searchData && cart?.total_price) {
+        const dates = JSON.parse(searchData);
+        const checkin = new Date(dates.checkin);
+        const checkout = new Date(dates.checkout);
+        const countedDays = Utils___DateDifference(checkout, checkin);
+        countedDays && setDays(countedDays);
+
+        const calculatedPrice = Utils___CalculateBookingPrice(
+          checkin,
+          checkout,
+          cart.total_price
+        );
+        calculatedPrice && setTotalPrice(calculatedPrice);
+      }
+    }
+  }, [cart]);
 
   return (
     <div className="w-16 h-16 rounded-full bg-white shadow-2xl border border-primary fixed bottom-4 right-4 z-50 flex items-center justify-center">
@@ -38,7 +64,10 @@ const Cart = () => {
                   const { room_name, regular_price, discounted_price } =
                     room_category;
 
-                  const uniqueToken = item?.id?.toString() + room_category?.id?.toString() + "remove"
+                  const uniqueToken =
+                    item?.id?.toString() +
+                    room_category?.id?.toString() +
+                    "remove";
 
                   return (
                     <div
@@ -47,18 +76,22 @@ const Cart = () => {
                     >
                       <div className="absolute top-0 right-0 z-50">
                         <div className="rounded-md bg-white/50 backdrop-blur flex items-center justify-between p-1">
-                          {
-                            loading.status && loading.token === uniqueToken ? <Sun className="p-[4px] border rounded-full border-gray-300 hover:stroke-red-600 hover:border-red-400 cursor-pointer animate-spin" /> :
-                              <Trash2Icon
-                                className="p-[4px] border rounded-md border-gray-300 hover:stroke-red-600 hover:border-red-400 cursor-pointer"
-                                onClick={() =>
-                                  addToCart({
+                          {loading.status && loading.token === uniqueToken ? (
+                            <Sun className="p-[4px] border rounded-full border-gray-300 hover:stroke-red-600 hover:border-red-400 cursor-pointer animate-spin" />
+                          ) : (
+                            <Trash2Icon
+                              className="p-[4px] border rounded-md border-gray-300 hover:stroke-red-600 hover:border-red-400 cursor-pointer"
+                              onClick={() =>
+                                addToCart(
+                                  {
                                     room_category_id: room_category.id,
                                     quantity: item.quantity,
-                                  }, uniqueToken)
-                                }
-                              />
-                          }
+                                  },
+                                  uniqueToken
+                                )
+                              }
+                            />
+                          )}
                         </div>
                       </div>
                       <div>
@@ -85,6 +118,11 @@ const Cart = () => {
                   );
                 })}
               </div>
+              {days && cart.total_price && totalPrice ? (
+                <div>
+                  BDT {cart.total_price} /night x {days} days = BDT {totalPrice}
+                </div>
+              ) : null}
               <div>
                 <Link href="/booking-checkout">
                   <Button>Checkout</Button>

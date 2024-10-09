@@ -47,11 +47,14 @@ export const RoomCarousel = ({ data }: { data: any }) => {
         }}
       >
         {data?.map((item: any) => {
-          const { id, room_category, name } = item;
+          const { id, room_category } = item;
           const mastered_service_name = room_category?.room_name
             ?.replaceAll(" ", "-")
             ?.toLowerCase();
+          
           let mastered_redirect_link = `/booking-checkout/${mastered_service_name}?branch=${room_category?.branch?.id}&id=${room_category?.id}`;
+
+
           return (
             <SwiperSlide key={id} className="pb-16 group z-0 relative">
               <div
@@ -63,19 +66,19 @@ export const RoomCarousel = ({ data }: { data: any }) => {
                   fill
                   className="bg-cover bg-center"
                 />
-                <p className="absolute top-0 left-0 p-[10px] m-[5px] rounded-full flex flex-col items-center justify-center bg-primary text-white leading-[13px]">
+                {/* <p className="absolute top-0 left-0 p-[10px] m-[5px] rounded-full flex flex-col items-center justify-center bg-primary text-white leading-[13px]">
                   <span className="font-bold text-white">
                     {parseInt(room_category?.discount_in_percentage)}%
                   </span>
                   <span className="font-light">off</span>
-                </p>
+                </p> */}
                 <div className="absolute bottom-0 left-0 w-full backdrop-blur bg-white/80 p-[16px]">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-[8px]">
                       <BedDouble className="w-4 h-4" />
                       <span>2 Beds</span>
                     </div>
-                    <div className="font-medium text-primary">From $899</div>
+                    <div className="font-medium text-primary">BDT { room_category.discounted_price}</div>
                   </div>
                 </div>
               </div>
