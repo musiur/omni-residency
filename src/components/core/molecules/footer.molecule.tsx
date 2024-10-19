@@ -42,21 +42,15 @@ const Footer = () => {
         </div>
         <section className="container flex flex-wrap justify-between gap-[48px] pt-[90px]">
           <div className="flex flex-col gap-[20px] max-w-[300px]">
-            {/* <h6 className="text-[16px] lg:text-[20px] text-secondary font-semibold">
-              <span className="text-[16px] lg:text-[20px] text-primary font-semibold">
-                Omni
-              </span>
-              &nbsp;Residency
-            </h6> */}
             <div className="[&>*]:text-plain_gray flex flex-col gap-[16px]">
               <p>Hotel are becoming increasingly popular and appealing</p>
               <Textcon
                 icon={<Mail className="w-4 h-4" />}
-                text="Hello@hotelomniresidency.com"
+                text="info@hotelomniresidency.com"
               />
               <Textcon
                 icon={<PhoneCall className="w-4 h-4" />}
-                text="022-560-342-972"
+                text="+88 01844611001"
               />
             </div>
           </div>
