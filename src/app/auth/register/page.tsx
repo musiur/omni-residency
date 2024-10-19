@@ -35,7 +35,7 @@ const Register = () => {
       <div className="relative container grid grid-cols-1 md:grid-cols-2 gap-10">
         <AuthGraphic
           H1="Register"
-          text="Don't have account?"
+          text="Already have account?"
           link="/auth/login"
           linkText="Please login!"
         />

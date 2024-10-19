@@ -38,7 +38,7 @@ const Login = () => {
       <div className="relative container grid grid-cols-1 md:grid-cols-2 gap-10">
         <AuthGraphic
           H1="Login"
-          text="Already have account?"
+          text="Don't have account?"
           link="/auth/register"
           linkText="Please register!"
         />
