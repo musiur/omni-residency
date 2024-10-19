@@ -36,7 +36,9 @@ const CheckoutForm = () => {
   });
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
+    console.log("on Submit")
     if (typeof window !== "undefined") {
+      console.log("window is defined")
       if (localStorage.getItem("search")) {
         const searchInfo = JSON.parse(localStorage.getItem("search") || "");
         
