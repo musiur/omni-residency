@@ -25,6 +25,7 @@ export const A__POST__CreateCart = async () => {
     }
 
     const result = await response.json();
+    
     return result;
   } catch (error) {
     return {
@@ -143,6 +144,7 @@ export const A__POST__AddToCart = async (
   data: T__CartItemAdder
 ) => {
   try {
+    
     const response = await fetch(`${BASEURL}/segments/carts/${id}/cartitems/`, {
       method: "POST",
       headers: {
@@ -151,9 +153,12 @@ export const A__POST__AddToCart = async (
       },
       body: JSON.stringify(data),
     });
+    
     const result = await response.json();
+    
     return result;
   } catch (error) {
+    
     return {
       success: false,
       message: "Something went wrong!",

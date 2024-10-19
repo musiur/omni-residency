@@ -19,7 +19,9 @@ const AddToCart = ({
   const uniqueToken = "addToCart" + data?.room_category_id.toString();
 
   return (
-    <Button onClick={() => addToCart(data, uniqueToken)} disabled={loading.status}>
+    <Button onClick={() => {
+      addToCart(data, uniqueToken)
+    }} disabled={loading.status}>
       {cart?.items?.find(
         (item: any) => item?.room_category?.id === data?.room_category_id
       )

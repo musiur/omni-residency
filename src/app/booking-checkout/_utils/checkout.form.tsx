@@ -12,6 +12,7 @@ import { usePathname, useRouter } from "next/navigation";
 import SubmitX from "@/components/core/molecules/submit-x.molecule";
 import ResponseX from "@/components/core/molecules/response-x.molecule";
 import { CSR__DELETE__Cookie } from "@/app/_utils/actions";
+import { Utils___FormatDate } from "@/lib/utils";
 
 const FormSchema = z.object({
   full_name: z.string().min(1),
@@ -38,13 +39,13 @@ const CheckoutForm = () => {
     if (typeof window !== "undefined") {
       if (localStorage.getItem("search")) {
         const searchInfo = JSON.parse(localStorage.getItem("search") || "");
-        console.log(localStorage.getItem("search"),searchInfo)
-        console.log(new Date(searchInfo.checkin).toDateString())
+        
         const { checkin, checkout, branch } = searchInfo;
+
         const payload = {
           ...data,
-          check_in: new Date(checkin),
-          check_out: new Date(checkout),
+          check_in: Utils___FormatDate(new Date(checkin)),
+          check_out: Utils___FormatDate(new Date(checkout)),
           branch_id: parseInt(branch || 1),
           cart_id: cart?.id,
         };
