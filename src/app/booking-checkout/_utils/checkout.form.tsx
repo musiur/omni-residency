@@ -50,7 +50,7 @@ const CheckoutForm = () => {
           cart_id: cart?.id,
         };
         const result = await A__POST__Booking(payload);
-
+        console.log(result);
         ResponseX({ title: "Booking", result });
         if (result?.status_code === 401) {
           await CSR__DELETE__Cookie("access");
