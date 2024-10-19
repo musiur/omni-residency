@@ -70,7 +70,7 @@ const SearchBox = ({
 
   form.watch(() => {
     const values = form.getValues();
-    console.log(JSON.stringify(values))
+    console.log(JSON.stringify(values));
     localStorage.setItem("search", JSON.stringify(values));
   });
 
@@ -88,6 +88,17 @@ const SearchBox = ({
         const parsedData = JSON.parse(storedSearchData);
         form.setValue("checkin", new Date(parsedData.checkin));
         form.setValue("checkout", new Date(parsedData.checkout));
+      } else {
+        console.error("No search info found in local storage!");
+        localStorage.setItem(
+          "search",
+          JSON.stringify({
+            checkin: timeNow.toISOString(),
+            checkout: tomorrow.toISOString(),
+            branch: branches[0]?.id?.toString(),
+            persons: "1",
+          })
+        );
       }
     }
   }, []);

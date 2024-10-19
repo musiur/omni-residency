@@ -36,12 +36,12 @@ const CheckoutForm = () => {
   });
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log("on Submit")
+    console.log("on Submit");
     if (typeof window !== "undefined") {
-      console.log("window is defined")
+      console.log("window is defined");
       if (localStorage.getItem("search")) {
         const searchInfo = JSON.parse(localStorage.getItem("search") || "");
-        
+
         const { checkin, checkout, branch } = searchInfo;
 
         const payload = {
@@ -65,6 +65,8 @@ const CheckoutForm = () => {
           clearCart();
           router.push("/dashboard/bookings");
         }
+      } else {
+        console.error("No search info found in local storage!");
       }
     }
   }
