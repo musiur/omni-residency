@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { ChevronRight } from "lucide-react";
 
-const HeroSection = () => {
+const HeroSection = ({ title }: { title?: string }) => {
   return (
     <div className="pt-[86px] min-[1120px]:pt-[127px] pb-[100px] bg-black/80 relative">
       <section className="flex flex-col items-center justify-center gap-[16px]">
@@ -11,6 +11,12 @@ const HeroSection = () => {
             Home&nbsp;
             <ChevronRight className="w-4 h-4" />
             &nbsp;Latest News
+            {title ? (
+              <>
+                <ChevronRight className="w-4 h-4" />
+                &nbsp;{title}
+              </>
+            ) : null}
           </p>
         </div>
       </section>

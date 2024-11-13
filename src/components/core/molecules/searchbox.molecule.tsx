@@ -70,7 +70,6 @@ const SearchBox = ({
 
   form.watch(() => {
     const values = form.getValues();
-    console.log(JSON.stringify(values));
     localStorage.setItem("search", JSON.stringify(values));
   });
 

@@ -36,9 +36,7 @@ const CheckoutForm = () => {
   });
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log("on Submit");
     if (typeof window !== "undefined") {
-      console.log("window is defined");
       if (localStorage.getItem("search")) {
         const searchInfo = JSON.parse(localStorage.getItem("search") || "");
 
@@ -52,7 +50,6 @@ const CheckoutForm = () => {
           cart_id: cart?.id,
         };
         const result = await A__POST__Booking(payload);
-        console.log(result);
         ResponseX({ title: "Booking", result });
         if (result?.status_code === 401) {
           await CSR__DELETE__Cookie("access");

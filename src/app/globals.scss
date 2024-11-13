@@ -122,6 +122,7 @@ h2 span {
 
 .swiper:hover {
   @media (min-width: 500px) {
+
     .swiper-button-next::after,
     .swiper-button-prev::after,
     .swiper-button-prev,
@@ -185,4 +186,16 @@ textarea,
 select {
   @apply px-[16px] h-12 max-h-12 rounded-[10px] border border-gray-200;
   // height: 20px!important;
+}
+
+.article {
+  @apply text-base md:text-xl;
+
+  h2 {
+    @apply text-2xl md:text-3xl font-semibold pt-12 pb-2;
+  }
+
+  ul {
+    @apply space-y-4 pb-4;
+  }
 }

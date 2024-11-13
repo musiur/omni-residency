@@ -124,7 +124,6 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   };
 
   const deleteCart = async (token?: string) => {
-    console.log("From Delete Cart")
     // Call your API to delete the cart
     if (cart?.id) {
       setLoading({
@@ -152,8 +151,6 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
         (item: any) => item?.room_category?.id === payload?.room_category_id
       );
 
-      console.log(alreadyExists)
-
       setLoading({
         token: token || "addToCart",
         status: true,
@@ -162,10 +159,9 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
         ? await A__DELETE__CartItem(cart.id, alreadyExists?.id)
         : await A__POST__AddToCart(cart.id, payload);
 
-      console.log(result)
       if (result?.success) {
         const cartFromServer = await A__GET__Cart(cart.id);
-        console.log(cartFromServer)
+
         if (cartFromServer?.success) {
           setCart(cartFromServer.data);
         }

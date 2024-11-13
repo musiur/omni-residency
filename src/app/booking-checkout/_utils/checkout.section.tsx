@@ -26,12 +26,7 @@ const CheckoutSection = () => {
         const countedDays = Utils___DateDifference(checkout, checkin);
         countedDays && setDays(countedDays);
 
-        console.log({
-          checkin,
-          checkout,
-          price: cart.total_price,
-          countedDays,
-        });
+        
         const calculatedPrice = Utils___CalculateBookingPrice(
           checkin,
           checkout,
