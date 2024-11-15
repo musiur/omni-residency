@@ -15,8 +15,8 @@ const News = async () => {
   return (
     <section className="w-full py-12 md:py-24 lg:py-32 bg-white">
       <div className="container px-4 md:px-6">
-        {
-          success && data?.results?.length ? <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {success && data?.results?.length ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {data?.results?.map((post: any, index: number) => {
               return (
                 <Card key={index} className="flex flex-col h-full">
@@ -35,12 +35,13 @@ const News = async () => {
                     <div className="flex items-center text-sm text-gray-500 mb-3">
                       <span className="font-medium">{post.author}</span>
                       <span className="mx-2">•</span>
-                      <time dateTime={post.publishDate}>
-                        {new Date(post.publishDate).toLocaleDateString("en-US", {
+                      <time dateTime={post.created_at}>
+                        {post.created_at}
+                        {/* {new Date(post.created_at).toLocaleDateString("en-US", {
                           year: "numeric",
                           month: "long",
                           day: "numeric",
-                        })}
+                        })} */}
                       </time>
                     </div>
                     <div className="flex flex-wrap gap-2 mb-4">
@@ -61,10 +62,12 @@ const News = async () => {
                     </Button>
                   </CardFooter>
                 </Card>
-              )
+              );
             })}
-          </div> : <div className="text-center py-4">No blogs found!</div>
-        }
+          </div>
+        ) : (
+          <div className="text-center py-4">No blogs found!</div>
+        )}
       </div>
     </section>
   );
