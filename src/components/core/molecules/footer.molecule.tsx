@@ -4,11 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import Textcon from "../atoms/texcon.atom";
 import { Mail, PhoneCall } from "lucide-react";
-import { usePathname } from "next/navigation";
+// import { usePathname } from "next/navigation";
 import NavFooterVisibility from "../atoms/nav-footer-visibility.atom";
 
 const Footer = () => {
-  const pathname = usePathname();
+  // const pathname = usePathname();
   return (
     <NavFooterVisibility>
       <footer id="footer">
@@ -108,12 +108,6 @@ const Brands = [
     image: "/images/footer/omni-iconic.png",
     link: "/",
   },
-  // {
-  //   id: 3,
-  //   image: "/images/footer/omni-trading.png",
-  //   link: "/",
-  // },
-
   {
     id: 5,
     image: "/images/footer/gmt-trading.png",

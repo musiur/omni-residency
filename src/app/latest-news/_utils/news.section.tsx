@@ -31,17 +31,12 @@ const News = async () => {
                   </CardHeader>
                   <CardContent className="flex-grow p-4">
                     <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
-                    {/* <p className="text-sm text-gray-600 mb-3">{post.description}</p> */}
                     <div className="flex items-center text-sm text-gray-500 mb-3">
                       <span className="font-medium">{post.author}</span>
                       <span className="mx-2">•</span>
                       <time dateTime={post.created_at}>
                         {post.created_at}
-                        {/* {new Date(post.created_at).toLocaleDateString("en-US", {
-                          year: "numeric",
-                          month: "long",
-                          day: "numeric",
-                        })} */}
+                        
                       </time>
                     </div>
                     <div className="flex flex-wrap gap-2 mb-4">
