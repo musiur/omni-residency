@@ -57,7 +57,7 @@ const Testimonial = async ({
                       )}
                       <div>
                         <p className="font-bold">{guest?.name}</p>
-                        <p className="text-plain_gray">{guest?.address || "Address N/A"}</p>
+                        {/* <p className="text-plain_gray">{guest?.address || "Address N/A"}</p> */}
                       </div>
                     </div>
                     <div className="text-plain_gray flex items-center gap-[4px]">

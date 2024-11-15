@@ -61,7 +61,12 @@ const ReservationForm = () => {
               <label>
                 Reservation Date <span className="text-pink-600">*</span>
               </label>
-              <input {...register("reservation_date")} type="date" required />
+              <input 
+                {...register("reservation_date")} 
+                type="date" 
+                required 
+                min={new Date().toISOString().split("T")[0]}
+              />
               <Errors details={{ errors, name: "reservation_date" }} />
             </div>
           </div>
