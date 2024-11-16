@@ -66,6 +66,7 @@ const ReservationForm = () => {
                 type="date" 
                 required 
                 min={new Date().toISOString().split("T")[0]}
+                // for now, we are not allowing to make reservation for days before today
               />
               <Errors details={{ errors, name: "reservation_date" }} />
             </div>
